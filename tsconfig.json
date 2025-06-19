@@ -1,17 +1,10 @@
 {
   "extends": "astro/tsconfigs/strict",
-  // "include": [".astro/types.d.ts", "**/*"],
-  // "exclude": ["dist"],
-  // "compilerOptions": {
-  //   "baseUrl": ".",
-  //   "paths": {
-  //     "@components/*": ["src/components/*"],
-  //     "@assets/*": ["src/assets/*"]
-  //   }
-  // }
-  //
   "compilerOptions": {
-    "strictNullChecks": true, // add if using `base` template
-    "allowJs": true // required, and included with all Astro templates
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@assets/*": ["src/assets/*"]
+    }
   }
 }
