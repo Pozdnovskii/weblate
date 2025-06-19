@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
+import SocialLink from "../components/SocialLink.astro";
+
 import ContraLogo from "../assets/social-logos/contra_logo.svg";
 import UpworkLogo from "../assets/social-logos/upwork_logo.svg";
 import LinkedinLogo from "../assets/social-logos/linkedin_logo.svg";
@@ -26,7 +28,7 @@ import TgLogo from "../assets/social-logos/tg_logo.svg";
             </h2>
             <address>
                 <ul class="flex gap-x-2 lg:justify-end">
-                    <li
+                    <!-- <li
                         class="w-[clamp(45px,2.5em,78px)] translate-x-[calc(clamp(45px,2.5em,78px)/-6)] lg:translate-x-[calc(clamp(45px,2.5em,78px)/6)]"
                     >
                         <a
@@ -36,17 +38,18 @@ import TgLogo from "../assets/social-logos/tg_logo.svg";
                             class="w-full flex justify-center items-center"
                             ><ContraLogo /></a
                         >
-                    </li>
-
+                    </li> -->
+                    <SocialLink
+                        href="https://contra.com/ipozdnovskii_f3llzxwh?referralExperimentNid=SOCIAL_REFERRAL_PROGRAM&referrerUsername=ipozdnovskii_f3llzxwh"
+                        ariaLabel="Contra account"
+                        Icon={ContraLogo}
+                    />
                     <!-- <SocialLink
                         href="https://www.upwork.com/freelancers/~014d1e5fca851a8c3a?mp_source=share"
                         ariaLabel="Upwork account"
                         Icon={UpworkLogo}
                     />
                     <SocialLink
-                        href="https://contra.com/ipozdnovskii_f3llzxwh?referralExperimentNid=SOCIAL_REFERRAL_PROGRAM&referrerUsername=ipozdnovskii_f3llzxwh"
-                        ariaLabel="Contra account"
-                        Icon={ContraLogo}
                     />
                     <SocialLink
                         href="https://www.linkedin.com/in/ivan-pozdnovskii/?locale=en_US"
