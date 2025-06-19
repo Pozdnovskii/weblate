@@ -1,0 +1,15 @@
+---
+const { href, ariaLabel, Icon } = Astro.props;
+---
+
+<li
+    class="w-[clamp(45px,2.5em,78px)] translate-x-[calc(clamp(45px,2.5em,78px)/-6)] lg:translate-x-[calc(clamp(45px,2.5em,78px)/6)]"
+>
+    <a
+        href={href}
+        aria-label={ariaLabel}
+        target="_blank"
+        class="w-full flex justify-center items-center"
+        ><Icon class="w-2/3 aspect-square" /></a
+    >
+</li>
