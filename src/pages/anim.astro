@@ -1,0 +1,183 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+import SocialLink from "../components/SocialLink.astro";
+
+import ContraLogo from "../assets/social-logos/contra_logo.svg";
+import UpworkLogo from "../assets/social-logos/upwork_logo.svg";
+import LinkedinLogo from "../assets/social-logos/linkedin_logo.svg";
+import TgLogo from "../assets/social-logos/tg_logo.svg";
+---
+
+<Layout>
+    <div class="pb-40">
+        <main
+            class="h-screen w-full px-3 py-5 flex flex-col justify-between mb-40"
+        >
+            <section>
+                <h1
+                    class="text-[clamp(24px,1rem+8.4svw,66px)] leading-none font-black uppercase text-balance"
+                >
+                    New Website Coming Soon
+                </h1>
+                <!-- <p class="text-[clamp(18px,.33rem+4.8svw,36px)] font-medium">
+                ready by 07/07
+            </p> -->
+            </section>
+
+            <section class="lg:self-end-safe">
+                <h2 class="text-[clamp(18px,1rem+4.8svw,30px)] mb-2">
+                    Find us here for now:
+                </h2>
+                <address>
+                    <ul class="flex gap-x-2 lg:justify-end">
+                        <SocialLink
+                            href="https://contra.com/ipozdnovskii_f3llzxwh?referralExperimentNid=SOCIAL_REFERRAL_PROGRAM&referrerUsername=ipozdnovskii_f3llzxwh"
+                            ariaLabel="Contra account"
+                            Icon={ContraLogo}
+                        />
+                        <SocialLink
+                            href="https://www.upwork.com/freelancers/~014d1e5fca851a8c3a?mp_source=share"
+                            ariaLabel="Upwork account"
+                            Icon={UpworkLogo}
+                        />
+                        <SocialLink
+                            href="https://www.linkedin.com/in/ivan-pozdnovskii/?locale=en_US"
+                            ariaLabel="Linkedin account"
+                            Icon={LinkedinLogo}
+                        />
+                        <SocialLink
+                            href="https://t.me/pozdnovskii"
+                            ariaLabel="Telegram account"
+                            Icon={TgLogo}
+                        />
+                    </ul>
+                </address>
+            </section>
+        </main>
+        <section class="flex items-center justify-center mb-50">
+            <div
+                id="goUpIcon"
+                class="flex items-center justify-center size-24 bg-red-600"
+            >
+                <svg
+                    width="32"
+                    height="26"
+                    viewBox="0 0 32 26"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        d="M27.4491 25C27.1523 4.3577 1 6.59398 1 14.5651C1 25 27.4491 17.2513 27.4491 1"
+                        stroke="#030500"
+                        stroke-width="1.5"
+                        stroke-linecap="round"></path>
+                    <path
+                        d="M23.5312 4.3577L27.4491 1L31 3.68623"
+                        stroke="#030500"
+                        stroke-width="1.5"
+                        stroke-linecap="round"></path>
+                </svg>
+            </div>
+        </section>
+
+        <section class="flex items-center justify-center mb-50">
+            <!-- <svg
+                width="62"
+                height="70"
+                viewBox="0 0 62 70"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M44.575 1.19447C44.8992 4.32987 40.7585 9.04513 39.0813 11.7321C36.9345 15.1713 20.2517 -0.844696 16.652 1.19453C10.4406 4.71334 14.9425 25.2896 8.1986 23.4386C6.49388 22.9707 3.81845 21.4228 2.02752 21.6079C0.154133 21.8016 5.7486 22.8147 7.07013 24.1566C8.05498 25.1566 10.3664 26.0608 11.6473 27.1016C13.3633 28.496 15.2361 29.6553 16.652 31.4266C18.743 34.0424 6.00109 44.6554 7.07013 47.8633C7.91829 50.4083 25.7633 45.166 26.0422 47.8633C26.2548 49.9196 26.4674 51.976 26.6799 54.0323C27.031 57.428 26.2592 60.9834 26.6015 64.295C26.7312 65.549 25.7178 66.7682 25.853 68.0754C25.9955 69.4539 27.3072 65.7078 27.8833 64.4473C29.889 60.0589 33.1925 55.4488 36.1167 51.6325C38.3414 48.7291 47.0179 61.1703 50.3045 59.5C54.0662 57.5882 51.494 40.3579 55.8566 39.9069C56.5855 39.8316 61.1433 39.7281 59.9816 38.7842C58.9788 37.9693 57.2879 38.4191 56.2002 37.7192C54.7835 36.8077 51.9886 36.2765 50.3045 35.7967C48.3484 35.2396 61.5181 18.7993 59.9817 17.5C53.3993 11.9334 40.1894 12.8237 42.7865 5.93695"
+                    stroke="#030500"
+                    stroke-width="2"
+                    stroke-linecap="round"></path>
+            </svg> -->
+
+            <svg
+                width="62"
+                height="70"
+                viewBox="0 0 62 70"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <filter id="displacementFilter">
+                    <feTurbulence
+                        type="turbulence"
+                        numOctaves="2"
+                        baseFrequency="0.1"
+                        result="turbulence"></feTurbulence>
+                    <feDisplacementMap
+                        in2="turbulence"
+                        in="SourceGraphic"
+                        scale="3"
+                        xChannelSelector="R"
+                        yChannelSelector="G"></feDisplacementMap>
+                </filter>
+                <path
+                    id="morph"
+                    d="M44.575 1.19473C44.8992 4.33012 40.7585 9.04539 39.0813 11.7324C36.9345 15.1716 32.6228 19.2468 29.0232 21.286C22.8117 24.8048 14.9425 25.2899 8.19863 23.4389C6.49391 22.971 3.81848 21.423 2.02755 21.6082C0.154162 21.8018 5.74863 22.815 7.07016 24.1569C8.05501 25.1569 10.3665 26.061 11.6473 27.1019C13.3633 28.4963 15.2361 29.6556 16.652 31.4269C18.743 34.0426 22.49 37.4747 23.5591 40.6825C24.4072 43.2276 25.7633 45.1662 26.0422 47.8635C26.2548 49.9199 26.4674 51.9762 26.68 54.0326C27.031 57.4282 26.2592 60.9837 26.6015 64.2952C26.7312 65.5493 25.7178 66.7684 25.853 68.0757C25.9955 69.4542 27.3072 65.708 27.8833 64.4476C29.8891 60.0592 33.1925 55.4491 36.1167 51.6328C38.3414 48.7293 40.8624 44.0538 44.149 42.3835C47.9108 40.4718 51.494 40.3582 55.8567 39.9072C56.5855 39.8318 61.1433 39.7284 59.9817 38.7844C58.9788 37.9695 57.2879 38.4193 56.2002 37.7195C54.7835 36.808 51.9886 36.2767 50.3045 35.797C48.3484 35.2398 46.5198 32.7723 44.9834 31.473C38.4011 25.9064 40.1894 12.8239 42.7865 5.9372"
+                    stroke="#030500"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    filter="url(#displacementFilter)"></path>
+                <path
+                    class="hidden"
+                    id="morph2"
+                    d="M44.575 1.19447C44.8992 4.32987 40.7585 9.04513 39.0813 11.7321C36.9345 15.1713 20.2517 -0.844696 16.652 1.19453C10.4406 4.71334 14.9425 25.2896 8.1986 23.4386C6.49388 22.9707 3.81845 21.4228 2.02752 21.6079C0.154133 21.8016 5.7486 22.8147 7.07013 24.1566C8.05498 25.1566 10.3664 26.0608 11.6473 27.1016C13.3633 28.496 15.2361 29.6553 16.652 31.4266C18.743 34.0424 6.00109 44.6554 7.07013 47.8633C7.91829 50.4083 25.7633 45.166 26.0422 47.8633C26.2548 49.9196 26.4674 51.976 26.6799 54.0323C27.031 57.428 26.2592 60.9834 26.6015 64.295C26.7312 65.549 25.7178 66.7682 25.853 68.0754C25.9955 69.4539 27.3072 65.7078 27.8833 64.4473C29.889 60.0589 33.1925 55.4488 36.1167 51.6325C38.3414 48.7291 47.0179 61.1703 50.3045 59.5C54.0662 57.5882 51.494 40.3579 55.8566 39.9069C56.5855 39.8316 61.1433 39.7281 59.9816 38.7842C58.9788 37.9693 57.2879 38.4191 56.2002 37.7192C54.7835 36.8077 51.9886 36.2765 50.3045 35.7967C48.3484 35.2396 61.5181 18.7993 59.9817 17.5C53.3993 11.9334 40.1894 12.8237 42.7865 5.93695"
+                    stroke="#030500"
+                    stroke-width="2"
+                    stroke-linecap="round"></path>
+            </svg>
+        </section>
+
+        <section class="flex items-center justify-center mb-50">
+            <div
+                id="stagger"
+                class="text-teal-100 w-full grid grid-cols-6 gap-3 p-4 bg-rose-50 *:aspect-square *:bg-teal-200"
+            >
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </section>
+    </div>
+    <script>
+        import("../scripts/goUpAnimation");
+    </script>
+</Layout>

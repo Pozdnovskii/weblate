@@ -23,6 +23,7 @@
     #body__background::before,
     #body__background::after {
         content: "";
+        display: none;
         position: absolute;
         background-color: white;
         border-radius: 40% 60% 30% 70% / 35% 50% 50% 65%;
