@@ -6,14 +6,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 <!doctype html>
 <html lang="en" class="antialiased font-sans">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="generator" content={Astro.generator} />
-        <title>Weblate | Web Development & Design Studio</title>
-        <!-- <meta name="description" content={description} /> -->
-        <!-- <meta property="og:title" content={`Anastasiya Pavlyk | ${title}`} />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Weblate | Web Development & Design Studio</title>
+    <!-- <meta name="description" content={description} /> -->
+    <!-- <meta property="og:title" content={`Anastasiya Pavlyk | ${title}`} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content="/opengraph.jpg" />
         <meta property="og:type" content="website" />
@@ -22,10 +22,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <meta name="twitter:title" content={`Anastasiya Pavlyk | ${title}`} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content="/opengraph.jpg" /> -->
-        <link rel="canonical" href={canonicalURL} />
-        <meta name="view-transition" content="same-origin" />
-    </head>
-    <body class="bg-indigo-50/48">
-        <slot />
-    </body>
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="view-transition" content="same-origin" />
+  </head>
+  <body class="bg-indigo-50/48">
+    <slot />
+  </body>
 </html>

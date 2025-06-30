@@ -1,0 +1,27 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { client } from "../../lib/sanity.js";
+
+const posts = await client.fetch(`
+  *[_type == "post"] | order(publishedAt desc) {
+    title,
+    "slug": slug.current,
+    publishedAt
+  }
+`);
+---
+
+<Layout>
+  <h1>All</h1>
+
+  {
+    posts.map((post) => (
+      <article>
+        <h2>
+          <a href={`/posts/${post.slug}`}>{post.title}</a>
+        </h2>
+        <p>{new Date(post.publishedAt).toLocaleDateString()}</p>
+      </article>
+    ))
+  }
+</Layout>

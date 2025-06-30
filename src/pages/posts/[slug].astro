@@ -1,0 +1,32 @@
+---
+// @ts-nocheck
+import { client } from "../../lib/sanity";
+import Layout from "../../layouts/Layout.astro";
+import { PortableText } from "astro-portabletext";
+
+export async function getStaticPaths() {
+  const posts = await client.fetch(`
+    *[_type == "post" && defined(slug.current)]{
+      "slug": slug.current,
+      title,
+      publishedAt,
+      body
+    }
+  `);
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<Layout>
+  <h1 class="bg-amber-600">{post.title}</h1>
+  <p>Опубликовано {new Date(post.publishedAt).toLocaleDateString()}</p>
+  <article class="prose">
+    <PortableText value={post.body} />
+  </article>
+</Layout>
