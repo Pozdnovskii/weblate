@@ -11,6 +11,7 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.4.1",
     "@sanity/client": "^7.6.0",
+    "@sanity/image-url": "^1.1.0",
     "@tailwindcss/vite": "^4.1.8",
     "animejs": "^4.0.2",
     "astro": "^5.10.0",

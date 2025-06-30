@@ -1,0 +1,9 @@
+---
+import { urlForImg } from "../lib/sanity";
+
+const { asset, alt } = Astro.props.node;
+
+const url = urlForImg(asset).url();
+---
+
+<img src={url} alt={alt} loading="lazy" />

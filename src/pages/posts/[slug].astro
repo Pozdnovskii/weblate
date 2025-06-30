@@ -1,8 +1,8 @@
 ---
 // @ts-nocheck
-import { client } from "../../lib/sanity";
+import { client, urlForImg } from "../../lib/sanity";
 import Layout from "../../layouts/Layout.astro";
-import { PortableText } from "astro-portabletext";
+import PortableText from "../../components/PortableText.astro";
 
 export async function getStaticPaths() {
   const posts = await client.fetch(`
@@ -10,7 +10,8 @@ export async function getStaticPaths() {
       "slug": slug.current,
       title,
       publishedAt,
-      body
+      body,
+      mainImage
     }
   `);
 
@@ -21,12 +22,26 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
+const imageUrl = post.mainImage
+  ? urlForImg(post.mainImage).auto("format").width(800).url()
+  : null;
 ---
 
 <Layout>
   <h1 class="bg-amber-600">{post.title}</h1>
   <p>Опубликовано {new Date(post.publishedAt).toLocaleDateString()}</p>
+
+  {
+    imageUrl && (
+      <img
+        src={imageUrl}
+        alt={post.mainImage.alt || post.title}
+        loading="lazy"
+      />
+    )
+  }
+
   <article class="prose">
-    <PortableText value={post.body} />
+    <PortableText portableText={post.body} />
   </article>
 </Layout>
