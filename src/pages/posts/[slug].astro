@@ -23,23 +23,17 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const imageUrl = post.mainImage
-  ? urlForImg(post.mainImage).auto("format").width(800).url()
+  ? urlForImg(post.mainImage).format("webp").url()
   : null;
 ---
 
 <Layout>
   <h1 class="bg-amber-600">{post.title}</h1>
-  <p>Опубликовано {new Date(post.publishedAt).toLocaleDateString()}</p>
+  <p class="h-screen">
+    Опубликовано {new Date(post.publishedAt).toLocaleDateString()}
+  </p>
 
-  {
-    imageUrl && (
-      <img
-        src={imageUrl}
-        alt={post.mainImage.alt || post.title}
-        loading="lazy"
-      />
-    )
-  }
+  {imageUrl && <img src={imageUrl} alt={post.mainImage.alt || post.title} />}
 
   <article class="prose">
     <PortableText portableText={post.body} />
