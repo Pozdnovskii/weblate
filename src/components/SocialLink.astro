@@ -2,14 +2,15 @@
 const { href, ariaLabel, Icon } = Astro.props;
 ---
 
-<li
-  class="w-[clamp(45px,2.5em,78px)] translate-x-[calc(clamp(45px,2.5em,78px)/-6)] lg:translate-x-[calc(clamp(45px,2.5em,78px)/6)]"
->
+<li class="">
   <a
     href={href}
     aria-label={ariaLabel}
     target="_blank"
-    class="w-full flex justify-center items-center"
-    ><Icon class="w-3/5 aspect-square" /></a
+    class="w-[clamp(45px,2.5em,78px)] aspect-square flex justify-center items-center"
+    ><Icon
+      class="w-3/5 aspect-square hover:fill-cyan-700 hover:w-4/5 transition-all"
+      fill="currentColor"
+    /></a
   >
 </li>

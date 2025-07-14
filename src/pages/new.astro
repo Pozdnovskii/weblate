@@ -1,0 +1,90 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+import ServicesSection from "../components/ServicesSection.astro";
+import HowToSection from "../components/HowToSection.astro";
+import ToolsSection from "../components/ToolsSection.astro";
+import SocialLinksList from "../components/SocilaLinksList.astro";
+---
+
+<Layout>
+  <header
+    class="fixed w-full z-10 justify-between items-center px-[3svw] py-3 backdrop-blur-md"
+  >
+    <a href="/">
+      <div class="font-mono leading-4 flex flex-col">
+        <span class="font-medium tracking-tighter">Ivan Pozdnovskii</span>
+        <span class="text-sm">Website Developer</span>
+      </div>
+    </a>
+    <nav class="hidden lg:block">
+      <ul class="flex gap-x-4">
+        <li><a href="#services">Services</a></li><li>
+          <a href="#works">Works</a>
+        </li>
+        <li><a href="practices">Practices</a></li>
+      </ul>
+    </nav>
+    <a href="#" class="hidden lg:block">Grow my project</a>
+  </header>
+
+  <main class="relative flex flex-col gap-y-[66svw] px-[3svw]">
+    <section id="hero" class="h-screen py-4 flex flex-col gap-[21svw]">
+      <div class="relative flex flex-col gap-3 mt-auto">
+        <h1
+          class="opacity-80 text-[11.1svw] tracking-tight font-mono font-extralight leading-[1.15em]"
+        >
+          Meticulous Developer For Your Website
+        </h1>
+        <p class="text-[5.1svw] leading-[1.66em] text-pretty">
+          I specialize in fast-loading, SEO-friendly, accessible websites —
+          built to <span class="block italic font-serif"
+            >rank higher and perform better.</span
+          >
+        </p>
+      </div>
+
+      <div class="">
+        <h2
+          class="font-mono tracking-tighter text-[clamp(18px,.5rem+3.6svw,30px)] font-light mb-2"
+        >
+          Write me here:
+        </h2>
+        <address>
+          <SocialLinksList />
+        </address>
+      </div>
+    </section>
+
+    <ServicesSection />
+
+    <section id="works">
+      <h2>Works</h2>
+    </section>
+
+    <ToolsSection />
+
+    <HowToSection />
+
+    <section id="testimonials">
+      <h2>Testimonials</h2>
+      <ul>
+        <li>
+          <article>
+            <blockquote>
+              "Hands down the most reliable and effective contractor I've worked
+              with. Hired for a short-term project - but found myself looking
+              for new work to hand off to Ivan knowing his skills."
+            </blockquote>
+            <figure>
+              <img src="" alt="" />
+              <span></span>
+              <span></span>
+            </figure>
+            <a href="" target="_blank">Visit site →</a>
+          </article>
+        </li>
+      </ul>
+    </section>
+  </main>
+</Layout>

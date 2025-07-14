@@ -1,0 +1,38 @@
+---
+import SocialLink from "./SocialLink.astro";
+
+import ContraLogo from "../assets/social-logos/contra_logo.svg";
+import UpworkLogo from "../assets/social-logos/upwork_logo.svg";
+import LinkedinLogo from "../assets/social-logos/linkedin_logo.svg";
+import TgLogo from "../assets/social-logos/tg_logo.svg";
+import EmailLogo from "../assets/social-logos/email_logo.svg";
+---
+
+<ul class="flex gap-x-1 translate-x-[calc(clamp(45px,2.5em,78px)/-6)]">
+  <SocialLink
+    href="https://contra.com/ipozdnovskii?referralExperimentNid=SOCIAL_REFERRAL_PROGRAM&referrerUsername=ipozdnovskii"
+    ariaLabel="Contra account"
+    Icon={ContraLogo}
+  />
+  <SocialLink
+    href="https://www.upwork.com/freelancers/~014d1e5fca851a8c3a?mp_source=share"
+    ariaLabel="Upwork account"
+    Icon={UpworkLogo}
+  />
+  <SocialLink
+    href="https://www.linkedin.com/in/ivan-pozdnovskii/?locale=en_US"
+    ariaLabel="Linkedin account"
+    Icon={LinkedinLogo}
+  />
+  <SocialLink
+    href="https://t.me/pozdnovskii"
+    ariaLabel="Telegram account"
+    Icon={TgLogo}
+  />
+  <SocialLink
+    href="mailto:ipozdnovskii@icloud.com"
+    ariaLabel="Email me"
+    Icon={EmailLogo}
+    fill="#000"
+  />
+</ul>

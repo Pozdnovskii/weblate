@@ -1,0 +1,66 @@
+---
+import Card from "../components/Card.astro";
+import CardList from "../components/CardList.astro";
+import cards from "../data/howTo.json";
+---
+
+<section id="how">
+  <h2 class="font-mono font-semibold leading-tight text-3xl">How I Work</h2>
+  <div class="flex flex-col gap-8 relative">
+    {
+      cards.map((card) => (
+        <Card title={card.title} description={card.description}>
+          <CardList items={card.items} />
+        </Card>
+      ))
+    }
+    <!-- <div class="ellipse"></div>
+    <div class="scene">
+      <div class="cube" style="--i: 0">
+        <div></div>
+      </div>
+      <div class="cube" style="--i: 1">
+        <div></div>
+      </div>
+      <div class="cube" style="--i: 2">
+        <div></div>
+      </div>
+      <div class="cube" style="--i: 3">
+        <div></div>
+      </div>
+      <div class="cube" style="--i: 4">
+        <div></div>
+      </div>
+      <div class="cube" style="--i: 5">
+        <div></div>
+      </div>
+      <div class="cube" style="--i: 6">
+        <div></div>
+      </div>
+      <div class="cube" style="--i: 7">
+        <div></div>
+      </div>
+      <div class="cube" style="--i: 8">
+        <div></div>
+      </div>
+      <div class="cube" style="--i: 9">
+        <div></div>
+      </div>
+      <div class="cube" style="--i: 10">
+        <div></div>
+      </div>
+      <div class="cube" style="--i: 11">
+        <div></div>
+      </div>
+      <div class="cube" style="--i: 12">
+        <div></div>
+      </div>
+      <div class="cube" style="--i: 13">
+        <div></div>
+      </div>
+      <div class="cube" style="--i: 14">
+        <div></div>
+      </div>
+    </div> -->
+  </div>
+</section>

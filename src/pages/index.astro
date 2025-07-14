@@ -1,55 +1,62 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-import SocialLink from "../components/SocialLink.astro";
-
-import ContraLogo from "../assets/social-logos/contra_logo.svg";
-import UpworkLogo from "../assets/social-logos/upwork_logo.svg";
-import LinkedinLogo from "../assets/social-logos/linkedin_logo.svg";
-import TgLogo from "../assets/social-logos/tg_logo.svg";
+import SocialLinksList from "../components/SocilaLinksList.astro";
 ---
 
 <Layout>
-  <main class="h-[100dvh] w-full px-3 py-5 flex flex-col justify-between">
-    <section>
-      <h1
-        class="text-[clamp(24px,1rem+8.4svw,66px)] leading-none font-black uppercase text-balance"
-      >
-        New Website Coming Soon
-      </h1>
-      <!-- <p class="text-[clamp(18px,.33rem+4.8svw,36px)] font-medium">
-                ready by 07/07
-            </p> -->
-    </section>
+  <header
+    class="auto fixed w-full z-10 justify-between items-center px-[3svw] py-3 backdrop-blur-md"
+  >
+    <a href="/">
+      <div class="font-mono leading-4 flex flex-col">
+        <span class="font-medium tracking-tighter">Ivan Pozdnovskii</span>
+        <span class="text-sm">Website Developer</span>
+      </div>
+    </a>
+    <nav class="hidden">
+      <ul class="flex gap-x-4">
+        <li><a href="#services">Services</a></li><li>
+          <a href="#works">Works</a>
+        </li>
+        <li><a href="practices">Practices</a></li>
+      </ul>
+    </nav>
+    <a href="#" class="hidden">Grow my project</a>
+  </header>
 
-    <section class="lg:self-end-safe">
-      <h2 class="text-[clamp(18px,1rem+4.8svw,30px)] mb-2">
-        Find us here for now:
-      </h2>
-      <address>
-        <ul class="flex gap-x-2 lg:justify-end">
-          <SocialLink
-            href="https://contra.com/ipozdnovskii_f3llzxwh?referralExperimentNid=SOCIAL_REFERRAL_PROGRAM&referrerUsername=ipozdnovskii_f3llzxwh"
-            ariaLabel="Contra account"
-            Icon={ContraLogo}
-          />
-          <SocialLink
-            href="https://www.upwork.com/freelancers/~014d1e5fca851a8c3a?mp_source=share"
-            ariaLabel="Upwork account"
-            Icon={UpworkLogo}
-          />
-          <SocialLink
-            href="https://www.linkedin.com/in/ivan-pozdnovskii/?locale=en_US"
-            ariaLabel="Linkedin account"
-            Icon={LinkedinLogo}
-          />
-          <SocialLink
-            href="https://t.me/pozdnovskii"
-            ariaLabel="Telegram account"
-            Icon={TgLogo}
-          />
-        </ul>
-      </address>
+  <main class="relative flex flex-col gap-y-[66svw] px-[3svw]">
+    <section
+      id="hero"
+      class="min-h-[100dvh] py-4 flex flex-col gap-[min(21svw,6rem)] justify-end pt-24"
+    >
+      <div class="text-balance w-[48rem] max-w-full relative flex flex-col">
+        <h1
+          class="text-[clamp(30px,1rem+6.3svw,4rem)] tracking-tight font-mono font-extralight leading-[min(1.15em,66px)] w-[9em] max-w-full mb-[.36em] opacity-80"
+        >
+          Meticulous Developer For Your Website
+        </h1>
+        <p
+          class="text-[clamp(16px,.3rem+3.6svw,1.75rem)] leading-[1.66em] text-pretty"
+        >
+          I specialize in fast-loading, SEO-friendly, accessible websites —
+          built to <span class="inline-block italic font-serif"
+            >rank higher and perform better.</span
+          >
+        </p>
+      </div>
+
+      <!-- <section class="lg:self-end-safe"></section> -->
+      <div class="">
+        <h2
+          class="text-[clamp(18px,.5rem+3.6svw,2rem)] font-mono font-light tracking-tighter mb-0"
+        >
+          Write me here:
+        </h2>
+        <address>
+          <SocialLinksList />
+        </address>
+      </div>
     </section>
   </main>
 </Layout>

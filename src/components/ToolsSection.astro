@@ -1,0 +1,21 @@
+---
+import ToolCard from "./ToolCard.astro";
+import tools from "../data/tools";
+---
+
+<section id="tools" class="">
+  <h2 class="font-mono font-semibold leading-tight text-3xl">
+    Technologies & Tools
+  </h2>
+
+  <ul
+    class="w-full grid grid-cols-2 gap-3 *:first:col-span-2 *:last:col-span-2 [&_svg]:h-8 md:grid-cols-4"
+  >
+    {
+      tools.map(({ figcaption, logos }) => (
+        <ToolCard figcaption={figcaption} logos={logos} />
+      ))
+    }
+  </ul>
+  <!-- <div class="background"></div> -->
+</section>

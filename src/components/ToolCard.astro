@@ -1,0 +1,18 @@
+---
+const { figcaption, logos } = Astro.props;
+---
+
+<li class="border p-3 rounded-md">
+  {
+    logos ? (
+      <figure class="flex flex-row flex-wrap gap-3">
+        {logos.map((Logo) => (
+          <Logo />
+        ))}
+        <figcaption class="w-full">{figcaption}</figcaption>
+      </figure>
+    ) : (
+      <p>{figcaption}</p>
+    )
+  }
+</li>
