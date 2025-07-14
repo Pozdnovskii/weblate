@@ -9,6 +9,10 @@
     height: 100%;
   }
 
+  body {
+    scrollbar-gutter: stable both-edges;
+  }
+
   h2 {
     font-size: 2rem;
     font-weight: bold;
