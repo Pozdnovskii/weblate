@@ -40,15 +40,6 @@
 
   body:has(dialog[open]) {
     overflow: hidden;
-    /* display: grid;
-    place-items: center;
-    place-content: center; */
-  }
-
-  dialog[open] {
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
   }
 
   h1,
@@ -57,7 +48,7 @@
   h4,
   h5 {
     font-family: var(--font-headings);
-    font-weight: 500;
+    font-weight: 400;
   }
 
   h1 {
