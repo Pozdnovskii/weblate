@@ -2,42 +2,59 @@
 import Layout from "../layouts/Layout.astro";
 
 import SocialLinksList from "../components/SocilaLinksList.astro";
+import HowToSection from "../components/HowToSection.astro";
+import ToolsSection from "../components/ToolsSection.astro";
 ---
 
 <Layout>
-  <header
-    class="auto fixed w-full z-10 justify-between items-center px-[3svw] py-3 backdrop-blur-md"
+  <dialog
+    aria-labelledby="dialog-name"
+    id="under-construction"
+    class="w-[30rem] max-w-full m-auto text-center bg-white p-0 border-0 rounded-md shadow-xl backdrop:bg-indigo-200/48 backdrop:backdrop-blur-md"
   >
-    <a href="/">
-      <div class="font-mono leading-4 flex flex-col">
-        <span class="font-medium tracking-tighter">Ivan Pozdnovskii</span>
-        <span class="text-sm">Website Developer</span>
-      </div>
-    </a>
-    <nav class="hidden">
+    <div class="p-6">
+      <h2 id="dialog-name" class="text-2xl font-mono mb-4">
+        This site is in development
+      </h2>
+      <p class="mb-4">
+        You can explore the available sections, and for contact use the links to
+        my profiles.
+      </p>
+      <button
+        onclick="document.querySelector('dialog').close();"
+        id="close-dialog"
+        class="mt-4 px-4 py-2 bg-gray-800 text-white rounded cursor-pointer hover:bg-gray-600 transition"
+      >
+        View current content
+      </button>
+    </div>
+  </dialog>
+
+  <header class="absolute py-3">
+    <p class="font-mono flex flex-col">
+      <span class="tracking-tighter leading-none">Ivan Pozdnovskii</span>
+      <span class="text-responsive-sm">Website Developer</span>
+    </p>
+    <!-- <nav class="hidden">
       <ul class="flex gap-x-4">
         <li><a href="#services">Services</a></li><li>
           <a href="#works">Works</a>
         </li>
         <li><a href="practices">Practices</a></li>
       </ul>
-    </nav>
-    <a href="#" class="hidden">Grow my project</a>
+    </nav> -->
   </header>
 
-  <main class="relative flex flex-col gap-y-[66svw] px-[3svw]">
-    <section
-      id="hero"
-      class="min-h-[100dvh] py-4 flex flex-col gap-[min(21svw,6rem)] justify-end pt-24"
-    >
+  <main id="main">
+    <section id="hero" class="pb-4 gap-[min(21svw,80px)] justify-end pt-24">
       <div class="relative flex flex-col">
         <h1
-          class="text-[clamp(30px,1rem+6.3svw,4rem)] tracking-tight font-mono font-extralight leading-[min(1.15em,66px)] text-balance w-[9em] max-w-full mb-[.36em] opacity-80"
+          class="leading-[1.15em] text-balance w-[15em] max-w-full mb-[.36em] opacity-80"
         >
           Meticulous Developer For Your Website
         </h1>
         <p
-          class="text-[clamp(16px,.3rem+3.6svw,1.75rem)] leading-[1.66em] w-[24em] max-w-full"
+          class="text-[clamp(16px,.3rem+3.6svw,1.75rem)] leading-relaxed md:leading-tight w-[24em] max-w-full"
         >
           I specialize in fast-loading, SEO-friendly, accessible websites —
           built to <span class="inline-block italic font-serif"
@@ -45,18 +62,16 @@ import SocialLinksList from "../components/SocilaLinksList.astro";
           >
         </p>
       </div>
-
-      <!-- <section class="lg:self-end-safe"></section> -->
       <div class="">
-        <h2
-          class="text-[clamp(18px,.5rem+3.6svw,2rem)] font-mono font-light tracking-tighter mb-0"
-        >
-          Write me here:
-        </h2>
+        <h2 class="mb-0">Write me here:</h2>
         <address>
           <SocialLinksList />
         </address>
       </div>
     </section>
+
+    <HowToSection />
+
+    <ToolsSection />
   </main>
 </Layout>

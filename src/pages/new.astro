@@ -8,16 +8,13 @@ import SocialLinksList from "../components/SocilaLinksList.astro";
 ---
 
 <Layout>
-  <header
-    class="fixed w-full z-10 justify-between items-center px-[3svw] py-3 backdrop-blur-md"
-  >
-    <a href="/">
-      <div class="font-mono leading-4 flex flex-col">
-        <span class="font-medium tracking-tighter">Ivan Pozdnovskii</span>
-        <span class="text-sm">Website Developer</span>
-      </div>
-    </a>
-    <nav class="hidden lg:block">
+  <header class="py-3">
+    <div class="font-mono leading-4 flex flex-col">
+      <span class="font-medium tracking-tighter">Ivan Pozdnovskii</span>
+      <span class="text-sm">Website Developer</span>
+    </div>
+
+    <nav class="hidden">
       <ul class="flex gap-x-4">
         <li><a href="#services">Services</a></li><li>
           <a href="#works">Works</a>
@@ -25,28 +22,34 @@ import SocialLinksList from "../components/SocilaLinksList.astro";
         <li><a href="practices">Practices</a></li>
       </ul>
     </nav>
-    <a href="#" class="hidden lg:block">Grow my project</a>
+    <a href="#" class="hidden">Grow my project</a>
   </header>
 
   <main class="relative flex flex-col gap-y-[66svw] px-[3svw]">
-    <section id="hero" class="h-screen py-4 flex flex-col gap-[21svw]">
-      <div class="relative flex flex-col gap-3 mt-auto">
+    <section
+      id="hero"
+      class="min-h-[100dvh] py-4 flex flex-col gap-[min(21svw,6rem)] justify-end pt-24"
+    >
+      <div class="relative flex flex-col">
         <h1
-          class="opacity-80 text-[11.1svw] tracking-tight font-mono font-extralight leading-[1.15em]"
+          class="text-[clamp(30px,1rem+6.3svw,4rem)] tracking-tight font-mono font-extralight leading-[min(1.15em,66px)] text-balance w-[9em] max-w-full mb-[.36em] opacity-80"
         >
           Meticulous Developer For Your Website
         </h1>
-        <p class="text-[5.1svw] leading-[1.66em] text-pretty">
+        <p
+          class="text-[clamp(16px,.3rem+3.6svw,1.75rem)] leading-[1.66em] w-[24em] max-w-full"
+        >
           I specialize in fast-loading, SEO-friendly, accessible websites —
-          built to <span class="block italic font-serif"
+          built to <span class="inline-block italic font-serif"
             >rank higher and perform better.</span
           >
         </p>
       </div>
 
+      <!-- <section class="lg:self-end-safe"></section> -->
       <div class="">
         <h2
-          class="font-mono tracking-tighter text-[clamp(18px,.5rem+3.6svw,30px)] font-light mb-2"
+          class="text-[clamp(18px,.5rem+3.6svw,2rem)] font-mono font-light tracking-tighter mb-0"
         >
           Write me here:
         </h2>

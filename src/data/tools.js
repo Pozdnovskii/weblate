@@ -47,6 +47,6 @@ export default [
   },
   {
     figcaption:
-      "I never stop learning — exploring new tools, following industry trends, and finding better ways ащк every project, so your site stays one step ahead.",
+      "I never stop learning — exploring new tools, following industry trends, and finding better ways for every project, so your site stays one step ahead.",
   },
 ];

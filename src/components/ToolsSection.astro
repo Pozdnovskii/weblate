@@ -3,13 +3,11 @@ import ToolCard from "./ToolCard.astro";
 import tools from "../data/tools";
 ---
 
-<section id="tools" class="">
-  <h2 class="font-mono font-semibold leading-tight text-3xl">
-    Technologies & Tools
-  </h2>
+<section id="tools">
+  <h2>Technologies & Tools</h2>
 
   <ul
-    class="w-full grid grid-cols-2 gap-3 *:first:col-span-2 *:last:col-span-2 [&_svg]:h-8 md:grid-cols-4"
+    class="w-full grid grid-cols-2 gap-3 *:nth-[3n-2]:col-span-2 [&_svg]:h-8 md:grid-cols-3 md:*:nth-4:col-span-1 xl:grid-cols-4 xl:*:first:row-span-2 xl:*:nth-2:col-4"
   >
     {
       tools.map(({ figcaption, logos }) => (
@@ -17,5 +15,4 @@ import tools from "../data/tools";
       ))
     }
   </ul>
-  <!-- <div class="background"></div> -->
 </section>
