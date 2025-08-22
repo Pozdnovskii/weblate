@@ -1,0 +1,52 @@
+---
+import SocialLinksList from "../components/SocilaLinksList.astro";
+---
+
+<header id="header" class="wrapper fixed top-4 start-1/2 z-6 -translate-x-1/2">
+  <div id="header-content" class="relative w-96 max-w-full ms-auto">
+    <div id="header-top" class="relative">
+      <p class="flex flex-col gap-y-1 p-3 font-secondary uppercase">
+        <span>Ivan Pozdnovskii</span>
+        <span class="text-xs">Website Developer</span>
+      </p>
+      <button
+        id="header-btn"
+        aria-label="Toggle menu"
+        aria-controls="header-nav"
+        aria-expanded="false"
+      >
+        <div id="burger-line-middle" class="-order-1"></div>
+      </button>
+    </div>
+
+    <nav
+      id="header-nav"
+      class="grid relative overflow-hidden transition-all duration-500 ease-in-out"
+    >
+      <div id="nav-content" class="relative pt-[2px]">
+        <ul
+          class="flex flex-col gap-y-3 relative overflow-visible p-3 [&_span]:me-2 [&_span]:font-secondary"
+        >
+          <li>
+            <a href="#services"><span aria-hidden>01</span>Services</a>
+          </li>
+          <li>
+            <a href="#tools"><span aria-hidden>02</span>Tools</a>
+          </li>
+          <li>
+            <a href="#how-to"><span aria-hidden>03</span>How To</a>
+          </li>
+          <li>
+            <a href="#projects"><span aria-hidden>04</span>Projects</a>
+          </li>
+          <li>
+            <a href="#contacts"><span aria-hidden>05</span>Contacts</a>
+          </li>
+        </ul>
+        <address class="">
+          <SocialLinksList variant="vertical" />
+        </address>
+      </div>
+    </nav>
+  </div>
+</header>

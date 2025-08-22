@@ -1,0 +1,10 @@
+---
+const { title, id } = Astro.props;
+---
+
+<h2
+  id={id}
+  class="heading-mono flex justify-between grid-wrapper__subgrid mb-6"
+>
+  <span aria-hidden>/</span><span>{title}</span>
+</h2>

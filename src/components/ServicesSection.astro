@@ -1,53 +1,50 @@
 ---
-
+import ServiceCard from "./ServiceCard.astro";
+import SocilaLinksList from "./SocilaLinksList.astro";
+import Section from "./Section.astro";
 ---
 
-<section id="services" class="">
-  <h2 class="font-mono font-semibold leading-tight text-3xl">Services</h2>
+<Section id="services" title="Services" class="wrapper grid-wrapper">
+  <main class="flex flex-col gap-y-8 grid-wrapper__subgrid">
+    <ServiceCard index="001" title="Website development">
+      <p>
+        I develop multi-page websites, corporate sites, landing pages,
+        portfolios, blogs, and online stores — always with performance,
+        accessibility, and SEO in mind.
+      </p>
+      <p>
+        For each project, I pick the perfect tech stack—custom code from scratch
+        or no/low-code platforms like Webflow, Webstudio, Shopify or Framer,
+        depending on your goals.
+      </p>
+    </ServiceCard>
 
-  <article>
-    <h3>Website development</h3>
-    <p>
-      I develop multi-page websites, corporate sites, landing pages, portfolios,
-      blogs, and online stores — always with performance, accessibility, and SEO
-      in mind.
-    </p>
-    <p>
-      For each project, I pick the perfect tech stack—custom code from scratch
-      or no/low-code platforms like Webflow, Webstudio, Shopify or Framer,
-      depending on your goals.
-    </p>
-    <p>
-      I prefer clean code, as it creates the fastest, most SEO-optimized, and
-      accessible websites. This brings more traffic, better engagement, and
-      future scalability as your business grows.
-    </p>
-  </article>
+    <ServiceCard index="002" title="Website Upgrades">
+      <p>
+        Is your site loading slowly, not ranking well, underperforming, or
+        looking outdated? I'll pinpoint what's holding it back and make it work
+        harder for your business.From complete redesigns to precise technical
+        improvements, I make websites faster, more engaging, and easier to grow.
+      </p>
+      <p>
+        Performance optimization, SEO improvements, design updates, engaging
+        animations, better user experience, and accessibility improvements —
+        everything your site needs to reach its full potential.
+      </p>
+    </ServiceCard>
 
-  <article>
-    <h3>Website Upgrades</h3>
-    <p>
-      Is your site loading slowly, not ranking well, underperforming, or looking
-      outdated? I'll pinpoint what's holding it back and make it work harder for
-      your business.From complete redesigns to precise technical improvements, I
-      make websites faster, more engaging, and easier to grow.
-    </p>
-    <p>
-      Performance optimization, SEO improvements, design updates, engaging
-      animations, better user experience, and accessibility improvements —
-      everything your site needs to reach its full potential.
-    </p>
-  </article>
-
-  <article>
-    <h3>Web Design</h3>
-    <p>Design isn't my specialty, though I designed this site myself.</p>
-    <p>
-      That's why I partner with skilled and reliable designers who create
-      visuals that make you stand out from the crowd and boost your conversions.
-      Together, we create websites that don't just look good — they work hard to
-      grow your business.
-    </p>
-    <aside>Designer? Let's work together.</aside>
-  </article>
-</section>
+    <ServiceCard index="003" title="Web Design">
+      <p>Design isn't my specialty, though I designed this site myself.</p>
+      <p>
+        That's why I partner with skilled and reliable designers who create
+        visuals that make you stand out from the crowd and boost your
+        conversions. Together, we create websites that don't just look good —
+        they work hard to grow your business.
+      </p>
+      <aside slot="aside" class="grid-wrapper__center-cell mt-6">
+        <p>Designer? <span class="heading-mono"> Let's collaborate →</span></p>
+        <address><SocilaLinksList /></address>
+      </aside>
+    </ServiceCard>
+  </main>
+</Section>

@@ -1,17 +1,20 @@
 ---
 import "../styles/global.css";
+import { Font } from "astro:assets";
+
+import Header from "../components/Header.astro";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="en" class="antialiased font-sans">
+<html lang="en" class="antialiased">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Weblate | Web Development & Design Studio</title>
+    <title>Ivan Pozdnovskii | Web Developer</title>
     <!-- <meta name="description" content={description} /> -->
     <!-- <meta property="og:title" content={`Anastasiya Pavlyk | ${title}`} />
         <meta property="og:description" content={description} />
@@ -24,11 +27,48 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <meta name="twitter:image" content="/opengraph.jpg" /> -->
     <link rel="canonical" href={canonicalURL} />
     <meta name="view-transition" content="same-origin" />
+    <Font cssVariable="--font-space-grotesk" preload />
+    <Font cssVariable="--font-space-mono" preload />
   </head>
-  <body class="2xl:container mx-auto px-svw bg-indigo-50/48">
+  <body class="bg-zinc-800 text-white">
+    <Header />
     <slot />
     <script is:inline>
       document.addEventListener("DOMContentLoaded", () => {
+        const header = document.getElementById("header");
+        const burger = document.getElementById("header-btn");
+        const nav = document.getElementById("header-nav");
+
+        if (!header) return;
+
+        let isOpen = false;
+        function toggleMenu() {
+          console.log(isOpen);
+          isOpen = !isOpen;
+          header.classList.toggle("header--open", isOpen);
+          burger.setAttribute("aria-expanded", isOpen);
+
+          if (isOpen) {
+            setTimeout(() => nav?.querySelector("a")?.focus(), 150);
+          }
+        }
+
+        burger.addEventListener("click", toggleMenu);
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && isOpen) {
+            toggleMenu();
+            burger.focus();
+          }
+        });
+
+        document.addEventListener("click", (e) => {
+          if (isOpen && !header.contains(e.target)) {
+            toggleMenu();
+          }
+        });
+
+        // Dialogue
         const dialog = document.querySelector("dialog");
 
         if (!dialog) return;

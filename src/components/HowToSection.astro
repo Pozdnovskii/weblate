@@ -1,18 +1,85 @@
 ---
-import HowToCard from "../components/HowToCard.astro";
-import HowToCardList from "../components/HowToCardList.astro";
-import cards from "../data/howTo.json";
+import Section from "./Section.astro";
+import tabs from "../data/howTo.json";
 ---
 
-<section id="how-to">
-  <h2>How I Work</h2>
-  <div class="flex flex-col gap-section-sm">
+<Section id="how-to" title="How I Work" class="wrapper grid-wrapper">
+  <main class="grid-wrapper__subgrid" data-tabs>
+    <div
+      role="tablist"
+      aria-labelledby="how-to-title"
+      class="col-span-full ps-2.5 flex gap-0.5"
+    >
+      {
+        tabs.map((tab, index) => (
+          <button
+            id={`tab-${index}`}
+            role="tab"
+            aria-selected={index === 0 ? "true" : "false"}
+            aria-controls={`panel-${index}`}
+            tabindex={index === 0 ? "0" : "-1"}
+            class="px-2.5 py-1.5 rounded-t-sm border border-neutral-500 border-b-0 aria-selected:bg-neutral-500"
+            data-tab-button
+          >
+            {tab.title}
+          </button>
+        ))
+      }
+    </div>
+
     {
-      cards.map((card) => (
-        <HowToCard title={card.title} description={card.description}>
-          <HowToCardList items={card.items} />
-        </HowToCard>
+      tabs.map((tab, index) => (
+        <ul
+          class="grid-wrapper__subgrid py-1.5 px-4 bg-neutral-500 divide-y divide-dashed divide-zinc-800 rounded-sm"
+          id={`panel-${index}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${index}`}
+          hidden={index !== 0}
+          tabindex="0"
+          data-tab-panel
+        >
+          {tab.items.map((item) => (
+            <li class="py-2.5 grid-wrapper__subgrid">
+              <h3 class="heading-mono leading-6">{item.title}</h3>
+              <p class="">{item.description}</p>
+            </li>
+          ))}
+        </ul>
       ))
     }
-  </div>
-</section>
+  </main>
+
+  <script>
+    const tabButtons = document.querySelectorAll("[data-tab-button]");
+    const tabPanels = document.querySelectorAll("[data-tab-panel]");
+
+    function activateTab(newTab) {
+      tabButtons.forEach((btn) => {
+        btn.setAttribute("aria-selected", "false");
+        btn.setAttribute("tabindex", "-1");
+      });
+      tabPanels.forEach((panel) => ((panel as HTMLElement).hidden = true));
+
+      newTab.setAttribute("aria-selected", "true");
+      newTab.setAttribute("tabindex", "0");
+      const panelId = newTab.getAttribute("aria-controls");
+      document.getElementById(panelId).hidden = false;
+      newTab.focus();
+    }
+
+    tabButtons.forEach((button) => {
+      button.addEventListener("click", () => activateTab(button));
+      button.addEventListener("keydown", (e: KeyboardEvent) => {
+        let idx = [...tabButtons].indexOf(button);
+        if (e.key === "ArrowRight") {
+          idx = (idx + 1) % tabButtons.length;
+          activateTab(tabButtons[idx]);
+        }
+        if (e.key === "ArrowLeft") {
+          idx = (idx - 1 + tabButtons.length) % tabButtons.length;
+          activateTab(tabButtons[idx]);
+        }
+      });
+    });
+  </script>
+</Section>

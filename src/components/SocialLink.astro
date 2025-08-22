@@ -7,10 +7,7 @@ const { href, ariaLabel, Icon } = Astro.props;
     href={href}
     aria-label={ariaLabel}
     target="_blank"
-    class="w-[clamp(45px,2.5em,78px)] aspect-square flex justify-center items-center"
-    ><Icon
-      class="w-3/5 aspect-square hover:fill-cyan-700 hover:w-4/5 transition-all"
-      fill="currentColor"
-    /></a
+    class="w-[clamp(45px,2.5em,78px)] aspect-square flex justify-center items-center *:rounded-[6px] hover:*:fill-hover hover:*:shadow-sm hover:*:shadow-shadow/60 hover:*:w-3/4"
+    ><Icon class="w-3/5 aspect-square transition-all" fill="currentColor" /></a
   >
 </li>

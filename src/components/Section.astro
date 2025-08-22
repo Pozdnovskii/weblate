@@ -1,0 +1,10 @@
+---
+import SectionHeading from "./SectionHeading.astro";
+
+const { id, title, class: className = "" } = Astro.props;
+---
+
+<section id={id} class={className}>
+  <SectionHeading title={title} id={`${id}-title`} />
+  <slot />
+</section>

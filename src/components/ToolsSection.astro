@@ -1,11 +1,10 @@
 ---
+import Section from "./Section.astro";
 import ToolCard from "./ToolCard.astro";
 import tools from "../data/tools";
 ---
 
-<section id="tools">
-  <h2>Technologies & Tools</h2>
-
+<Section id="tools" title="Technologies & Tools" class="wrapper">
   <ul
     class="w-full grid grid-cols-2 gap-3 *:nth-[3n-2]:col-span-2 [&_svg]:h-8 md:grid-cols-3 md:*:nth-4:col-span-1 xl:grid-cols-4 xl:*:first:row-span-2 xl:*:nth-2:col-4"
   >
@@ -15,4 +14,4 @@ import tools from "../data/tools";
       ))
     }
   </ul>
-</section>
+</Section>

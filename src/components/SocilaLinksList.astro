@@ -6,9 +6,17 @@ import UpworkLogo from "../assets/social-logos/upwork_logo.svg";
 import LinkedinLogo from "../assets/social-logos/linkedin_logo.svg";
 import TgLogo from "../assets/social-logos/tg_logo.svg";
 import EmailLogo from "../assets/social-logos/email_logo.svg";
+
+const { variant } = Astro.props;
 ---
 
-<ul class="flex gap-x-1 translate-x-[calc(clamp(45px,2.5em,78px)/-6)]">
+<ul
+  class={`flex ${
+    variant === "vertical"
+      ? "flex-col items-center py-2.5"
+      : "gap-x-1 translate-x-[calc(clamp(45px,2.5em,78px)/-6)]"
+  }`}
+>
   <SocialLink
     href="https://contra.com/ipozdnovskii?referralExperimentNid=SOCIAL_REFERRAL_PROGRAM&referrerUsername=ipozdnovskii"
     ariaLabel="Contra account"
