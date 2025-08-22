@@ -68,6 +68,14 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
           }
         });
 
+        nav.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            if (isOpen) {
+              toggleMenu();
+            }
+          });
+        });
+
         // Dialogue
         const dialog = document.querySelector("dialog");
 
