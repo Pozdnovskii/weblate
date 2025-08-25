@@ -1,6 +1,7 @@
 ---
 import Section from "./Section.astro";
 import tabs from "../data/howTo.json";
+import PrinciplesIcon from "../assets/images/principles.svg";
 ---
 
 <Section id="how-to" title="Principles & Approach" class="wrapper grid-wrapper">
@@ -29,7 +30,7 @@ import tabs from "../data/howTo.json";
 
     {
       tabs.map((tab, index) => (
-        <ul
+        <section
           class="grid-wrapper__subgrid py-1.5 px-4 bg-neutral-500 divide-y divide-dashed divide-zinc-800 rounded-sm"
           id={`panel-${index}`}
           role="tabpanel"
@@ -39,12 +40,13 @@ import tabs from "../data/howTo.json";
           data-tab-panel
         >
           {tab.items.map((item) => (
-            <li class="py-2.5 grid-wrapper__subgrid">
+            <article class="py-2.5 grid-wrapper__subgrid grid gap-y-1.5">
               <h3 class="heading-mono leading-6">{item.title}</h3>
-              <p class="">{item.description}</p>
-            </li>
+              <p class="max-w-prose">{item.description}</p>
+              <PrinciplesIcon class="max-lg:hidden lg:w-6 lg:aspect-square lg:justify-self-end" />
+            </article>
           ))}
-        </ul>
+        </section>
       ))
     }
   </main>

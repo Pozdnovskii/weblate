@@ -16,6 +16,8 @@
   --spacing-section: max(90px, calc(var(--spacing-svw) * 4));
   --spacing-section-sm: calc(var(--spacing-section) / 3);
 
+  --spacing-text-indent: min(2em, 48px);
+
   /* --text-responsive: clamp(1rem, 0.9342rem + 0.3289svw, 1.25rem);
   --text-responsive-sm: calc(var(--text-responsive) * 0.875);
     --fs-md: clamp(1.25rem, 0.61vi + 1.1rem, 1.58rem);
@@ -65,28 +67,28 @@
   }
 
   #contacts {
-    @apply relative top-[calc(var(--spacing-section)/-3)];
+    @apply relative top-[var(--spacing-section-sm)];
   }
 
   @media (min-width: 48rem) {
     .grid-wrapper {
-      @apply grid grid-cols-[1fr_42ch_1fr] gap-x-4;
+      @apply grid grid-cols-[minmax(15em,1fr)_min(52em,calc(92svw-15em))] gap-x-6 lg:grid-cols-[minmax(15em,1fr)_min(52em,calc(92svw-27em))_minmax(10em,1fr)];
     }
 
     .grid-wrapper__center-cell {
       @apply col-start-2 col-end-3;
     }
-
-    /* #hero p {
-      @apply me-[27rem] max-w-[calc(100%-26rem)];
-    } */
   }
 }
 
 @layer utilities {
+  #contacts > * {
+    @apply md:text-xl md:col-span-full lg:col-start-2 lg:col-end-3 xl:text-2xl;
+  }
+
   @media (min-width: 48rem) {
     .grid-wrapper .grid-wrapper__subgrid {
-      @apply grid col-start-1 col-end-4 grid-cols-subgrid;
+      @apply grid col-span-full grid-cols-subgrid grid-flow-dense;
     }
   }
 }

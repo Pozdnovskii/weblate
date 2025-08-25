@@ -38,6 +38,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         const header = document.getElementById("header");
         const burger = document.getElementById("header-btn");
         const nav = document.getElementById("header-nav");
+        const headerContent = document.getElementById("header-content");
 
         if (!header) return;
 
@@ -63,7 +64,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         });
 
         document.addEventListener("click", (e) => {
-          if (isOpen && !header.contains(e.target)) {
+          if (isOpen && !headerContent.contains(e.target)) {
             toggleMenu();
           }
         });

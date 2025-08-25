@@ -1,14 +1,21 @@
 ---
 const { title, index } = Astro.props;
+import Sdf from "../assets/images/sdf.svg";
 ---
 
 <article
-  class="border-t border-dashed border-neutral-500 py-6 grid-wrapper__subgrid"
+  class="border-t border-dashed border-neutral-500 py-6 grid-wrapper__subgrid [&:last-child_svg]:hidden md:[&:last-child_svg]:block"
 >
   <span aria-hidden class="mb-3">S/{index}</span>
   <h3 class="text-2xl mb-6">{title}</h3>
-  <main class="grid-wrapper__center-cell indent-[2ch] leading-7">
+  <main
+    class="grid-wrapper__center-cell indent-text-indent leading-7 max-w-prose flex flex-col gap-y-2 mt-auto"
+  >
     <slot />
+    <slot name="aside" />
   </main>
-  <slot name="aside" />
+  <Sdf
+    class="max-w-60 self-center justify-self-center max-md:mt-6 md:justify-self-start md:max-lg:w-2/3 lg:w-8/9 lg:justify-self-end lg:row-span-2"
+  />
+  <!-- <div class="w-2.5 bg-fuchsia-100 aspect-square"></div> -->
 </article>
