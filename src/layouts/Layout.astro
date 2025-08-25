@@ -92,6 +92,18 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             dialog.close();
           }
         });
+
+        // Url cleaner
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", (e) => {
+            e.preventDefault();
+            const id = anchor.getAttribute("href").substring(1);
+            const target = document.getElementById(id);
+            if (target) {
+              target.scrollIntoView({ behavior: "smooth" });
+            }
+          });
+        });
       });
     </script>
   </body>

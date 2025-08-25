@@ -1,0 +1,51 @@
+---
+import Section from "./Section.astro";
+---
+
+<Section id="projects" title="Projects" class="wrapper grid-wrapper">
+  <main class="grid-wrapper__subgrid" data-tabs>
+    <div
+      role="tablist"
+      aria-labelledby="how-to-title"
+      class="col-span-full ps-2.5 flex gap-0.5"
+    >
+      <!-- {
+        tabs.map((tab, index) => (
+          <button
+            id={`tab-${index}`}
+            role="tab"
+            aria-selected={index === 0 ? "true" : "false"}
+            aria-controls={`panel-${index}`}
+            tabindex={index === 0 ? "0" : "-1"}
+            class="px-2.5 py-1.5 rounded-t-sm border border-neutral-500 border-b-0 aria-selected:bg-neutral-500"
+            data-tab-button
+          >
+            {tab.title}
+          </button>
+        ))
+      } -->
+    </div>
+
+    <!-- {
+      tabs.map((tab, index) => (
+        <section
+          class="grid-wrapper__subgrid py-1.5 px-4 bg-neutral-500 divide-y divide-dashed divide-zinc-800 rounded-sm"
+          id={`panel-${index}`}
+          role="tabpanel"
+          aria-labelledby={`tab-${index}`}
+          hidden={index !== 0}
+          tabindex="0"
+          data-tab-panel
+        >
+          {tab.items.map((item) => (
+            <article class="py-2.5 grid-wrapper__subgrid grid gap-y-1.5">
+              <h3 class="heading-mono leading-6">{item.title}</h3>
+              <p class="max-w-prose">{item.description}</p>
+              <PrinciplesIcon class="max-lg:hidden lg:w-6 lg:aspect-square lg:justify-self-end" />
+            </article>
+          ))}
+        </section>
+      ))
+    } -->
+  </main>
+</Section>
