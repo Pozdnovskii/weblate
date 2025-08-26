@@ -10,10 +10,10 @@ export default defineConfig({
   },
   site: "https://weblateweb.dev",
   integrations: [sitemap()],
-  image: {
-    responsiveStyles: true,
-    // layout: "constrained",
-  },
+  // image: {
+  //   responsiveStyles: true,
+  //   // layout: "constrained",
+  // },
   experimental: {
     fonts: [
       {

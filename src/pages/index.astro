@@ -10,7 +10,7 @@ import HowToSection from "../components/HowToSection.astro";
 import ToolsSection from "../components/ToolsSection.astro";
 
 // import BG from "../assets/images/hero-bg.svg";
-import BackgroundDesk from "../assets/images/hero-bg-desk.webp";
+import backgroundDesk from "../assets/images/hero-bg-desk.webp";
 // import BackgroundMob from "../assets/images/hero-bg-mob.png";
 ---
 
@@ -68,11 +68,13 @@ import BackgroundDesk from "../assets/images/hero-bg-desk.webp";
     </section>
 
     <Image
-      src={BackgroundDesk}
+      src={backgroundDesk}
       alt=" "
       aria-hidden="true"
       class="object-cover absolute -z-1 h-[110svh]"
       priority
+      widths={[1000, 1350, backgroundDesk.width]}
+      sizes={`(max-width: 720px) 1000px, (max-width: 1280px) 1350px, ${backgroundDesk.width}px`}
     />
 
     <section id="contacts" class="wrapper grid-wrapper">
