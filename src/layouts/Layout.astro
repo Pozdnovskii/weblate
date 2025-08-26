@@ -5,6 +5,9 @@ import { Font } from "astro:assets";
 import Header from "../components/Header.astro";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const title = "Ivan Pozdnovskii | Web Developer";
+const description =
+  "Modern Website development with Astro, Webstudio, Webflow, and Shopify. Expert in site speed optimization, SEO, and accessibility for higher rankings.";
 ---
 
 <!doctype html>
@@ -14,19 +17,19 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Ivan Pozdnovskii | Web Developer</title>
-    <!-- <meta name="description" content={description} /> -->
-    <!-- <meta property="og:title" content={`Anastasiya Pavlyk | ${title}`} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content="/opengraph.jpg" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={canonicalURL} />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`Anastasiya Pavlyk | ${title}`} />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content="/opengraph.jpg" /> -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/opengraph.webp" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/opengraph.webp" />
     <link rel="canonical" href={canonicalURL} />
-    <meta name="view-transition" content="same-origin" />
+    <!-- <meta name="view-transition" content="same-origin" /> -->
     <Font cssVariable="--font-space-grotesk" preload />
     <Font cssVariable="--font-space-mono" preload />
   </head>
