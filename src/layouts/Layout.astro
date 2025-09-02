@@ -110,5 +110,39 @@ const description =
         });
       });
     </script>
+
+    <script is:inline>
+      const table = document.querySelector("table");
+
+      // Функция для показа определенного столбца
+      const showColumn = (index) => {
+        table.querySelectorAll("tr").forEach((row) => {
+          [...row.children].forEach((cell, i) => {
+            cell.style.display =
+              i < 2 || i === index - 1 ? "table-cell" : "none";
+          });
+        });
+      };
+
+      // Обработчик кликов по кнопкам столбцов
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-col]");
+        if (!btn) return;
+        showColumn(Number(btn.dataset.col));
+      });
+
+      // Функция для показа столбца только на мобильных устройствах
+      const showColumnOnMobile = () => {
+        if (window.innerWidth <= 480) {
+          showColumn(3);
+        }
+      };
+
+      // Инициализация при загрузке страницы
+      showColumnOnMobile();
+
+      // Отслеживание изменения размера окна
+      window.addEventListener("resize", showColumnOnMobile);
+    </script>
   </body>
 </html>
