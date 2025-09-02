@@ -9,7 +9,11 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   site: "https://weblateweb.dev",
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes("/table") && !page.includes("/table-2"),
+    }),
+  ],
   // image: {
   //   responsiveStyles: true,
   //   // layout: "constrained",
