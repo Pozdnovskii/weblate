@@ -36,16 +36,13 @@
   }
 
   html {
-    @apply scroll-smooth scroll-pt-[calc(var(--spacing-section)*1.5)];
+    /* @apply scroll-smooth scroll-pt-[calc(var(--spacing-section)*1.5)]; */
+    @apply scroll-smooth scroll-pt-section-sm;
   }
 
   body {
     scrollbar-gutter: stable both-edges;
     font-family: var(--font-body);
-  }
-
-  body:has(> header.header--open) {
-    overflow: hidden;
   }
 
   h1 {
@@ -62,9 +59,9 @@
 }
 
 @layer components {
-  body:has(dialog[open]) {
+  /* body:has(dialog[open]) {
     overflow: hidden;
-  }
+  } */
 
   #contacts {
     @apply relative top-[var(--spacing-section-sm)];
