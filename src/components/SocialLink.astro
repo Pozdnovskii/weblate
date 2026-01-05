@@ -1,9 +1,11 @@
 ---
-const { href, ariaLabel, Icon } = Astro.props;
+const { href, ariaLabel, Icon, dataUmamiEvent } = Astro.props;
 ---
 
 <li class="">
   <a
+    data-umami-event={dataUmamiEvent}
+    data-umami-event-link={ariaLabel}
     href={href}
     aria-label={ariaLabel}
     target="_blank"

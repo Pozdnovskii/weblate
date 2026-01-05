@@ -14,6 +14,7 @@ import PrinciplesIcon from "../assets/images/principles.svg";
       {
         tabs.map((tab, index) => (
           <button
+            data-umami-event="how-to-tab-click"
             id={`tab-${index}`}
             role="tab"
             aria-selected={index === 0 ? "true" : "false"}

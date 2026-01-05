@@ -8,6 +8,9 @@ import TgLogo from "../assets/social-logos/tg_logo.svg";
 import EmailLogo from "../assets/social-logos/email_logo.svg";
 
 const { variant } = Astro.props;
+const dataUmamiEvent =
+  variant === "vertical" ? "header-address-click" : "contacts-address-click";
+dataUmamiEvent;
 ---
 
 <ul
@@ -18,26 +21,31 @@ const { variant } = Astro.props;
   }`}
 >
   <SocialLink
+    data-umami-event={dataUmamiEvent}
     href="https://contra.com/ipozdnovskii?referralExperimentNid=SOCIAL_REFERRAL_PROGRAM&referrerUsername=ipozdnovskii"
     ariaLabel="Contra account"
     Icon={ContraLogo}
   />
   <SocialLink
+    data-umami-event={dataUmamiEvent}
     href="https://www.upwork.com/freelancers/~014d1e5fca851a8c3a?mp_source=share"
     ariaLabel="Upwork account"
     Icon={UpworkLogo}
   />
   <SocialLink
+    data-umami-event={dataUmamiEvent}
     href="https://www.linkedin.com/in/ivan-pozdnovskii/?locale=en_US"
     ariaLabel="Linkedin account"
     Icon={LinkedinLogo}
   />
   <SocialLink
+    data-umami-event={dataUmamiEvent}
     href="https://t.me/pozdnovskii"
     ariaLabel="Telegram account"
     Icon={TgLogo}
   />
   <SocialLink
+    data-umami-event={dataUmamiEvent}
     href="mailto:ipozdnovskii@icloud.com"
     ariaLabel="Email me"
     Icon={EmailLogo}

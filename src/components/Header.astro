@@ -10,6 +10,7 @@ import SocialLinksList from "../components/SocilaLinksList.astro";
         <span class="text-xs">Website Developer</span>
       </p>
       <button
+        data-umami-event="header-navigation-toggle"
         id="header-btn"
         aria-label="Toggle menu"
         aria-controls="header-nav"
@@ -28,15 +29,25 @@ import SocialLinksList from "../components/SocilaLinksList.astro";
           class="flex flex-col gap-y-3 relative overflow-visible p-3 [&_span]:me-2 [&_span]:font-secondary"
         >
           <li>
-            <a href="#services"><span aria-hidden="true">01</span>Services</a>
+            <a
+              data-umami-event="header-navigation"
+              data-umami-event-link="services"
+              href="#services"><span aria-hidden="true">01</span>Services</a
+            >
           </li>
           <li>
-            <a href="#tools"
+            <a
+              data-umami-event="header-navigation"
+              data-umami-event-link="tools"
+              href="#tools"
               ><span aria-hidden="true">02</span>Technologies & Tools</a
             >
           </li>
           <li>
-            <a href="#how-to"
+            <a
+              data-umami-event="header-navigation"
+              data-umami-event-link="how-to"
+              href="#how-to"
               ><span aria-hidden="true">03</span>Principles & Approach</a
             >
           </li>
