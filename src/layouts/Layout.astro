@@ -52,6 +52,12 @@ const description =
     <Font cssVariable="--font-space-mono" preload />
   </head>
   <body class="bg-zinc-800 text-white">
+    <div
+      style="display:none"
+      data-debug-host={Astro.url.hostname}
+      data-debug-site={Astro.site?.hostname}
+    >
+    </div>
     <Header />
     <slot />
     <script is:inline>
