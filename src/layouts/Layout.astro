@@ -5,7 +5,8 @@ import { Font } from "astro:assets";
 import Header from "../components/Header.astro";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const isProduction = Astro.url.hostname === Astro.site.hostname;
+const isAllowed =
+  import.meta.env.PROD && Astro.site && Astro.url.origin === Astro.site.origin;
 
 const title = "Ivan Pozdnovskii | Web Developer";
 const description =
@@ -15,9 +16,6 @@ const description =
 <!doctype html>
 <html lang="en" class="antialiased">
   <head>
-    {/* Если это НЕ продакшн, запрещаем индексацию */}
-    {!isProduction && <meta name="robots" content="noindex, nofollow" />}
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -34,9 +32,13 @@ const description =
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="/opengraph.webp" />
     <link rel="canonical" href={canonicalURL} />
-    <meta name="robots" content="index, follow" />
     {
-      isProduction && (
+      (isAllowed && <meta name="robots" content="index, follow" />) || (
+        <meta name="robots" content="noindex, nofollow" />
+      )
+    }
+    {
+      isAllowed && (
         <script
           defer
           src="https://cloud.umami.is/script.js"
@@ -44,8 +46,9 @@ const description =
         />
       )
     }
-    {isProduction && <script>console.log('isProduction')</script>}
-    {!isProduction && <script>console.log('NotisProduction')</script>}
+
+    {isAllowed && <script>console.log('isProduction')</script>}
+    {!isAllowed && <script>console.log('NotisProduction')</script>}
 
     <!-- <meta name="view-transition" content="same-origin" /> -->
     <Font cssVariable="--font-space-grotesk" preload />
