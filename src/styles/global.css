@@ -62,11 +62,6 @@
   /* body:has(dialog[open]) {
     overflow: hidden;
   } */
-  #header-nav {
-    display: none;
-
-    grid-template-rows: repeat(1, minmax(0, 0fr));
-  }
 
   #contacts {
     @apply relative top-[var(--spacing-section-sm)];

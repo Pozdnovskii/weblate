@@ -15,6 +15,10 @@
     content: "";
   }
 
+  #header-nav {
+    grid-template-rows: repeat(1, minmax(0, 0fr));
+  }
+
   /* Header shape */
   #header p,
   #header ul {
@@ -106,7 +110,6 @@
 
   /* Header open animation */
   .header--open #header-nav {
-    display: grid;
     grid-template-rows: repeat(1, minmax(0, 1fr));
   }
 

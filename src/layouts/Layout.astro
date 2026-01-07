@@ -5,6 +5,8 @@ import { Font } from "astro:assets";
 import Header from "../components/Header.astro";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const isProduction = Astro.url.hostname === Astro.site.hostname;
+
 const title = "Ivan Pozdnovskii | Web Developer";
 const description =
   "Modern Website development with Astro, Webstudio, Webflow, and Shopify. Expert in site speed optimization, SEO, and accessibility for higher rankings.";
@@ -13,6 +15,9 @@ const description =
 <!doctype html>
 <html lang="en" class="antialiased">
   <head>
+    {/* Если это НЕ продакшн, запрещаем индексацию */}
+    {!isProduction && <meta name="robots" content="noindex, nofollow" />}
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -30,10 +35,16 @@ const description =
     <meta name="twitter:image" content="/opengraph.webp" />
     <link rel="canonical" href={canonicalURL} />
     <meta name="robots" content="index, follow" />
-    <script
-      defer
-      src="https://cloud.umami.is/script.js"
-      data-website-id="63b3ed92-ca97-4846-a043-2d135db38955"></script>
+    {
+      isProduction && (
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="63b3ed92-ca97-4846-a043-2d135db38955"
+        />
+      )
+    }
+
     <!-- <meta name="view-transition" content="same-origin" /> -->
     <Font cssVariable="--font-space-grotesk" preload />
     <Font cssVariable="--font-space-mono" preload />
@@ -57,7 +68,10 @@ const description =
           burger.setAttribute("aria-expanded", isOpen);
 
           if (isOpen) {
+            nav.removeAttribute("inert");
             setTimeout(() => nav?.querySelector("a")?.focus(), 150);
+          } else {
+            nav.setAttribute("inert", "");
           }
         }
 
