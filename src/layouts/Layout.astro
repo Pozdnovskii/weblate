@@ -52,7 +52,6 @@ const description =
 
         let isOpen = false;
         function toggleMenu() {
-          console.log(isOpen);
           isOpen = !isOpen;
           header.classList.toggle("header--open", isOpen);
           burger.setAttribute("aria-expanded", isOpen);
@@ -112,6 +111,13 @@ const description =
             }
           });
         });
+      });
+    </script>
+    <script>
+      import { initGoUpAnimation } from "../scripts/animations/h1-animation.js";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        initGoUpAnimation();
       });
     </script>
   </body>

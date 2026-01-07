@@ -62,6 +62,11 @@
   /* body:has(dialog[open]) {
     overflow: hidden;
   } */
+  #header-nav {
+    display: none;
+
+    grid-template-rows: repeat(1, minmax(0, 0fr));
+  }
 
   #contacts {
     @apply relative top-[var(--spacing-section-sm)];
@@ -74,6 +79,53 @@
 
     .grid-wrapper__center-cell {
       @apply col-start-2 col-end-3;
+    }
+  }
+
+  .pipe {
+    animation: fadeIn 0.5s ease-in-out 3 alternate;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  /* h1 span:not(:last-child) {
+    display: inline-block;
+    width: 0;
+    overflow: hidden;
+    transform-origin: left;
+    animation: type 0.5s ease calc(var(--item-index) * 1s) forwards;
+    text-indent: 0;
+  }
+
+  @keyframes type {
+    0% {
+      width: 0;
+    }
+
+    100% {
+      width: fit-content;
+    }
+  } */
+
+  [data-fade-animation] {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s ease forwards;
+    animation-delay: calc(var(--fade-index) * 0.2s);
+  }
+
+  @keyframes fadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }

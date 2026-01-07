@@ -48,12 +48,21 @@ import backgroundDesk from "../assets/images/hero-bg-desk.webp";
       class="wrapper min-h-svh pt-27 pb-2 gap-[min(21svw,80px)] justify-between flex flex-col-reverse w-full relative md:pt-5"
     >
       <h1
+        data-fade-animation
         class="leading-tight indent-[2ch] font-medium uppercase w-[15em] max-w-full pb-section-sm md:leading-[1.2] md:pb-svw"
+        style="--fade-index: 1"
       >
-        Meticulous Developer For Your Website
+        <span style="--item-index: 1">Meticulous</span>
+        <span style="--item-index: 2">Developer</span>
+        <span style="--item-index: 3">For</span>
+        <span style="--item-index: 4">Your</span>
+        <span style="--item-index: 5">Website</span>
+        <!-- <span class="pipe">|</span> -->
       </h1>
       <p
+        data-fade-animation
         class="indent-text-indent leading-tight w-96 max-w-full ms-auto md:me-102 md:w-87 md:max-w-[calc(100%-var(--spacing)*99)]"
+        style="--fade-index: 2"
       >
         I specialize in fast-loading, SEO-friendly, accessible websites — built
         to rank higher and perform better.
@@ -62,6 +71,8 @@ import backgroundDesk from "../assets/images/hero-bg-desk.webp";
       <a
         data-umami-event="click-explore"
         href="#contacts"
+        data-fade-animation
+        style="--fade-index: 4"
         class="absolute self-end heading-mono flex gap-x-8 md:w-xs md:max-w-[calc(100%-var(--spacing-svw)*2)]"
       >
         <span aria-hidden="true" class="hidden md:block md:me-auto">/</span

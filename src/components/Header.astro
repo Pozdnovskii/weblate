@@ -2,7 +2,12 @@
 import SocialLinksList from "../components/SocilaLinksList.astro";
 ---
 
-<header id="header" class="wrapper fixed top-4 start-1/2 z-6 -translate-x-1/2">
+<header
+  id="header"
+  class="wrapper fixed top-4 start-1/2 z-6 -translate-x-1/2"
+  style="--fade-index: 3"
+  data-fade-animation
+>
   <div id="header-content" class="relative w-96 max-w-full ms-auto">
     <div id="header-top" class="relative">
       <p class="flex flex-col gap-y-1 p-3 font-secondary uppercase">
@@ -22,7 +27,7 @@ import SocialLinksList from "../components/SocilaLinksList.astro";
 
     <nav
       id="header-nav"
-      class="grid relative overflow-hidden transition-all duration-500 ease-in-out"
+      class="relative overflow-hidden transition-all duration-500 ease-in-out"
     >
       <div id="nav-content" class="relative pt-[2px]">
         <ul
