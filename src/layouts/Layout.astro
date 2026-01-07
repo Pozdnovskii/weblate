@@ -44,6 +44,8 @@ const description =
         />
       )
     }
+    {isProduction && <script>console.log('isProduction')</script>}
+    {!isProduction && <script>console.log('NotisProduction')</script>}
 
     <!-- <meta name="view-transition" content="same-origin" /> -->
     <Font cssVariable="--font-space-grotesk" preload />
