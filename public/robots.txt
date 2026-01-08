@@ -1,5 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /table
-Disallow: /table-2
 Sitemap: https://weblateweb.dev/sitemap-index.xml

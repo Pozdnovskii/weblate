@@ -5,7 +5,6 @@
 import { animate, svg, stagger, createTimeline } from "animejs";
 
 export function initGoUpAnimation() {
-  console.log("initGoUpAnimation called");
   const goUp = document.getElementById("goUpIcon");
   if (!goUp) return;
 

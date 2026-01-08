@@ -31,12 +31,11 @@ const description =
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="/opengraph.webp" />
     <link rel="canonical" href={canonicalURL} />
-    <!-- {
-      (isAllowed && <meta name="robots" content="index, follow" />) || (
+    {
+      (enableAnalytics && <meta name="robots" content="index, follow" />) || (
         <meta name="robots" content="noindex, nofollow" />
       )
-    } -->
-    <meta name="robots" content="noindex, nofollow" />
+    }
 
     {
       enableAnalytics && (
@@ -48,7 +47,6 @@ const description =
       )
     }
 
-    <!-- <meta name="view-transition" content="same-origin" /> -->
     <Font cssVariable="--font-space-grotesk" preload />
     <Font cssVariable="--font-space-mono" preload />
   </head>
