@@ -1,0 +1,18 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Page not found | Anastasiya Pavlyk">
+  <main
+    id="main"
+    class="wrapper min-h-dvh relative flex flex-col justify-center items-center text-center text-balance"
+  >
+    <h1 class="text-xl mb-2">Page not found</h1>
+    <p class="mb-5">
+      Looks like the address <code>{Astro.url.pathname}</code> doesn't exist.
+    </p>
+    <a class="block border border-current rounded-md py-2 px-4" href="/"
+      >Go back to the homepage</a
+    >
+  </main>
+</Layout>
