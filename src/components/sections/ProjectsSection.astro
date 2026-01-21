@@ -7,7 +7,7 @@ import projects from "@data/projects.json";
 <Section id="projects" title="Projects" class="wrapper grid-wrapper">
   <ul class="grid-wrapper__subgrid">
     {
-      projects.map((project, index) => (
+      projects.slice(0, 6).map((project, index) => (
         <li class="grid-wrapper__subgrid">
           <span aria-hidden="true" class="">
             {String(index + 1).padStart(2, "0")}
