@@ -1,0 +1,30 @@
+---
+import Section from "@components/UI/Section.astro";
+// import ToolCard from "./ToolCard.astro";
+import projects from "@data/projects.json";
+---
+
+<Section id="projects" title="Projects" class="wrapper grid-wrapper">
+  <ul class="grid-wrapper__subgrid">
+    {
+      projects.map((project, index) => (
+        <li class="grid-wrapper__subgrid">
+          <span aria-hidden="true" class="">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <a data-hover-direction href={project.link} target="_blank">
+            <h3>{project.title}</h3>
+          </a>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M23.7071 8.07039C24.0976 7.67986 24.0976 7.0467 23.7071 6.65617L17.3431 0.292213C16.9526 -0.0983109 16.3195 -0.0983109 15.9289 0.292213C15.5384 0.682738 15.5384 1.3159 15.9289 1.70643L21.5858 7.36328L15.9289 13.0201C15.5384 13.4107 15.5384 14.0438 15.9289 14.4343C16.3195 14.8249 16.9526 14.8249 17.3431 14.4343L23.7071 8.07039ZM0 7.36328V8.36328H23V7.36328V6.36328H0V7.36328Z" />
+          </svg>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

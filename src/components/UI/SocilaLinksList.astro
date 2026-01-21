@@ -1,11 +1,12 @@
 ---
-import SocialLink from "./SocialLink.astro";
+import SocialLink from "@components/UI/SocialLink.astro";
 
-import ContraLogo from "../assets/social-logos/contra_logo.svg";
-import UpworkLogo from "../assets/social-logos/upwork_logo.svg";
-import LinkedinLogo from "../assets/social-logos/linkedin_logo.svg";
-import TgLogo from "../assets/social-logos/tg_logo.svg";
-import EmailLogo from "../assets/social-logos/email_logo.svg";
+import ContraLogo from "@social-logos/contra_logo.svg";
+import UpworkLogo from "@social-logos/upwork_logo.svg";
+import LinkedinLogo from "@social-logos/linkedin_logo.svg";
+import TgLogo from "@social-logos/tg_logo.svg";
+import EmailLogo from "@social-logos/email_logo.svg";
+import GitHubLogo from "@social-logos/github_logo.svg";
 
 const { variant } = Astro.props;
 const dataUmamiEvent =
@@ -17,7 +18,7 @@ dataUmamiEvent;
   class={`flex ${
     variant === "vertical"
       ? "flex-col items-center py-2.5"
-      : "gap-x-1 translate-x-[calc(clamp(45px,2.5em,78px)/-6)]"
+      : "flex-wrap gap-x-1 translate-x-[calc(clamp(45px,2.5em,78px)/-6)]"
   }`}
 >
   <SocialLink
@@ -31,6 +32,12 @@ dataUmamiEvent;
     href="https://www.upwork.com/freelancers/~014d1e5fca851a8c3a?mp_source=share"
     ariaLabel="Upwork account"
     Icon={UpworkLogo}
+  />
+  <SocialLink
+    data-umami-event={dataUmamiEvent}
+    href="https://github.com/Pozdnovskii"
+    ariaLabel="GitHub account"
+    Icon={GitHubLogo}
   />
   <SocialLink
     data-umami-event={dataUmamiEvent}

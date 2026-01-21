@@ -1,47 +1,21 @@
 ---
 import { Image } from "astro:assets";
-// import { Picture } from "astro:assets";
 
-import Layout from "../layouts/Layout.astro";
+import Layout from "@layouts/Layout.astro";
 
-import SocialLinksList from "../components/SocilaLinksList.astro";
-import ServicesSection from "../components/ServicesSection.astro";
-import HowToSection from "../components/HowToSection.astro";
-import ToolsSection from "../components/ToolsSection.astro";
+import SocialLinksList from "@components/UI/SocilaLinksList.astro";
+import ServicesSection from "@components/sections/ServicesSection/ServicesSection.astro";
+import HowToSection from "@components/sections/HowToSection.astro";
+import ToolsSection from "@components/sections/ToolsSection/ToolsSection.astro";
+import ProjectsSection from "@components/sections/ProjectsSection.astro";
 
-// import BG from "../assets/images/hero-bg.svg";
-import backgroundDesk from "../assets/images/hero-bg-desk.webp";
-// import BackgroundMob from "../assets/images/hero-bg-mob.png";
+import backgroundDesk from "@images/hero-bg-desk.webp";
 ---
 
 <Layout>
-  <!-- <dialog
-    aria-labelledby="dialog-name"
-    id="under-construction"
-    class="w-[30rem] max-w-[94%] m-auto text-center bg-white p-0 border-0 rounded-md shadow-xl backdrop:bg-indigo-200/48 backdrop:backdrop-blur-md"
-  >
-    <div class="p-6">
-      <h2 id="dialog-name" class="text-2xl mb-4">
-        This site is in development
-      </h2>
-      <p class="mb-4">
-        You can explore the available sections, and for contact use the links to
-        my profiles.
-      </p>
-      <button
-        data-umami-event="close-dialog"
-        onclick="document.querySelector('dialog').close();"
-        id="close-dialog"
-        class="mt-4 px-4 py-2 bg-gray-800 text-white rounded cursor-pointer hover:bg-gray-600 transition"
-      >
-        View current content
-      </button>
-    </div>
-  </dialog> -->
-
   <main
     id="main"
-    class="relative flex flex-col gap-y-section overflow-hidden pb-section"
+    class="relative flex flex-col gap-y-section overflow-hidden pb-section -z-1"
   >
     <section
       id="hero"
@@ -57,7 +31,6 @@ import backgroundDesk from "../assets/images/hero-bg-desk.webp";
         <span style="--item-index: 3">For</span>
         <span style="--item-index: 4">Your</span>
         <span style="--item-index: 5">Website</span>
-        <!-- <span class="pipe">|</span> -->
       </h1>
       <p
         data-fade-animation
@@ -108,5 +81,7 @@ import backgroundDesk from "../assets/images/hero-bg-desk.webp";
     <ToolsSection />
 
     <HowToSection />
+
+    <ProjectsSection />
   </main>
 </Layout>

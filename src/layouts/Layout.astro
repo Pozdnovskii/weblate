@@ -1,8 +1,8 @@
 ---
-import "../styles/global.css";
+import "@styles/global.css";
 import { Font } from "astro:assets";
 
-import Header from "../components/Header.astro";
+import Header from "@components/sections/Header.astro";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const enableAnalytics = import.meta.env.PUBLIC_ENABLE_ANALYTICS === "true";
@@ -129,10 +129,12 @@ const description =
       });
     </script>
     <script>
-      import { initGoUpAnimation } from "../scripts/animations/h1-animation.js";
+      import { initGoUpAnimation } from "@scripts/animations/h1-animation.js";
+      import { initHoverDirection } from "@scripts/animations/hoverDirection.js";
 
       document.addEventListener("DOMContentLoaded", () => {
         initGoUpAnimation();
+        initHoverDirection();
       });
     </script>
   </body>

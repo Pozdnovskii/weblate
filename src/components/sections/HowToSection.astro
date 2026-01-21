@@ -1,7 +1,7 @@
 ---
-import Section from "./Section.astro";
-import tabs from "../data/howTo.json";
-import PrinciplesIcon from "../assets/images/principles.svg";
+import Section from "@components/UI/Section.astro";
+import tabs from "@data/howTo.json";
+import PrinciplesIcon from "@images/principles.svg";
 ---
 
 <Section id="how-to" title="Principles & Approach" class="wrapper grid-wrapper">
@@ -32,7 +32,7 @@ import PrinciplesIcon from "../assets/images/principles.svg";
     {
       tabs.map((tab, index) => (
         <section
-          class="grid-wrapper__subgrid py-1.5 px-4 bg-neutral-500 divide-y divide-dashed divide-zinc-800 rounded-sm"
+          class="grid-wrapper__subgrid py-1.5 px-4 bg-neutral-500/90 divide-y divide-dashed divide-zinc-800 rounded-sm"
           id={`panel-${index}`}
           role="tabpanel"
           aria-labelledby={`tab-${index}`}

@@ -41,7 +41,12 @@
 
   #header-top,
   #nav-content {
-    @apply grid grid-cols-[1fr_68px] gap-x-[2px];
+    @apply relative grid grid-cols-[1fr_68px] gap-x-[2px];
+  }
+
+  #header-top,
+  #header-nav {
+    @apply shadow-zinc-800/10 shadow-lg;
   }
 
   #header-top::after,

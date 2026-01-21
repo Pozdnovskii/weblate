@@ -1,5 +1,6 @@
 @import "tailwindcss";
-@import "./header.css";
+@import "@styles/header.css";
+@import "@styles/projects.css";
 
 @theme {
   --font-body: var(--font-space-grotesk);
@@ -47,19 +48,29 @@
   h1 {
     font-size: clamp(1.313rem, 5.625vw + 0.188rem, 5.25rem);
   }
+}
 
+@layer components {
   .wrapper {
     @apply w-full 2xl:container mx-auto px-svw;
   }
 
-  .heading-mono {
-    @apply font-secondary uppercase text-sm;
-  }
-}
-
-@layer components {
   #contacts {
     @apply mt-[var(--spacing-section-sm)];
+  }
+
+  @media (min-width: 48rem) {
+    .grid-wrapper {
+      @apply grid grid-cols-[minmax(15em,1fr)_min(52em,calc(92svw-15em))] gap-x-6 lg:grid-cols-[minmax(15em,1fr)_min(52em,calc(92svw-27em))_minmax(10em,1fr)];
+
+      .grid-wrapper__subgrid {
+        @apply grid col-span-full grid-cols-subgrid grid-flow-dense;
+      }
+    }
+
+    .grid-wrapper__center-cell {
+      @apply col-start-2 col-end-3;
+    }
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -81,16 +92,6 @@
       }
     }
   }
-
-  @media (min-width: 48rem) {
-    .grid-wrapper {
-      @apply grid grid-cols-[minmax(15em,1fr)_min(52em,calc(92svw-15em))] gap-x-6 lg:grid-cols-[minmax(15em,1fr)_min(52em,calc(92svw-27em))_minmax(10em,1fr)];
-    }
-
-    .grid-wrapper__center-cell {
-      @apply col-start-2 col-end-3;
-    }
-  }
 }
 
 @layer utilities {
@@ -98,9 +99,7 @@
     @apply md:text-xl md:col-span-full lg:col-start-2 lg:col-end-3 xl:text-2xl;
   }
 
-  @media (min-width: 48rem) {
-    .grid-wrapper .grid-wrapper__subgrid {
-      @apply grid col-span-full grid-cols-subgrid grid-flow-dense;
-    }
+  .heading-mono {
+    @apply font-secondary uppercase text-sm;
   }
 }

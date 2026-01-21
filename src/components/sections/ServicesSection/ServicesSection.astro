@@ -1,11 +1,11 @@
 ---
-import ServiceCard from "./ServiceCard.astro";
-import SocilaLinksList from "./SocilaLinksList.astro";
-import Section from "./Section.astro";
+import ServiceCard from "@components/sections/ServicesSection/ServiceCard.astro";
+import SocilaLinksList from "@components/UI/SocilaLinksList.astro";
+import Section from "@components/UI/Section.astro";
 ---
 
 <Section id="services" title="Services" class="wrapper grid-wrapper">
-  <main class="flex flex-col gap-y-8 grid-wrapper__subgrid">
+  <main class="grid gap-y-8 grid-wrapper__subgrid max-md:grid-cols-1">
     <ServiceCard index="001" title="Website development">
       <p>
         I develop multi-page websites, corporate sites, landing pages,

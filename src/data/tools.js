@@ -1,18 +1,18 @@
-import AnimejsLogo from "../assets/tech-logos/animejs.svg";
-import AstroLogo from "../assets/tech-logos/astro.svg";
-import CloudflareLogo from "../assets/tech-logos/cloudflare.svg";
-import CssLogo from "../assets/tech-logos/css.svg";
-import FramerLogo from "../assets/tech-logos/framer.svg";
-import GsapLogo from "../assets/tech-logos/gsap.svg";
-import HtmlLogo from "../assets/tech-logos/html.svg";
-import JsLogo from "../assets/tech-logos/js.svg";
-import ReploLogo from "../assets/tech-logos/replo.svg";
-import SanityLogo from "../assets/tech-logos/sanity.svg";
-import ShopifyLogo from "../assets/tech-logos/shopify.svg";
-import TailwindLogo from "../assets/tech-logos/tailwind.svg";
-import VercelLogo from "../assets/tech-logos/vercel.svg";
-import WebflowLogo from "../assets/tech-logos/webflow.svg";
-import WebstudioLogo from "../assets/tech-logos/webstudio.svg";
+import AnimejsLogo from "@tech-logos/animejs.svg";
+import AstroLogo from "@tech-logos/astro.svg";
+import CloudflareLogo from "@tech-logos/cloudflare.svg";
+import CssLogo from "@tech-logos/css.svg";
+import FramerLogo from "@tech-logos/framer.svg";
+import GsapLogo from "@tech-logos/gsap.svg";
+import HtmlLogo from "@tech-logos/html.svg";
+import JsLogo from "@tech-logos/js.svg";
+import ReploLogo from "@tech-logos/replo.svg";
+import SanityLogo from "@tech-logos/sanity.svg";
+import ShopifyLogo from "@tech-logos/shopify.svg";
+import TailwindLogo from "@tech-logos/tailwind.svg";
+import VercelLogo from "@tech-logos/vercel.svg";
+import WebflowLogo from "@tech-logos/webflow.svg";
+import WebstudioLogo from "@tech-logos/webstudio.svg";
 
 export default [
   {

@@ -1,15 +1,18 @@
 ---
-import SocialLinksList from "../components/SocilaLinksList.astro";
+import SocialLinksList from "@components/UI/SocilaLinksList.astro";
 ---
 
 <header
   id="header"
-  class="wrapper fixed top-4 start-1/2 z-6 -translate-x-1/2"
+  class="wrapper fixed top-4 start-1/2 -translate-x-1/2"
   style="--fade-index: 3"
   data-fade-animation
 >
-  <div id="header-content" class="relative w-96 max-w-full ms-auto">
-    <div id="header-top" class="relative">
+  <div
+    id="header-content"
+    class="absolute end-svw w-96 max-w-[calc(100%-var(--spacing-svw)*2)] ms-auto"
+  >
+    <div id="header-top">
       <p class="flex flex-col gap-y-1 p-3 font-secondary uppercase">
         <span>Ivan Pozdnovskii</span>
         <span class="text-xs">Website Developer</span>
@@ -30,7 +33,7 @@ import SocialLinksList from "../components/SocilaLinksList.astro";
       id="header-nav"
       class="grid relative overflow-hidden transition-all duration-500 ease-in-out"
     >
-      <div id="nav-content" class="relative pt-[2px]">
+      <div id="nav-content" class="pt-[2px]">
         <ul
           class="flex flex-col gap-y-3 relative overflow-visible p-3 [&_span]:me-2 [&_span]:font-secondary"
         >

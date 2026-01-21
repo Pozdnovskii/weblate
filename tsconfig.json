@@ -4,6 +4,21 @@
     "strict": false,
     "strictNullChecks": false,
     "allowJs": true,
-    "noImplicitAny": false
-  }
+    "noImplicitAny": false,
+
+    "baseUrl": ".",
+    "paths": {
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@images/*": ["src/assets/images/*"],
+      "@social-logos/*": ["src/assets/images/social-logos/*"],
+      "@tech-logos/*": ["src/assets/images/tech-logos/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@data/*": ["src/data/*"],
+      "@scripts/*": ["src/scripts/*"],
+      "@styles/*": ["src/styles/*"]
+    }
+  },
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["node_modules", "dist"]
 }
