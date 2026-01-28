@@ -1,0 +1,53 @@
+# Ivan Pozdnovskii - Web Developer
+
+> Modern Website development with Astro, Webstudio, Webflow, and Shopify. Expert in site speed optimization, SEO, and accessibility for higher rankings.
+
+## Contact
+
+- Website: https://weblateweb.dev
+- GitHub: https://github.com/Pozdnovskii
+- LinkedIn: https://www.linkedin.com/in/ivan-pozdnovskii
+
+## Expertise
+
+- **Astro** - Static site generation, modern web architecture
+- **Tailwind CSS** - Utility-first CSS framework
+- **SEO Optimization** - Technical SEO, Core Web Vitals
+- **Web Accessibility (a11y)** - WCAG compliance, semantic HTML
+- **Web Performance** - Optimization, lazy loading, critical CSS
+- **Webflow** - No-code development
+- **Webstudio** - Visual development
+- **Shopify** - E-commerce development
+
+## Principles
+
+- Performance-first development
+- SEO-optimized architecture
+- Accessibility for all users
+- Clean, scalable code
+- Modern web standards
+
+## Technologies
+
+### Frontend
+- Astro 5.x
+- Tailwind CSS 4.x
+- Vanilla JavaScript
+- Anime.js (animations)
+
+### Tools
+- TypeScript
+- Git
+- Prettier
+
+## Services
+
+- Website Development
+- SEO Optimization
+- Performance Audits
+- Accessibility Consulting
+- Site Speed Optimization
+
+---
+
+This file is intended for AI assistants and LLMs to understand the professional context and expertise.

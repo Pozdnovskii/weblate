@@ -11,7 +11,6 @@ import GitHubLogo from "@social-logos/github_logo.svg";
 const { variant } = Astro.props;
 const dataUmamiEvent =
   variant === "vertical" ? "header-address-click" : "contacts-address-click";
-dataUmamiEvent;
 ---
 
 <ul
@@ -22,37 +21,37 @@ dataUmamiEvent;
   }`}
 >
   <SocialLink
-    data-umami-event={dataUmamiEvent}
+    dataUmamiEvent={dataUmamiEvent}
     href="https://contra.com/ipozdnovskii?referralExperimentNid=SOCIAL_REFERRAL_PROGRAM&referrerUsername=ipozdnovskii"
     ariaLabel="Contra account"
     Icon={ContraLogo}
   />
   <SocialLink
-    data-umami-event={dataUmamiEvent}
+    dataUmamiEvent={dataUmamiEvent}
     href="https://www.upwork.com/freelancers/~014d1e5fca851a8c3a?mp_source=share"
     ariaLabel="Upwork account"
     Icon={UpworkLogo}
   />
   <SocialLink
-    data-umami-event={dataUmamiEvent}
+    dataUmamiEvent={dataUmamiEvent}
     href="https://github.com/Pozdnovskii"
     ariaLabel="GitHub account"
     Icon={GitHubLogo}
   />
   <SocialLink
-    data-umami-event={dataUmamiEvent}
+    dataUmamiEvent={dataUmamiEvent}
     href="https://www.linkedin.com/in/ivan-pozdnovskii/?locale=en_US"
     ariaLabel="Linkedin account"
     Icon={LinkedinLogo}
   />
   <SocialLink
-    data-umami-event={dataUmamiEvent}
+    dataUmamiEvent={dataUmamiEvent}
     href="https://t.me/pozdnovskii"
     ariaLabel="Telegram account"
     Icon={TgLogo}
   />
   <SocialLink
-    data-umami-event={dataUmamiEvent}
+    dataUmamiEvent={dataUmamiEvent}
     href="mailto:ipozdnovskii@icloud.com"
     ariaLabel="Email me"
     Icon={EmailLogo}

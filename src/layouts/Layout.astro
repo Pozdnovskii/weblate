@@ -4,12 +4,21 @@ import { Font } from "astro:assets";
 
 import Header from "@components/sections/Header.astro";
 
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/opengraph.webp", Astro.site).href;
 const enableAnalytics = import.meta.env.PUBLIC_ENABLE_ANALYTICS === "true";
 
-const title = "Ivan Pozdnovskii | Web Developer";
-const description =
-  "Modern Website development with Astro, Webstudio, Webflow, and Shopify. Expert in site speed optimization, SEO, and accessibility for higher rankings.";
+const {
+  title = "Ivan Pozdnovskii | Web Developer",
+  description = "Modern Website development with Astro, Webstudio, Webflow, and Shopify. Expert in site speed optimization, SEO, and accessibility for higher rankings.",
+  noindex = false,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -23,29 +32,55 @@ const description =
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="/opengraph.webp" />
+    <meta property="og:image" content={ogImage} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="/opengraph.webp" />
+    <meta name="twitter:image" content={ogImage} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Ivan Pozdnovskii" />
     <link rel="canonical" href={canonicalURL} />
-    {
-      (enableAnalytics && <meta name="robots" content="index, follow" />) || (
+    {(noindex || enableAnalytics) && (
         <meta name="robots" content="noindex, nofollow" />
-      )
-    }
+    )}
+    {enableAnalytics && (
+        <link rel="preconnect" href="https://cloud.umami.is" />
 
-    {
-      enableAnalytics && (
         <script
           defer
           src="https://cloud.umami.is/script.js"
           data-website-id="63b3ed92-ca97-4846-a043-2d135db38955"
         />
-      )
-    }
+      )}
+
+    <script is:inline type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ivan Pozdnovskii",
+        "jobTitle": "Web Developer",
+        "description": "Modern Website development with Astro, Webstudio, Webflow, and Shopify. Expert in site speed optimization, SEO, and accessibility.",
+        "url": "https://weblateweb.dev",
+        "image": "https://weblateweb.dev/opengraph.webp",
+        "email": "ivan@weblateweb.dev",
+        "sameAs": [
+          "https://github.com/Pozdnovskii",
+          "https://www.linkedin.com/in/ivan-pozdnovskii"
+        ],
+        "knowsAbout": [
+          "Astro",
+          "Tailwind CSS",
+          "SEO",
+          "Web Accessibility",
+          "Web Performance",
+          "Webflow",
+          "Webstudio",
+          "Shopify"
+        ]
+      }
+    </script>
 
     <Font cssVariable="--font-space-grotesk" preload />
     <Font cssVariable="--font-space-mono" preload />
@@ -53,89 +88,15 @@ const description =
   <body class="bg-zinc-800 text-white">
     <Header />
     <slot />
-    <script is:inline>
-      document.addEventListener("DOMContentLoaded", () => {
-        const header = document.getElementById("header");
-        const burger = document.getElementById("header-btn");
-        const nav = document.getElementById("header-nav");
-        const headerContent = document.getElementById("header-content");
-
-        if (!header) return;
-
-        let isOpen = false;
-        function toggleMenu() {
-          isOpen = !isOpen;
-          header.classList.toggle("header--open", isOpen);
-          burger.setAttribute("aria-expanded", isOpen);
-
-          if (isOpen) {
-            nav.removeAttribute("inert");
-            setTimeout(() => nav?.querySelector("a")?.focus(), 150);
-          } else {
-            nav.setAttribute("inert", "");
-          }
-        }
-
-        burger.addEventListener("click", toggleMenu);
-
-        document.addEventListener("keydown", (e) => {
-          if (e.key === "Escape" && isOpen) {
-            toggleMenu();
-            burger.focus();
-          }
-        });
-
-        document.addEventListener("click", (e) => {
-          if (isOpen && !headerContent.contains(e.target)) {
-            toggleMenu();
-          }
-        });
-
-        nav.querySelectorAll("a").forEach((link) => {
-          link.addEventListener("click", () => {
-            if (isOpen) {
-              toggleMenu();
-            }
-          });
-        });
-
-        // Dialogue
-        // const dialog = document.querySelector("dialog");
-
-        // if (!dialog) return;
-
-        // setTimeout(() => {
-        //   dialog.showModal();
-        // }, 1200);
-
-        // dialog.addEventListener("click", (event) => {
-        //   const isBackdropClick = event.target === dialog;
-        //   if (isBackdropClick) {
-        //     dialog.close();
-        //   }
-        // });
-
-        // Url cleaner
-        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-          anchor.addEventListener("click", (e) => {
-            e.preventDefault();
-            const id = anchor.getAttribute("href").substring(1);
-            const target = document.getElementById(id);
-            if (target) {
-              target.scrollIntoView({ behavior: "smooth" });
-            }
-          });
-        });
-      });
-    </script>
     <script>
       import { initGoUpAnimation } from "@scripts/animations/h1-animation.js";
       import { initHoverDirection } from "@scripts/animations/hoverDirection.js";
+      import { initHeader, initSmoothScroll } from "@scripts/header.js";
 
-      document.addEventListener("DOMContentLoaded", () => {
-        initGoUpAnimation();
-        initHoverDirection();
-      });
+      initHeader();
+      initSmoothScroll();
+      initGoUpAnimation();
+      initHoverDirection();
     </script>
   </body>
 </html>

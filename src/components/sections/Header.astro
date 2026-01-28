@@ -1,5 +1,5 @@
 ---
-import SocialLinksList from "@components/UI/SocilaLinksList.astro";
+import SocialLinksList from "@components/UI/SocialLinksList.astro";
 ---
 
 <header
@@ -20,7 +20,7 @@ import SocialLinksList from "@components/UI/SocilaLinksList.astro";
       <button
         data-umami-event="header-navigation-toggle"
         id="header-btn"
-        aria-label="Toggle menu"
+        aria-label="Toggle navigation menu"
         aria-controls="header-nav"
         aria-expanded="false"
       >
@@ -31,6 +31,7 @@ import SocialLinksList from "@components/UI/SocilaLinksList.astro";
     <nav
       inert
       id="header-nav"
+      aria-label="Main navigation"
       class="grid relative overflow-hidden transition-all duration-500 ease-in-out"
     >
       <div id="nav-content" class="pt-[2px]">

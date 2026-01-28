@@ -12,7 +12,7 @@ import projects from "@data/projects.json";
           <span aria-hidden="true" class="">
             {String(index + 1).padStart(2, "0")}
           </span>
-          <a data-hover-direction href={project.link} target="_blank">
+          <a data-hover-direction href={project.link} target="_blank" rel="noopener">
             <h3>{project.title}</h3>
           </a>
           <svg

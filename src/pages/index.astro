@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 
 import Layout from "@layouts/Layout.astro";
 
-import SocialLinksList from "@components/UI/SocilaLinksList.astro";
+import SocialLinksList from "@components/UI/SocialLinksList.astro";
 import ServicesSection from "@components/sections/ServicesSection/ServicesSection.astro";
 import HowToSection from "@components/sections/HowToSection.astro";
 import ToolsSection from "@components/sections/ToolsSection/ToolsSection.astro";
@@ -55,9 +55,11 @@ import backgroundDesk from "@images/hero-bg-desk.webp";
 
     <Image
       src={backgroundDesk}
-      alt=" "
+      alt=""
       aria-hidden="true"
-      class="object-cover absolute -z-1 h-[110svh]"
+      class="object-cover absolute -z-1 h-[110svh] w-full max-w-[2000px]"
+      widths={[640, 1280, 1920]}
+      sizes="100vw"
       priority
     />
 
