@@ -42,7 +42,7 @@ const {
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Ivan Pozdnovskii" />
     <link rel="canonical" href={canonicalURL} />
-    {(noindex || enableAnalytics) && (
+    {(noindex || !enableAnalytics) && (
         <meta name="robots" content="noindex, nofollow" />
     )}
     {enableAnalytics && (
