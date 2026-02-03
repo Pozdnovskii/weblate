@@ -34,7 +34,6 @@ export function initHoverDirection() {
     el.addEventListener("pointerleave", handlePointerLeave);
   });
 
-  // Cleanup функция (опционально)
   return () => {
     elements.forEach((el) => {
       el.removeEventListener("pointerenter", handlePointerEnter);

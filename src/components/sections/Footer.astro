@@ -1,0 +1,48 @@
+---
+import SocialLinksList from "@components/UI/SocialLinksList.astro";
+---
+
+<footer id="footer" class="wrapper">
+  <div id="footer-top">
+    <form id="footer-form">
+      <label for="footer-email">Join my mailing list to stay up-to-date.</label>
+      <input
+        type="email"
+        id="footer-email"
+        name="email"
+        placeholder="Email address"
+        required
+      />
+      <button type="submit">Submit</button>
+    </form>
+    <span>Weblate.</span>
+  </div>
+
+  <div id="footer-bottom">
+    <span>Ivan Pozdnovskii</span>
+
+    <address>
+      <SocialLinksList />
+    </address>
+    <span>© {new Date().getFullYear()}</span>
+  </div>
+
+  <!-- <div aria-hidden="true">
+    <span></span>
+    <span class="row-span-2"></span>
+    <span></span>
+    <span class="col-span-2 row-span-2"></span>
+    <span class="hidden md:block"></span>
+    <span class="hidden md:block row-span-2"></span>
+    <span class="hidden md:block col-span-2"></span>
+    <span class="hidden md:block row-span-2"></span>
+    <span class="hidden md:block"></span>
+    <span class="hidden md:block"></span>
+    <span class="col-span-2"></span>
+    <span></span>
+    <span class="hidden md:block"></span>
+    <span class="hidden md:block col-span-3"></span>
+    <span class="hidden md:block"></span>
+    <span class="hidden md:block col-span-2"></span>
+  </div> -->
+</footer>
