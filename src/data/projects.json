@@ -2,7 +2,7 @@
   {
     "title": "Xclusivecars",
     "link": "https://xclusivecars-website.pages.dev/",
-    "description": "",
+    "description": "Car import service from USA to Bulgaria. Built with Astro for fast static pages, Sanity CMS for content management, and Turso database for dynamic data. Optimized for SEO and performance.",
     "services": ["Web Development", "UX/UI Design"],
     "tools": ["Astro", "Sanity", "Turso"],
     "desktopImage": "cars_desk.png",
@@ -11,7 +11,7 @@
   {
     "title": "Yourmove AI",
     "link": "https://www.yourmove.ai/",
-    "description": "",
+    "description": "AI-powered dating assistant app. Webflow site with bandwidth optimization to handle high traffic. Fast-loading landing pages designed to convert visitors into users.",
     "services": ["Webflow Development", "Bandwidth Optimization"],
     "tools": ["Webflow"],
     "desktopImage": "yourmove_desk.png",
