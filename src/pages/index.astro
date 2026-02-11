@@ -3,8 +3,8 @@ import { Image } from "astro:assets";
 
 import Layout from "@layouts/Layout.astro";
 
-import SocialLinksList from "@components/UI/SocialLinksList.astro";
 import ServicesSection from "@components/sections/ServicesSection/ServicesSection.astro";
+import ContactsSection from "@components/sections/ContactsSection.astro";
 import HowToSection from "@components/sections/HowToSection.astro";
 import ToolsSection from "@components/sections/ToolsSection/ToolsSection.astro";
 import ProjectsSection from "@components/sections/ProjectsSection.astro";
@@ -24,7 +24,7 @@ import backgroundDesk from "@images/hero-bg-desk.webp";
     >
       <h1
         data-fade-animation
-        class="leading-tight indent-[2ch] font-medium uppercase w-[15em] max-w-full pb-section-sm md:leading-[1.2] md:pb-svw"
+        class="text-[clamp(1.313rem,5.625vw+0.188rem,5.25rem)] leading-tight indent-[2ch] uppercase w-[15em] max-w-full pb-section-sm md:leading-[1.2] md:pb-svw"
         style="--fade-index: 1"
       >
         <span style="--item-index: 1">Meticulous</span>
@@ -58,26 +58,13 @@ import backgroundDesk from "@images/hero-bg-desk.webp";
       src={backgroundDesk}
       alt=""
       aria-hidden="true"
-      class="object-cover absolute -z-1 h-[110svh] w-full max-w-[2000px]"
+      class="object-cover absolute -z-1 h-[110svh] w-full max-w-500"
       widths={[640, 1280, 1920]}
       sizes="100vw"
       priority
     />
 
-    <section id="contacts" class="wrapper grid-wrapper">
-      <p class="mb-7 indent-text-indent">
-        I prefer clean code, as it creates the fastest, most SEO-optimized, and
-        accessible websites. This brings more traffic, better engagement, and
-        future scalability as your business grows.
-      </p>
-
-      <div class="flex flex-wrap justify-between items-center gap-x-6">
-        <h2 class="heading-mono">Contact Me →</h2>
-        <address>
-          <SocialLinksList />
-        </address>
-      </div>
-    </section>
+    <ContactsSection />
 
     <ServicesSection />
 
@@ -89,3 +76,15 @@ import backgroundDesk from "@images/hero-bg-desk.webp";
   </main>
   <Footer />
 </Layout>
+
+<script>
+  import { initAccordions } from "@scripts/accordion.js";
+  import { initHowToTabs } from "@scripts/how-to-tabs.js";
+  import { initServiceCardAnimations } from "@scripts/service-cards.js";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    initAccordions();
+    initHowToTabs();
+    initServiceCardAnimations();
+  });
+</script>

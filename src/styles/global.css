@@ -1,11 +1,18 @@
 @import "tailwindcss";
 @import "@styles/header.css";
-@import "@styles/projects.css";
+@import "@styles/HomePage/contacts.css";
+@import "@styles/HomePage/tools.css";
+@import "@styles/HomePage/how-to.css";
+@import "@styles/HomePage/projects.css";
+@import "@styles/HomePage/services.css";
 @import "@styles/footer.css";
+@import "@styles/article.css";
 
 @theme {
   --font-body: var(--font-space-grotesk);
   --font-secondary: var(--font-space-mono);
+
+  --breakpoint-xs: 24rem;
 
   --color-hover: var(--color-blue-100);
   --color-shadow: var(--color-blue-900);
@@ -37,9 +44,10 @@
     height: 100%;
   }
 
-  body {
+  html > body {
     scrollbar-gutter: stable both-edges;
     font-family: var(--font-body);
+    @apply bg-zinc-800 text-white;
   }
 
   #main > section {
@@ -48,30 +56,13 @@
 
   h1 {
     font-size: clamp(1.313rem, 5.625vw + 0.188rem, 5.25rem);
+    @apply font-medium;
   }
 }
 
 @layer components {
   .wrapper {
-    @apply w-full 2xl:container mx-auto px-svw;
-  }
-
-  #contacts {
-    @apply mt-[var(--spacing-section-sm)];
-  }
-
-  @media (min-width: 48rem) {
-    .grid-wrapper {
-      @apply grid grid-cols-[minmax(15em,1fr)_min(52em,calc(92svw-15em))] gap-x-6 lg:grid-cols-[minmax(15em,1fr)_min(52em,calc(92svw-27em))_minmax(10em,1fr)];
-
-      .grid-wrapper__subgrid {
-        @apply grid col-span-full grid-cols-subgrid grid-flow-dense;
-      }
-    }
-
-    .grid-wrapper__center-cell {
-      @apply col-start-2 col-end-3;
-    }
+    @apply w-full max-w-full 2xl:container mx-auto px-svw;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -95,12 +86,18 @@
   }
 }
 
-@layer utilities {
-  #contacts > * {
-    @apply md:text-xl md:col-span-full lg:col-start-2 lg:col-end-3 xl:text-2xl;
-  }
+@utility heading-mono {
+  @apply font-secondary uppercase text-sm;
+}
 
-  .heading-mono {
-    @apply font-secondary uppercase text-sm;
-  }
+@utility grid-wrapper {
+  @apply grid grid-cols-1 gap-x-6 md:grid-cols-[minmax(15em,1fr)_min(52em,calc(92svw-15em))] lg:grid-cols-[minmax(15em,1fr)_min(52em,calc(92svw-27em))_minmax(10em,1fr)];
+}
+
+@utility grid-wrapper__subgrid {
+  @apply grid col-span-full grid-cols-subgrid grid-flow-dense;
+}
+
+@utility grid-wrapper__center-cell {
+  @apply col-start-2 col-end-3;
 }

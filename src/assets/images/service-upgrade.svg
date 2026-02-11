@@ -1,0 +1,59 @@
+<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="service-icon">
+  <defs>
+    <linearGradient id="needleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3357AA"/>
+      <stop offset="100%" stop-color="#8185B1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Speedometer arc -->
+  <path d="M50 160 A70 70 0 1 1 150 160" stroke="#4A66A9" stroke-width="3" fill="none" stroke-linecap="round" stroke-dasharray="330" stroke-dashoffset="330">
+    <animate attributeName="stroke-dashoffset" from="330" to="0" dur="0.8s" fill="freeze" begin="indefinite" data-delay="0"/>
+  </path>
+
+  <!-- Speed ticks -->
+  <g stroke-width="2" stroke-linecap="round">
+    <line x1="51" y1="149" x2="61" y2="142" stroke="transparent">
+      <animate attributeName="stroke" values="transparent;#4A66A9" dur="0.01s" fill="freeze" begin="indefinite" data-delay="0.5"/>
+    </line>
+    <line x1="38" y1="110" x2="50" y2="110" stroke="transparent">
+      <animate attributeName="stroke" values="transparent;#5068A8" dur="0.01s" fill="freeze" begin="indefinite" data-delay="0.6"/>
+    </line>
+    <line x1="51" y1="71" x2="61" y2="78" stroke="transparent">
+      <animate attributeName="stroke" values="transparent;#566BA8" dur="0.01s" fill="freeze" begin="indefinite" data-delay="0.7"/>
+    </line>
+    <line x1="100" y1="48" x2="100" y2="60" stroke="transparent">
+      <animate attributeName="stroke" values="transparent;#5C6EA8" dur="0.01s" fill="freeze" begin="indefinite" data-delay="0.8"/>
+    </line>
+    <line x1="149" y1="71" x2="139" y2="78" stroke="transparent">
+      <animate attributeName="stroke" values="transparent;#6271A9" dur="0.01s" fill="freeze" begin="indefinite" data-delay="0.9"/>
+    </line>
+    <line x1="162" y1="110" x2="150" y2="110" stroke="transparent">
+      <animate attributeName="stroke" values="transparent;#6874A9" dur="0.01s" fill="freeze" begin="indefinite" data-delay="1.0"/>
+    </line>
+    <line x1="149" y1="149" x2="139" y2="142" stroke="transparent">
+      <animate attributeName="stroke" values="transparent;#6E77AA" dur="0.01s" fill="freeze" begin="indefinite" data-delay="1.1"/>
+    </line>
+  </g>
+
+  <!-- Center dot -->
+  <circle cx="100" cy="110" r="0" fill="#5C6EA8">
+    <animate attributeName="r" from="0" to="10" dur="0.2s" fill="freeze" begin="indefinite" data-delay="1.2"/>
+  </circle>
+
+  <!-- Needle -->
+  <g>
+    <animateTransform attributeName="transform" type="rotate"
+      values="0 100 110; 270 100 110"
+      dur="1.2s" fill="freeze" begin="indefinite" data-delay="1.3"
+      calcMode="spline"
+      keySplines="0.2 0 0.2 1"/>
+    <animateTransform attributeName="transform" type="rotate"
+      values="270 100 110; 273 100 110; 267 100 110; 271 100 110; 269 100 110; 270 100 110"
+      dur="0.8s" begin="indefinite" data-delay="2.5" repeatCount="indefinite"
+      additive="replace"/>
+    <path d="M100 110 L60 150 L57 147 L100 107 Z" fill="transparent">
+      <animate attributeName="fill" values="transparent;#5C6EA8" dur="0.01s" fill="freeze" begin="indefinite" data-delay="1.3"/>
+    </path>
+  </g>
+</svg>

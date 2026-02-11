@@ -1,0 +1,41 @@
+@layer components {
+  #how-to {
+    @apply grid-wrapper;
+
+    & > main {
+      @apply grid-wrapper__subgrid;
+    }
+
+    [role="tablist"] {
+      @apply col-span-full ps-2.5 flex gap-0.5;
+    }
+
+    [role="tab"] {
+      @apply px-2.5 py-1.5 rounded-t-sm border border-neutral-500 border-b-0 cursor-pointer;
+
+      &[aria-selected="true"] {
+        @apply bg-neutral-500;
+      }
+    }
+
+    [role="tabpanel"] {
+      @apply grid-wrapper__subgrid py-1.5 px-4 bg-neutral-500/90 divide-y divide-dashed divide-zinc-800 rounded-sm;
+
+      article {
+        @apply py-2.5 grid-wrapper__subgrid gap-y-1.5;
+      }
+
+      h3 {
+        @apply heading-mono leading-6;
+
+        & + p {
+          @apply max-w-prose;
+        }
+
+        & ~ svg {
+          @apply max-lg:hidden lg:w-6 lg:aspect-square lg:justify-self-end;
+        }
+      }
+    }
+  }
+}

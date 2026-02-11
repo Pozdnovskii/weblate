@@ -1,0 +1,79 @@
+/* Article/Prose styles */
+.prose {
+  @apply max-w-[65ch] text-neutral-200;
+
+  > * + * {
+    @apply mt-6;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply text-white font-bold;
+  }
+
+  h1 {
+    @apply text-3xl md:text-4xl mt-0;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl mt-12;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl mt-8;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  a {
+    @apply text-blue-400 underline underline-offset-2 hover:text-blue-300 transition-colors;
+  }
+
+  strong {
+    @apply text-white font-semibold;
+  }
+
+  ul,
+  ol {
+    @apply pl-6 space-y-2;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  li {
+    @apply leading-relaxed;
+  }
+
+  blockquote {
+    @apply border-l-4 border-neutral-600 pl-4 italic text-neutral-400;
+  }
+
+  img {
+    @apply rounded-lg my-8;
+  }
+
+  hr {
+    @apply border-neutral-700 my-12;
+  }
+
+  code {
+    @apply bg-neutral-700 px-1.5 py-0.5 rounded text-sm;
+  }
+
+  pre {
+    @apply bg-neutral-900 p-4 rounded-lg overflow-x-auto;
+
+    code {
+      @apply bg-transparent p-0;
+    }
+  }
+}

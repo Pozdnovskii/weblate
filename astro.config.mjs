@@ -23,6 +23,10 @@ export default defineConfig({
       filter: (page) => !page.includes("/table") && !page.includes("/table-2"),
     }),
   ],
+  image: {
+    responsiveStyles: true,
+    layout: "constrained",
+  },
   experimental: {
     svgo: true,
     fonts: [

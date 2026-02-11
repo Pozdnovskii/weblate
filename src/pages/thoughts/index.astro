@@ -1,0 +1,40 @@
+---
+import Layout from "@layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("thoughts")).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+);
+---
+
+<Layout
+  title="Thoughts | Ivan Pozdnovskii"
+  description="Articles and thoughts about web development, performance, and tools."
+>
+  <main class="wrapper">
+    <h1
+      class="text-6xl leading-none mb-12 pt-32 md:text-[clamp(4rem,2.75rem+2.6vw,5.25rem)] md:leading-[4.2rem] md:pt-4"
+    >
+      Thou&shy;ghts
+    </h1>
+
+    <ul class="space-y-8 max-w-[65ch]">
+      {
+        posts.map((post) => (
+          <li>
+            <a
+              href={`/thoughts/${post.id}`}
+              class="block group hover:bg-zinc-700/50 -mx-4 px-4 py-4 rounded-lg transition-colors"
+            >
+              <p class="heading-mono text-grey mb-2">{post.data.date}</p>
+              <h2 class="text-xl md:text-2xl font-semibold group-hover:text-blue-400 transition-colors">
+                {post.data.title}
+              </h2>
+              <p class="text-neutral-400 mt-2">{post.data.description}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</Layout>

@@ -2,10 +2,13 @@
 import ServiceCard from "@components/sections/ServicesSection/ServiceCard.astro";
 import SocialLinksList from "@components/UI/SocialLinksList.astro";
 import Section from "@components/UI/Section.astro";
+import ServiceCodeIcon from "@images/service-code.svg";
+import ServiceUpgradeIcon from "@images/service-upgrade.svg";
+import ServiceDesignIcon from "@images/service-design.svg";
 ---
 
-<Section id="services" title="Services" class="wrapper grid-wrapper">
-  <main class="grid gap-y-8 grid-wrapper__subgrid max-md:grid-cols-1">
+<Section id="services" title="Services" class="wrapper">
+  <main>
     <ServiceCard index="001" title="Website development">
       <p>
         I develop multi-page websites, corporate sites, landing pages,
@@ -17,6 +20,7 @@ import Section from "@components/UI/Section.astro";
         scratch or no/low-code platforms like Webflow, Webstudio, Shopify or
         Framer, depending on your goals.
       </p>
+      <ServiceCodeIcon slot="icon" />
     </ServiceCard>
 
     <ServiceCard index="002" title="Website Upgrades">
@@ -31,6 +35,7 @@ import Section from "@components/UI/Section.astro";
         animations, better user experience, and accessibility improvements —
         everything your site needs to reach its full potential.
       </p>
+      <ServiceUpgradeIcon slot="icon" />
     </ServiceCard>
 
     <ServiceCard index="003" title="Web Design">
@@ -48,6 +53,7 @@ import Section from "@components/UI/Section.astro";
         <p>Designer? <span class="heading-mono"> Let's collaborate →</span></p>
         <address><SocialLinksList /></address>
       </aside>
+      <ServiceDesignIcon slot="icon" />
     </ServiceCard>
   </main>
 </Section>

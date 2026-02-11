@@ -1,0 +1,45 @@
+@layer components {
+  #tools {
+    @apply grid-wrapper;
+
+    ul {
+      @apply col-span-full grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 xl:grid-cols-4;
+    }
+
+    li {
+      @apply border border-dashed border-neutral-500 p-3;
+    }
+
+    figure {
+      @apply flex flex-row flex-wrap gap-3 h-full;
+    }
+
+    figcaption {
+      @apply w-full mt-auto;
+    }
+
+    li:nth-child(3n-2) {
+      @apply xs:col-span-2;
+    }
+
+    svg {
+      @apply h-8;
+    }
+
+    li:nth-child(4) {
+      @apply md:col-span-1;
+    }
+
+    li:first-of-type {
+      @apply xl:row-span-2;
+    }
+
+    li:nth-child(2) {
+      @apply xl:col-4;
+    }
+
+    li:last-of-type {
+      @apply flex items-end;
+    }
+  }
+}

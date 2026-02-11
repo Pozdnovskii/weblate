@@ -4,10 +4,8 @@ import ToolCard from "@components/sections/ToolsSection/ToolCard.astro";
 import tools from "@data/tools";
 ---
 
-<Section id="tools" title="Technologies & Tools" class="wrapper grid-wrapper">
-  <ul
-    class="col-span-full w-full grid grid-cols-2 *:nth-[3n-2]:col-span-2 [&_svg]:h-8 md:grid-cols-3 md:*:nth-4:col-span-1 xl:grid-cols-4 xl:*:first:row-span-2 xl:*:nth-2:col-4"
-  >
+<Section id="tools" title="Technologies & Tools" class="wrapper">
+  <ul>
     {
       tools.map(({ figcaption, logos }) => (
         <ToolCard figcaption={figcaption} logos={logos} />

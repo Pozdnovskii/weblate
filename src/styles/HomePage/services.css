@@ -1,0 +1,29 @@
+@layer components {
+  #services {
+    @apply grid-wrapper;
+
+    & > main {
+      @apply gap-y-8 grid-wrapper__subgrid;
+    }
+
+    article[data-service] {
+      @apply grid border-t border-dashed border-neutral-500 py-6 grid-wrapper__subgrid max-md:[&:last-child>.service-icon]:hidden;
+
+      & > span:first-of-type {
+        @apply mb-3;
+      }
+
+      & > h3 {
+        @apply text-2xl mb-6;
+      }
+
+      & > main {
+        @apply grid-wrapper__center-cell indent-text-indent leading-7 max-w-prose flex flex-col gap-y-2 mt-auto;
+      }
+
+      & > svg {
+        @apply max-w-60 self-center justify-self-center max-md:mt-6 md:justify-self-start md:max-lg:w-2/3 lg:w-8/9 lg:justify-self-end lg:row-span-2;
+      }
+    }
+  }
+}

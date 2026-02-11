@@ -1,0 +1,82 @@
+---
+import "@styles/global.css";
+import { Font } from "astro:assets";
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/opengraph.webp", Astro.site).href;
+const enableAnalytics = import.meta.env.PUBLIC_ENABLE_ANALYTICS === "true";
+
+const {
+  title = "Ivan Pozdnovskii | Web Developer",
+  description = "Modern Website development with Astro, Webstudio, Webflow, and Shopify. Expert in site speed optimization, SEO, and accessibility for higher rankings.",
+  noindex = false,
+} = Astro.props;
+
+  const isHome = Astro.url.pathname === "/";                                                                                                          
+---
+<!doctype html>
+<html lang="en" class="antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta property="og:locale" content="en" />
+    <meta property="og:site_name" content="Weblate" />
+    <link rel="canonical" href={canonicalURL} />
+    {(noindex || !enableAnalytics) && (
+        <meta name="robots" content="noindex, nofollow" />
+    )}
+    {enableAnalytics && (
+        <link rel="preconnect" href="https://cloud.umami.is" />
+
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="63b3ed92-ca97-4846-a043-2d135db38955"
+        />
+      )}
+{isHome && (                                                                                                                                      
+      
+    <script is:inline type="application/ld+json">
+      {
+          "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ivan Pozdnovskii",
+        "jobTitle": "Web Developer",
+        "description": "Modern Website development with Astro, Webstudio, Webflow, and Shopify. Expert in site speed optimization, SEO, and accessibility.",
+        "url": "https://weblateweb.dev",
+        "image": "https://weblateweb.dev/opengraph.webp",
+        "email": "ivan@weblateweb.dev",
+        "sameAs": [
+            "https://github.com/Pozdnovskii",
+            "https://www.linkedin.com/in/ivan-pozdnovskii"
+        ],
+        "knowsAbout": [
+            "Astro",
+            "Tailwind CSS",
+            "SEO",
+            "Web Accessibility",
+            "Web Performance",
+            "Webflow",
+            "Webstudio",
+            "Shopify"
+        ]
+      }
+    </script>
+    )}      
+
+    <Font cssVariable="--font-space-grotesk" preload />
+    <Font cssVariable="--font-space-mono" preload />
+  </head>

@@ -4,188 +4,100 @@
     "link": "https://xclusivecars-website.pages.dev/",
     "description": "",
     "services": ["Web Development", "UX/UI Design"],
-    "tools": [
-      "Webflow",
-      "Astro",
-      "Shopify",
-      "Webstudio",
-      "Sanity",
-      "Turso",
-      "GSAP"
-    ],
-    "cover": "",
-    "date": "April 2025"
+    "tools": ["Astro", "Sanity", "Turso"],
+    "desktopImage": "cars_desk.png",
+    "mobileImage": "cars_mob.png"
   },
   {
     "title": "Designer portfolio",
     "link": "https://apavlyk.cc/",
     "description": "",
-    "services": ["Web Development", "UX/UI Design"],
-    "tools": [
-      "Webflow",
-      "Astro",
-      "Shopify",
-      "Webstudio",
-      "Sanity",
-      "Turso",
-      "GSAP"
-    ],
-    "cover": "",
-    "date": "April 2025"
+    "services": ["Web Development"],
+    "tools": ["Astro"],
+    "desktopImage": "anpavlyk_desk.png",
+    "mobileImage": "anpavlyk_mob.png"
   },
   {
     "title": "Yourmove AI",
     "link": "https://www.yourmove.ai/",
     "description": "",
-    "services": ["Web Development", "UX/UI Design"],
-    "tools": [
-      "Webflow",
-      "Astro",
-      "Shopify",
-      "Webstudio",
-      "Sanity",
-      "Turso",
-      "GSAP"
-    ],
-    "cover": "",
-    "date": "April 2025"
+    "services": ["Webflow Development", "Bandwidth Optimization"],
+    "tools": ["Webflow"],
+    "desktopImage": "yourmove_desk.png",
+    "mobileImage": "yourmove_mob.png"
   },
 
   {
     "title": "New Voters",
     "link": "https://www.new-voters.org/",
     "description": "",
-    "services": ["Web Development", "UX/UI Design"],
-    "tools": [
-      "Webflow",
-      "Astro",
-      "Shopify",
-      "Webstudio",
-      "Sanity",
-      "Turso",
-      "GSAP"
-    ],
-    "cover": "",
-    "date": "April 2025"
+    "services": ["Webflow Development", "UX/UI Design"],
+    "tools": ["Webflow"],
+    "desktopImage": "voters_desk.png",
+    "mobileImage": "voters_mob.png"
   },
   {
     "title": "Cleverix",
     "link": "https://www.cleverix.com/",
     "description": "",
-    "services": ["Web Development", "UX/UI Design"],
-    "tools": [
-      "Webflow",
-      "Astro",
-      "Shopify",
-      "Webstudio",
-      "Sanity",
-      "Turso",
-      "GSAP"
-    ],
-    "cover": "",
-    "date": "April 2025"
+    "services": ["Webflow Development", "UX/UI Design"],
+    "tools": ["Webflow"],
+    "desktopImage": "cleverix_desk.png",
+    "mobileImage": "cleverix_mob.png"
   },
   {
     "title": "Taboogrow",
-    "link": "https://taboogrowcom-tlt9a.wstd.io/",
+    "link": "",
     "description": "",
     "services": ["Web Development", "UX/UI Design"],
-    "tools": [
-      "Webflow",
-      "Astro",
-      "Shopify",
-      "Webstudio",
-      "Sanity",
-      "Turso",
-      "GSAP"
-    ],
-    "cover": "",
-    "date": "April 2025"
+    "tools": ["Webstudio"],
+    "desktopImage": "taboo_desk.png",
+    "mobileImage": "taboo_mob.png"
   },
   {
     "title": "Mygiddi (18+)",
     "link": "https://mygiddi.com/",
     "description": "",
-    "services": ["Web Development", "UX/UI Design"],
-    "tools": [
-      "Webflow",
-      "Astro",
-      "Shopify",
-      "Webstudio",
-      "Sanity",
-      "Turso",
-      "GSAP"
-    ],
-    "cover": "",
-    "date": "April 2025"
+    "services": ["E-com Development", "SEO"],
+    "tools": ["Shopify"],
+    "desktopImage": "giddy_desk.png",
+    "mobileImage": "giddy_mob.png"
   },
   {
     "title": "Videostudioalex",
     "link": "https://videostudioalex.com/",
     "description": "",
-    "services": ["Web Development", "UX/UI Design"],
-    "tools": [
-      "Webflow",
-      "Astro",
-      "Shopify",
-      "Webstudio",
-      "Sanity",
-      "Turso",
-      "GSAP"
-    ],
-    "cover": "",
-    "date": "April 2025"
+    "services": ["Webflow Development", "UX/UI Design"],
+    "tools": ["Webflow"],
+    "desktopImage": "alex_desk.png",
+    "mobileImage": "alex_mob.png"
   },
   {
     "title": "MarkLevi",
     "link": "https://marklevi.com/",
     "description": "",
-    "services": ["Web Development", "UX/UI Design"],
-    "tools": [
-      "Webflow",
-      "Astro",
-      "Shopify",
-      "Webstudio",
-      "Sanity",
-      "Turso",
-      "GSAP"
-    ],
-    "cover": "",
-    "date": "April 2025"
+    "services": ["Web Development"],
+    "tools": ["Webstudio"],
+    "desktopImage": "mark_desk.png",
+    "mobileImage": "mark_mob.png"
   },
 
   {
     "title": "Sri Rupa Seva Kunj",
     "link": "https://www.rupaseva.com/en/main",
     "description": "",
-    "services": ["Web Development", "UX/UI Design"],
-    "tools": [
-      "Webflow",
-      "Astro",
-      "Shopify",
-      "Webstudio",
-      "Sanity",
-      "Turso",
-      "GSAP"
-    ],
-    "cover": "",
-    "date": "April 2025"
+    "services": ["Webflow Development"],
+    "tools": ["Webflow", "GSAP"],
+    "desktopImage": "srsk_desk.png",
+    "mobileImage": "srsk_mob.png"
   },
   {
     "title": "Motorbunny (18+)",
     "link": "https://motorbunny.com/",
     "description": "",
-    "services": ["Web Development", "UX/UI Design"],
-    "tools": [
-      "Webflow",
-      "Astro",
-      "Shopify",
-      "Webstudio",
-      "Sanity",
-      "Turso",
-      "GSAP"
-    ],
-    "cover": "",
-    "date": "April 2025"
+    "services": ["E-com Development", "SEO"],
+    "tools": ["Shopify"],
+    "desktopImage": "bunny_desk.png",
+    "mobileImage": "bunny_mob.png"
   }
 ]

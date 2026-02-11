@@ -1,0 +1,21 @@
+@layer components {
+  #contacts {
+    @apply mt-section-sm grid-wrapper;
+
+    h2 {
+      @apply heading-mono;
+    }
+
+    & > * {
+      @apply col-span-full md:text-xl md:max-lg:w-[calc(100svw-12em+var(--spacing-svw)*2)] md:max-lg:mx-auto lg:col-start-2 lg:col-end-3 xl:text-2xl;
+    }
+
+    p {
+      @apply mb-7 indent-text-indent order-first;
+    }
+
+    div {
+      @apply flex flex-wrap justify-between items-center gap-x-6;
+    }
+  }
+}
