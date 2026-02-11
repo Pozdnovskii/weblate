@@ -66,7 +66,7 @@
   {
     "title": "MarkLevi",
     "link": "https://marklevi.com/",
-    "description": "",
+    "description": "Personal brand website built with Webstudio. Minimalist design with focus on content and fast performance. Clean typography and smooth user experience.",
     "services": ["Web Development"],
     "tools": ["Webstudio"],
     "desktopImage": "mark_desk.png",
@@ -76,7 +76,7 @@
   {
     "title": "Sri Rupa Seva Kunj",
     "link": "https://www.rupaseva.com/en/main",
-    "description": "",
+    "description": "Spiritual organization website. Implemented custom GSAP animations to enhance user experience with smooth transitions and scroll-triggered effects.",
     "services": ["Webflow Development"],
     "tools": ["Webflow", "GSAP"],
     "desktopImage": "srsk_desk.png",
@@ -85,7 +85,7 @@
   {
     "title": "Motorbunny (18+)",
     "link": "https://motorbunny.com/",
-    "description": "",
+    "description": "Adult products e-commerce store on Shopify. SEO optimization and performance improvements with custom Liquid code for better user experience and conversions.",
     "services": ["E-com Development", "SEO"],
     "tools": ["Shopify"],
     "desktopImage": "bunny_desk.png",
