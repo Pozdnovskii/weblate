@@ -9,7 +9,7 @@ export function initServiceCardAnimations() {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          const svg = entry.target.querySelector("svg");
+          const svg = entry.target.querySelector(".service-icon");
           if (svg) {
             triggerSvgAnimations(svg);
           }
@@ -17,7 +17,7 @@ export function initServiceCardAnimations() {
         }
       });
     },
-    { threshold: 1.0 }
+    { threshold: 1.0 },
   );
 
   cards.forEach((card) => observer.observe(card));
