@@ -21,7 +21,7 @@
   {
     "title": "New Voters",
     "link": "https://www.new-voters.org/",
-    "description": "",
+    "description": "Non-profit organization empowering young voters. Webflow site with custom design focused on accessibility and clear information architecture. Built to engage and educate first-time voters.",
     "services": ["Webflow Development", "UX/UI Design"],
     "tools": ["Webflow"],
     "desktopImage": "voters_desk.png",
@@ -30,7 +30,7 @@
   {
     "title": "Cleverix",
     "link": "https://www.cleverix.com/",
-    "description": "",
+    "description": "IT outsourcing company website. Webflow site with professional design showcasing services and expertise. Clean UI with smooth animations to build trust with potential clients.",
     "services": ["Webflow Development", "UX/UI Design"],
     "tools": ["Webflow"],
     "desktopImage": "cleverix_desk.png",
