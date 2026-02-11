@@ -39,7 +39,7 @@
   {
     "title": "Taboogrow",
     "link": "",
-    "description": "",
+    "description": "Marketing agency specializing in Reddit promotion. Webstudio site with custom design highlighting their unique expertise in Reddit-based marketing strategies.",
     "services": ["Web Development", "UX/UI Design"],
     "tools": ["Webstudio"],
     "desktopImage": "taboo_desk.png",
@@ -48,7 +48,7 @@
   {
     "title": "Mygiddi (18+)",
     "link": "https://mygiddi.com/",
-    "description": "",
+    "description": "Adult products e-commerce store on Shopify. Built with Replo page builder and custom Liquid code for enhanced functionality and unique storefront experience.",
     "services": ["E-com Development", "SEO"],
     "tools": ["Shopify"],
     "desktopImage": "giddy_desk.png",
@@ -57,7 +57,7 @@
   {
     "title": "Videostudioalex",
     "link": "https://videostudioalex.com/",
-    "description": "",
+    "description": "Videographer portfolio website. Webflow site with custom animations showcasing video work. Clean design that lets the visual content take center stage.",
     "services": ["Webflow Development", "UX/UI Design"],
     "tools": ["Webflow"],
     "desktopImage": "alex_desk.png",
