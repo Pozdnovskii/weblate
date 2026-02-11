@@ -9,6 +9,15 @@
     "mobileImage": "cars_mob.png"
   },
   {
+    "title": "Designer portfolio",
+    "link": "https://apavlyk.cc/",
+    "description": "",
+    "services": ["Web Development"],
+    "tools": ["Astro"],
+    "desktopImage": "anpavlyk_desk.png",
+    "mobileImage": "anpavlyk_mob.png"
+  },
+  {
     "title": "Yourmove AI",
     "link": "https://www.yourmove.ai/",
     "description": "",
