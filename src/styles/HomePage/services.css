@@ -18,15 +18,15 @@
       }
 
       & > main {
-        @apply grid-wrapper__center-cell indent-text-indent leading-7 max-w-prose flex flex-col gap-y-2 mt-auto;
+        @apply grid-wrapper__center-cell indent-text-indent leading-7 max-w-prose flex flex-col gap-y-2 max-md:mb-6 lg:max-xl:col-span-2;
       }
 
       & > svg {
-        @apply max-w-60 self-center justify-self-center max-md:mt-6 md:justify-self-start md:max-lg:w-2/3 lg:w-8/9 lg:justify-self-end lg:row-span-2;
+        @apply max-w-60 justify-self-center md:justify-self-start md:max-lg:w-2/3 lg:max-xl:row-start-2 xl:justify-self-end xl:row-span-2;
+      }
 
-        &:last-child > svg {
-          @apply max-md:hidden;
-        }
+      &:last-child > svg {
+        @apply max-md:hidden;
       }
     }
   }

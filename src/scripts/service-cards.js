@@ -17,7 +17,7 @@ export function initServiceCardAnimations() {
         }
       });
     },
-    { threshold: 1.0 },
+    { threshold: 0.36 },
   );
 
   cards.forEach((card) => observer.observe(card));

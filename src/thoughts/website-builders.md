@@ -2,6 +2,7 @@
 title: "Website Builders: When to Use Them"
 description: "A practical guide to choosing website builders based on complexity levels and trade-offs between speed and quality."
 date: "2024-01-15"
+image: "../assets/images/thoughts/builders.webp"
 ---
 
 In website development, choosing clean code is the most effective way to ensure lightning-fast load speeds, SEO, accessibility, and scalability. However, businesses often choose website builders for various reasons. After 5+ years in development, I've worked with many of them: Webflow, Framer, Wix, Squarespace, Tilda, and others.

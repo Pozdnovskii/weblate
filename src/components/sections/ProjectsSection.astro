@@ -34,7 +34,7 @@ function getImage(filename) {
             <div aria-hidden="true" />
           </button>
 
-          <div id={`project-${index}`} hidden>
+          <article id={`project-${index}`} hidden>
             <div data-project-img>
               {getImage(project.desktopImage) && (
                 <Image
@@ -85,7 +85,7 @@ function getImage(filename) {
                 <span>Link temporarily unavailable</span>
               )}
             </div>
-          </div>
+          </article>
         </li>
       ))
     }

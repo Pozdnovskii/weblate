@@ -6,6 +6,10 @@
     @apply mt-6;
   }
 
+  main {
+    padding-top: 6rem;
+  }
+
   h1,
   h2,
   h3 {

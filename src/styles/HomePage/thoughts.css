@@ -1,0 +1,44 @@
+@layer components {
+  #thoughts {
+    @apply grid-wrapper;
+
+    & > ul {
+      @apply col-span-full grid grid-cols-1 gap-y-8 pt-7 border-t border-dashed border-neutral-500 md:grid-cols-2 gap-x-6;
+
+      & > li {
+        @apply relative grid grid-cols-[auto_min(65ch,80%)] gap-x-3 gap-y-2;
+
+        & > a {
+          @apply before:absolute before:inset-0;
+
+          & > h3 {
+            @apply text-2xl leading-tight text-balance;
+          }
+        }
+
+        & > p {
+          @apply col-span-2 text-neutral-200 sm:max-md:col-span-1;
+        }
+
+        & > img {
+          @apply -order-1  self-stretch sm:max-md:row-span-2;
+        }
+      }
+    }
+  }
+
+  @media (width >= 80rem) {
+    #thoughts {
+      & > ul {
+        @apply grid-cols-4;
+      }
+    }
+  }
+  /* .view-all {
+    @apply heading-mono mt-8 inline-flex gap-x-2 transition-colors hover:text-hover;
+  } */
+
+  /* img {
+        @apply -order-1 rounded-sm object-cover;
+      } */
+}

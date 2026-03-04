@@ -1,0 +1,55 @@
+---
+import Section from "@components/UI/Section.astro";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("thoughts"))
+  .sort(
+    (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+  )
+  .slice(0, 4);
+---
+
+<Section id="thoughts" title="Thoughts" class="wrapper">
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <a href={`/thoughts/${post.id}`}>
+            <h3>{post.data.title}</h3>
+          </a>
+          <p>{post.data.description}</p>
+
+          <Image src={post.data.image} alt={`${post.data.title} cover`} />
+        </li>
+        <li>
+          <a href={`/thoughts/${post.id}`}>
+            <h3>{post.data.title}</h3>
+          </a>
+          <p>{post.data.description}</p>
+
+          <Image src={post.data.image} alt={`${post.data.title} cover`} />
+        </li>
+        <li>
+          <a href={`/thoughts/${post.id}`}>
+            <h3>{post.data.title}</h3>
+          </a>
+          <p>{post.data.description}</p>
+
+          <Image src={post.data.image} alt={`${post.data.title} cover`} />
+        </li>
+        <li>
+          <a href={`/thoughts/${post.id}`}>
+            <h3>{post.data.title}</h3>
+          </a>
+          <p>{post.data.description}</p>
+
+          <Image src={post.data.image} alt={`${post.data.title} cover`} />
+        </li>
+      ))
+    }
+  </ul>
+  <!-- <a href="/thoughts" class="view-all">
+    View all thoughts <span aria-hidden="true">→</span>
+  </a> -->
+</Section>

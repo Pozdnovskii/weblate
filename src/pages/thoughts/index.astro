@@ -1,5 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 
 const posts = (await getCollection("thoughts")).sort(
@@ -18,19 +19,26 @@ const posts = (await getCollection("thoughts")).sort(
       Thou&shy;ghts
     </h1>
 
-    <ul class="space-y-8 max-w-[65ch]">
+    <ul class="space-y-8">
       {
         posts.map((post) => (
           <li>
             <a
               href={`/thoughts/${post.id}`}
-              class="block group hover:bg-zinc-700/50 -mx-4 px-4 py-4 rounded-lg transition-colors"
+              class="flex flex-col md:flex-row gap-6 group hover:bg-zinc-700/50 -mx-4 px-4 py-4 rounded-lg transition-colors"
             >
-              <p class="heading-mono text-grey mb-2">{post.data.date}</p>
-              <h2 class="text-xl md:text-2xl font-semibold group-hover:text-blue-400 transition-colors">
+              <p class="heading-mono text-grey mb-2 order-1">{post.data.date}</p>
+              <h2 class="text-xl md:text-2xl font-semibold group-hover:text-blue-400 transition-colors order-2">
                 {post.data.title}
               </h2>
-              <p class="text-neutral-400 mt-2">{post.data.description}</p>
+              <p class="text-neutral-400 mt-2 max-w-prose order-3">{post.data.description}</p>
+              {post.data.image && (
+                <Image
+                  src={post.data.image}
+                  alt=""
+                  class="w-full md:w-48 h-auto rounded-sm object-cover shrink-0 -order-1"
+                />
+              )}
             </a>
           </li>
         ))

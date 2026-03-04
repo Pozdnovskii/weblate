@@ -1,73 +1,52 @@
-<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="service-icon">
-  <!-- Browser window frame -->
-  <rect x="20" y="25" width="160" height="150" rx="6" stroke="#4A66A9" stroke-width="2" fill="none" stroke-dasharray="620" stroke-dashoffset="620">
-    <animate attributeName="stroke-dashoffset" from="620" to="0" dur="0.8s" fill="freeze" begin="indefinite" data-delay="0"/>
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="service-icon">
+  <defs>
+    <linearGradient id="mainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1" />
+      <stop offset="100%" stop-color="#A855F7" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <rect x="20" y="30" width="160" height="140" rx="12" stroke="url(#mainGrad)" stroke-width="2.5" 
+        pathLength="100" stroke-dasharray="100" stroke-dashoffset="100">
+    <animate attributeName="stroke-dashoffset" from="100" to="0" dur="0.8s" fill="freeze" begin="indefinite" data-delay="0"/>
   </rect>
 
-  <!-- Browser header line -->
-  <line x1="20" y1="50" x2="180" y2="50" stroke="transparent" stroke-width="2">
-    <animate attributeName="stroke" values="transparent;#4A66A9" dur="0.01s" fill="freeze" begin="indefinite" data-delay="0.6"/>
-  </line>
+  <g opacity="0">
+    <circle cx="45" cy="50" r="3.5" fill="#6366F1" />
+    <circle cx="60" cy="50" r="3.5" fill="#A855F7" />
+    <animate attributeName="opacity" from="0" to="1" dur="0.4s" fill="freeze" begin="indefinite" data-delay="0.5"/>
+  </g>
 
-  <!-- Browser dots -->
-  <circle cx="35" cy="38" r="0" fill="#5068A8">
-    <animate attributeName="r" from="0" to="4" dur="0.15s" fill="freeze" begin="indefinite" data-delay="0.7"/>
-  </circle>
-  <circle cx="50" cy="38" r="0" fill="#5C6EA8">
-    <animate attributeName="r" from="0" to="4" dur="0.15s" fill="freeze" begin="indefinite" data-delay="0.8"/>
-  </circle>
-  <circle cx="65" cy="38" r="0" fill="#6874A9">
-    <animate attributeName="r" from="0" to="4" dur="0.15s" fill="freeze" begin="indefinite" data-delay="0.9"/>
-  </circle>
+  <g stroke="url(#mainGrad)" stroke-width="3" stroke-linecap="round" filter="url(#glow)">
+    <path d="M45 85 l-8 8 l8 8" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100">
+      <animate attributeName="stroke-dashoffset" from="100" to="0" dur="0.4s" fill="freeze" begin="indefinite" data-delay="0.8"/>
+    </path>
+    <path d="M65 82 l-10 22" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100">
+      <animate attributeName="stroke-dashoffset" from="100" to="0" dur="0.4s" fill="freeze" begin="indefinite" data-delay="1.0"/>
+    </path>
+    <path d="M72 85 l8 8 l-8 8" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100">
+      <animate attributeName="stroke-dashoffset" from="100" to="0" dur="0.4s" fill="freeze" begin="indefinite" data-delay="1.2"/>
+    </path>
+  </g>
 
-  <!-- Grid lines - vertical -->
-  <line x1="80" y1="60" x2="80" y2="165" stroke="transparent" stroke-width="1" stroke-dasharray="4,4">
-    <animate attributeName="stroke" values="transparent;#5068A8" dur="0.01s" fill="freeze" begin="indefinite" data-delay="1"/>
-  </line>
-  <line x1="120" y1="60" x2="120" y2="165" stroke="transparent" stroke-width="1" stroke-dasharray="4,4">
-    <animate attributeName="stroke" values="transparent;#5068A8" dur="0.01s" fill="freeze" begin="indefinite" data-delay="1.1"/>
-  </line>
+  <g fill="url(#mainGrad)" filter="url(#glow)">
+    <rect x="110" y="75" width="55" height="35" rx="4" opacity="0">
+      <animate attributeName="opacity" from="0" to="0.7" dur="0.5s" fill="freeze" begin="indefinite" data-delay="1.5"/>
+      <animateTransform attributeName="transform" type="translate" from="10 0" to="0 0" dur="0.5s" fill="freeze" begin="indefinite" data-delay="1.5"/>
+    </rect>
+    <rect x="110" y="120" width="40" height="6" rx="3" opacity="0">
+      <animate attributeName="opacity" from="0" to="0.5" dur="0.4s" fill="freeze" begin="indefinite" data-delay="1.7"/>
+    </rect>
+    <rect x="110" y="135" width="25" height="6" rx="3" opacity="0">
+      <animate attributeName="opacity" from="0" to="0.3" dur="0.4s" fill="freeze" begin="indefinite" data-delay="1.8"/>
+    </rect>
+  </g>
 
-  <!-- Grid lines - horizontal -->
-  <line x1="30" y1="90" x2="170" y2="90" stroke="transparent" stroke-width="1" stroke-dasharray="4,4">
-    <animate attributeName="stroke" values="transparent;#5068A8" dur="0.01s" fill="freeze" begin="indefinite" data-delay="1.2"/>
-  </line>
-  <line x1="30" y1="130" x2="170" y2="130" stroke="transparent" stroke-width="1" stroke-dasharray="4,4">
-    <animate attributeName="stroke" values="transparent;#5068A8" dur="0.01s" fill="freeze" begin="indefinite" data-delay="1.3"/>
-  </line>
-
-  <!-- Design elements on grid -->
-  <!-- Header block -->
-  <rect x="35" y="62" width="130" height="20" rx="2" fill="transparent">
-    <animate attributeName="fill" values="transparent;#4A66A9" dur="0.2s" fill="freeze" begin="indefinite" data-delay="1.4"/>
+  <rect x="38" y="145" width="10" height="3" fill="#6366F1" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite" begin="indefinite" data-delay="2.0"/>
   </rect>
-
-  <!-- Left sidebar block -->
-  <rect x="35" y="95" width="38" height="65" rx="2" fill="transparent">
-    <animate attributeName="fill" values="transparent;#5C6EA8" dur="0.2s" fill="freeze" begin="indefinite" data-delay="1.6"/>
-  </rect>
-
-  <!-- Content blocks -->
-  <rect x="85" y="95" width="45" height="28" rx="2" fill="transparent">
-    <animate attributeName="fill" values="transparent;#6874A9" dur="0.2s" fill="freeze" begin="indefinite" data-delay="1.8"/>
-  </rect>
-  <rect x="85" y="132" width="45" height="28" rx="2" fill="transparent">
-    <animate attributeName="fill" values="transparent;#6874A9" dur="0.2s" fill="freeze" begin="indefinite" data-delay="2"/>
-  </rect>
-
-  <!-- Right block -->
-  <rect x="140" y="95" width="30" height="65" rx="2" fill="transparent">
-    <animate attributeName="fill" values="transparent;#7C7EAB" dur="0.2s" fill="freeze" begin="indefinite" data-delay="2.2"/>
-  </rect>
-
-  <!-- Sparkle effects -->
-  <circle cx="175" cy="58" r="2" fill="transparent">
-    <animate attributeName="fill" values="transparent;#8185B1;transparent" dur="2s" repeatCount="indefinite" begin="indefinite" data-delay="2.5"/>
-  </circle>
-  <circle cx="28" cy="165" r="2" fill="transparent">
-    <animate attributeName="fill" values="transparent;#7C7EAB;transparent" dur="2.5s" repeatCount="indefinite" begin="indefinite" data-delay="3"/>
-  </circle>
-  <circle cx="172" cy="170" r="1.5" fill="transparent">
-    <animate attributeName="fill" values="transparent;#6874A9;transparent" dur="1.8s" repeatCount="indefinite" begin="indefinite" data-delay="2.8"/>
-  </circle>
 </svg>

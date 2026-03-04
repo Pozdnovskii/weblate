@@ -14,10 +14,12 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<Layout title={`${post.data.title} | Ivan Pozdnovskii`} description={post.data.description}>
-  <main class="wrapper py-section-sm">
+<Layout
+  title={`${post.data.title} | Ivan Pozdnovskii`}
+  description={post.data.description}
+>
+  <main class="wrapper pt-32">
     <article class="prose mx-auto">
-      <p class="heading-mono text-grey mb-4">{post.data.date}</p>
       <h1>{post.data.title}</h1>
       <Content />
     </article>

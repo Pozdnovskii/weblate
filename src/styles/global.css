@@ -5,6 +5,7 @@
 @import "@styles/HomePage/how-to.css";
 @import "@styles/HomePage/projects.css";
 @import "@styles/HomePage/services.css";
+@import "@styles/HomePage/thoughts.css";
 @import "@styles/footer.css";
 @import "@styles/article.css";
 
@@ -91,7 +92,8 @@
 }
 
 @utility grid-wrapper {
-  @apply grid grid-cols-1 gap-x-6 md:grid-cols-[minmax(15em,1fr)_min(52em,calc(92svw-15em))] lg:grid-cols-[minmax(15em,1fr)_min(52em,calc(92svw-27em))_minmax(10em,1fr)];
+  @apply grid grid-cols-1 gap-x-6 md:grid-cols-[minmax(15em,1fr)_min(52em,calc(92svw-15em))] lg:grid-cols-[1fr_2fr_1fr];
+  /* lg:grid-cols-[minmax(15em,1fr)_min(52em,calc(92svw-27em))_minmax(10em,1fr)]; */
 }
 
 @utility grid-wrapper__subgrid {
@@ -99,5 +101,5 @@
 }
 
 @utility grid-wrapper__center-cell {
-  @apply col-start-2 col-end-3;
+  @apply col-start-2;
 }
