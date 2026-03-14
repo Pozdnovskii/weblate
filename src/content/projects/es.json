@@ -2,7 +2,7 @@
   {
     "title": "Xclusivecars",
     "link": "https://xclusivecars-website.pages.dev/",
-    "description": "Servicio de importación de coches de EE.UU. a Bulgaria. Construido con Astro para páginas estáticas rápidas, Sanity CMS para gestión de contenido y base de datos Turso para datos dinámicos. Optimizado para SEO y rendimiento.",
+    "description": "Servicio de importación de coches de Estados Unidos a Bulgaria. Construido con Astro para páginas estáticas rápidas, Sanity CMS para gestión de contenido y base de datos Turso para datos dinámicos. Optimizado para SEO y rendimiento.",
     "services": ["Desarrollo web", "Diseño UX/UI"],
     "tools": ["Astro", "Sanity", "Turso"],
     "desktopImage": "cars_desk.png",
