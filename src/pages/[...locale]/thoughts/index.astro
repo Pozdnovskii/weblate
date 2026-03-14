@@ -1,0 +1,48 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getAbsoluteLocaleUrl } from "astro:i18n";
+import Layout from "@layouts/Layout.astro";
+import ThoughtsList from "@components/sections/ThoughtsSection/ThoughtsList.astro";
+import { useTranslations, defaultLang, type Locale } from "@i18n/ui";
+
+export const getStaticPaths = (() => {
+  return [
+    { params: { locale: undefined }, props: { locale: defaultLang } },
+    { params: { locale: "bg" }, props: { locale: "bg" as Locale } },
+    { params: { locale: "es" }, props: { locale: "es" as Locale } },
+  ];
+}) satisfies GetStaticPaths;
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  name: t("thoughts.title"),
+  description: t("thoughts.description"),
+  url: getAbsoluteLocaleUrl(locale, "thoughts"),
+  inLanguage: locale,
+  author: {
+    "@type": "Person",
+    name: "Ivan Pozdnovskii",
+    url: "https://weblateweb.dev",
+  },
+};
+---
+
+<Layout
+  title={`${t("thoughts.title")} | Ivan Pozdnovskii`}
+  description={t("thoughts.description")}
+  schema={blogSchema}
+>
+  <main id="main" class="wrapper">
+    <h1 class="mb-[.5em] text-[clamp(2.25rem,1.5rem+3.75svw,4.875rem)]">
+      {t("thoughts.title")}
+    </h1>
+
+    <section id="thoughts">
+      <ThoughtsList headingLevel="h2" showViewAll={false} limit={100} locale={locale} />
+    </section>
+  </main>
+</Layout>

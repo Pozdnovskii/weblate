@@ -1,0 +1,59 @@
+---
+import { Image, type ImageMetadata } from "astro:assets";
+import { getCollection } from "astro:content";
+import { type Locale, useTranslations } from "@i18n/ui";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+interface Props {
+  headingLevel?: "h2" | "h3";
+  showViewAll?: boolean;
+  excludeId?: string;
+  limit?: number;
+  locale: Locale;
+}
+
+const {
+  headingLevel = "h3",
+  showViewAll = true,
+  excludeId,
+  limit = 3,
+  locale,
+} = Astro.props;
+
+const t = useTranslations(locale);
+const Heading = headingLevel;
+
+const getSlug = (id: string) => id.split("/").pop() || id;
+
+const posts = (await getCollection("thoughts", ({ id }) => id.startsWith(`${locale}/`)))
+  .filter((post) => getSlug(post.id) !== excludeId)
+  .slice(0, limit);
+---
+
+<ul>
+  {
+    posts.map((post) => (
+      <li>
+        <article>
+          <a href={getRelativeLocaleUrl(locale, `thoughts/${getSlug(post.id)}`)}>
+            <Heading>{post.data.title}</Heading>
+          </a>
+          <p>{post.data.description}</p>
+          <Image src={post.data.image as ImageMetadata} alt={`${post.data.title} cover`} />
+        </article>
+      </li>
+    ))
+  }
+  {
+    showViewAll && (
+      <li data-element="view-all">
+        <a href={getRelativeLocaleUrl(locale, "thoughts")}>
+          <Heading>
+            <span>{t("thoughts.viewAll")}</span>
+            <span aria-hidden="true">→</span>
+          </Heading>
+        </a>
+      </li>
+    )
+  }
+</ul>

@@ -1,0 +1,65 @@
+[
+  {
+    "title": "Proceso",
+    "items": [
+      {
+        "title": "Entregas rápidas",
+        "description": "Entrega rápida sin retrasos ni plazos incumplidos."
+      },
+      {
+        "title": "Actualizaciones regulares",
+        "description": "Comunicación transparente que te mantiene informado en cada paso."
+      },
+      {
+        "title": "Soporte post-lanzamiento",
+        "description": "Disponible para mejoras, actualizaciones y cambios de contenido después del lanzamiento."
+      }
+    ]
+  },
+  {
+    "title": "Calidad",
+    "items": [
+      {
+        "title": "Estándares de accesibilidad",
+        "description": "Diseño compatible con WCAG que es inclusivo para usuarios — y recompensado por Google."
+      },
+      {
+        "title": "Diseño responsive",
+        "description": "Se ve y funciona perfectamente en cualquier pantalla, desde móviles hasta escritorios."
+      },
+      {
+        "title": "Animaciones e interacciones",
+        "description": "Experiencias fluidas y atractivas que enganchan a los visitantes y hacen tu marca más memorable."
+      },
+      {
+        "title": "Fácilmente escalable",
+        "description": "Arquitectura de código limpio que crece con tu contenido y necesidades de negocio."
+      },
+      {
+        "title": "Integraciones de terceros",
+        "description": "Analytics, pruebas A/B, sistemas de reservas, CRM o integración con Shopify."
+      }
+    ]
+  },
+  {
+    "title": "Técnico",
+    "items": [
+      {
+        "title": "Mobile-First",
+        "description": "La mayoría de usuarios visitan desde dispositivos móviles, y Google prioriza el rendimiento móvil para el ranking."
+      },
+      {
+        "title": "HTML semántico",
+        "description": "Ayuda a los motores de búsqueda, bots de IA y lectores de pantalla a entender mejor tu contenido."
+      },
+      {
+        "title": "Carga rápida",
+        "description": "Cumple con los estándares Core Web Vitals, asegurando una experiencia fluida — porque nadie espera a que carguen sitios lentos."
+      },
+      {
+        "title": "SEO técnico",
+        "description": "Construido con estructura limpia y optimización lista para posicionamiento en buscadores."
+      }
+    ]
+  }
+]

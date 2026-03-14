@@ -1,48 +1,65 @@
+let headerState = { isOpen: false, toggleMenu: null };
+let documentListenersAdded = false;
+
 export function initHeader() {
   const header = document.getElementById("header");
   const burger = document.getElementById("header-btn");
   const nav = document.getElementById("header-nav");
   const headerContent = document.getElementById("header-content");
 
-  if (!header) return;
+  if (!header || !burger || !nav) return;
 
-  let isOpen = false;
+  headerState.isOpen = false;
+  header.classList.remove("header--open");
+  burger.setAttribute("aria-expanded", "false");
+  nav.setAttribute("inert", "");
 
-  function toggleMenu() {
-    isOpen = !isOpen;
-    header.classList.toggle("header--open", isOpen);
-    burger.setAttribute("aria-expanded", isOpen);
+  if (header.hasAttribute("data-fade-animation")) {
+    header.addEventListener("animationend", () => {
+      header.removeAttribute("data-fade-animation");
+    }, { once: true });
+  }
 
-    if (isOpen) {
+  headerState.toggleMenu = function() {
+    headerState.isOpen = !headerState.isOpen;
+    header.classList.toggle("header--open", headerState.isOpen);
+    burger.setAttribute("aria-expanded", headerState.isOpen);
+
+    if (headerState.isOpen) {
       nav.removeAttribute("inert");
       setTimeout(() => nav?.querySelector("a")?.focus(), 150);
     } else {
       nav.setAttribute("inert", "");
     }
-  }
+  };
 
-  burger.addEventListener("click", toggleMenu);
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && isOpen) {
-      toggleMenu();
-      burger.focus();
-    }
-  });
-
-  document.addEventListener("click", (e) => {
-    if (isOpen && !headerContent.contains(e.target)) {
-      toggleMenu();
-    }
-  });
+  burger.onclick = headerState.toggleMenu;
 
   nav.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      if (isOpen) {
-        toggleMenu();
+    link.onclick = () => {
+      if (headerState.isOpen) {
+        headerState.toggleMenu();
+      }
+    };
+  });
+
+  if (!documentListenersAdded) {
+    documentListenersAdded = true;
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && headerState.isOpen && headerState.toggleMenu) {
+        headerState.toggleMenu();
+        document.getElementById("header-btn")?.focus();
       }
     });
-  });
+
+    document.addEventListener("click", (e) => {
+      const headerContent = document.getElementById("header-content");
+      if (headerState.isOpen && headerContent && !headerContent.contains(e.target)) {
+        headerState.toggleMenu();
+      }
+    });
+  }
 }
 
 export function initSmoothScroll() {

@@ -1,18 +1,22 @@
 ---
 import SocialLinksList from "@components/UI/SocialLinksList.astro";
+import { type Locale, useTranslations } from "@i18n/ui";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
 ---
 
 <section id="contacts" class="wrapper">
   <div>
-    <h2>Contact Me →</h2>
+    <h2>{t("contacts.title")} →</h2>
     <address>
       <SocialLinksList />
     </address>
   </div>
 
-  <p>
-    I prefer clean code, as it creates the fastest, most SEO-optimized, and
-    accessible websites. This brings more traffic, better engagement, and future
-    scalability as your business grows.
-  </p>
+  <p>{t("contacts.description")}</p>
 </section>

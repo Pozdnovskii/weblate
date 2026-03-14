@@ -14,9 +14,10 @@
       "@social-logos/*": ["src/assets/images/social-logos/*"],
       "@tech-logos/*": ["src/assets/images/tech-logos/*"],
       "@layouts/*": ["src/layouts/*"],
-      "@data/*": ["src/data/*"],
+      "@content/*": ["src/content/*"],
       "@scripts/*": ["src/scripts/*"],
-      "@styles/*": ["src/styles/*"]
+      "@styles/*": ["src/styles/*"],
+      "@i18n/*": ["src/i18n/*"]
     }
   },
   "include": [".astro/types.d.ts", "**/*"],

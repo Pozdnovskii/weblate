@@ -1,0 +1,72 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection, render } from "astro:content";
+import { getAbsoluteLocaleUrl } from "astro:i18n";
+import Layout from "@layouts/Layout.astro";
+import ThoughtsList from "@components/sections/ThoughtsSection/ThoughtsList.astro";
+import SectionHeading from "@components/UI/SectionHeading.astro";
+import { useTranslations, defaultLang, type Locale } from "@i18n/ui";
+
+export const getStaticPaths = (async () => {
+  const locales: Locale[] = ["en", "bg", "es"];
+  const posts = await getCollection("thoughts");
+
+  return locales.flatMap((locale) =>
+    posts
+      .filter((post) => post.id.startsWith(`${locale}/`))
+      .map((post) => ({
+        params: {
+          locale: locale === defaultLang ? undefined : locale,
+          slug: post.id.split("/").pop(),
+        },
+        props: { post, locale },
+      }))
+  );
+}) satisfies GetStaticPaths;
+
+const { post, locale } = Astro.props;
+const t = useTranslations(locale);
+const { Content } = await render(post);
+const slug = post.id.split("/").pop();
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date,
+  inLanguage: locale,
+  url: getAbsoluteLocaleUrl(locale, `thoughts/${slug}`),
+  author: {
+    "@type": "Person",
+    name: "Ivan Pozdnovskii",
+    url: "https://weblateweb.dev",
+  },
+  publisher: {
+    "@type": "Person",
+    name: "Ivan Pozdnovskii",
+  },
+};
+---
+
+<Layout
+  title={`${post.data.title} | Ivan Pozdnovskii`}
+  description={post.data.description}
+  schema={articleSchema}
+>
+  <main id="main" class="wrapper">
+    <h1
+      class="mb-[1em] text-[clamp(1.6875rem,1.26rem+2.13svw,2.625rem)] sm:mx-auto sm:text-center"
+    >
+      {post.data.title}
+    </h1>
+    <article class="prose mx-auto">
+      <Content />
+    </article>
+
+    <aside id="thoughts">
+      <SectionHeading title={t("thoughts.recentTitle")} id="aside-title" />
+      <ThoughtsList excludeId={slug} locale={locale} />
+    </aside>
+  </main>
+</Layout>

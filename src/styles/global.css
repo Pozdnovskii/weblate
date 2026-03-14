@@ -38,32 +38,30 @@
 }
 
 @layer base {
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
+  html > body {
+    scrollbar-gutter: stable;
+    font-family: var(--font-body);
+    @apply flex min-h-lvh max-w-screen flex-col bg-zinc-900 text-white;
   }
 
-  html > body {
-    scrollbar-gutter: stable both-edges;
-    font-family: var(--font-body);
-    @apply bg-zinc-800 text-white;
+  #main {
+    @apply pb-section pt-32;
   }
 
   #main > section {
     @apply scroll-mt-section;
   }
 
-  h1 {
-    font-size: clamp(1.313rem, 5.625vw + 0.188rem, 5.25rem);
-    @apply font-medium;
+  h1:not(#main-page-h1),
+  h2,
+  h3 {
+    @apply max-w-full leading-tight text-balance text-pretty;
   }
 }
 
 @layer components {
   .wrapper {
-    @apply w-full max-w-full 2xl:container mx-auto px-svw;
+    @apply px-svw mx-auto w-full max-w-full 2xl:container;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -88,16 +86,15 @@
 }
 
 @utility heading-mono {
-  @apply font-secondary uppercase text-sm;
+  @apply font-secondary text-sm uppercase;
 }
 
 @utility grid-wrapper {
-  @apply grid grid-cols-1 gap-x-6 md:grid-cols-[minmax(15em,1fr)_min(52em,calc(92svw-15em))] lg:grid-cols-[1fr_2fr_1fr];
-  /* lg:grid-cols-[minmax(15em,1fr)_min(52em,calc(92svw-27em))_minmax(10em,1fr)]; */
+  @apply grid grid-cols-1 gap-x-6 md:grid-cols-[minmax(15em,1fr)_min(52em,calc(92svw-16.5em))] lg:grid-cols-[1fr_2fr_1fr];
 }
 
 @utility grid-wrapper__subgrid {
-  @apply grid col-span-full grid-cols-subgrid grid-flow-dense;
+  @apply col-span-full grid grid-flow-dense grid-cols-subgrid;
 }
 
 @utility grid-wrapper__center-cell {

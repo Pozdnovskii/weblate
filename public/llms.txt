@@ -17,7 +17,15 @@
 - **Web Performance** - Optimization, lazy loading, critical CSS
 - **Webflow** - No-code development
 - **Webstudio** - Visual development
-- **Shopify** - E-commerce development
+- **Shopify** - E-commerce development, theme optimization
+
+## E-commerce & Shopify
+
+- Shopify theme development and customization (Liquid, HTML, CSS, JS)
+- Theme performance optimization (reducing render-blocking resources, lazy loading)
+- Custom sections and blocks for store admins
+- SEO for e-commerce (structured data, meta tags, site speed)
+- Conversion optimization through better UX and faster load times
 
 ## Principles
 
@@ -27,26 +35,18 @@
 - Clean, scalable code
 - Modern web standards
 
-## Technologies
-
-### Frontend
-- Astro 5.x
-- Tailwind CSS 4.x
-- Vanilla JavaScript
-- Anime.js (animations)
-
-### Tools
-- TypeScript
-- Git
-- Prettier
-
 ## Services
 
-- Website Development
-- SEO Optimization
-- Performance Audits
-- Accessibility Consulting
-- Site Speed Optimization
+- Custom website development (Astro, Shopify, Webflow, Webstudio)
+- SEO optimization and technical audits
+- Performance optimization (Core Web Vitals)
+- Accessibility consulting (WCAG compliance)
+
+## Thoughts (Blog)
+
+Articles about web development:
+- https://weblateweb.dev/thoughts/website-builders - Guide to choosing website builders
+- https://weblateweb.dev/thoughts/best-work-clients-wont-return - Building reusable solutions for clients
 
 ---
 

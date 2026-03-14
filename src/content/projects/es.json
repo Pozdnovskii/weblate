@@ -1,0 +1,92 @@
+[
+  {
+    "title": "Xclusivecars",
+    "link": "https://xclusivecars-website.pages.dev/",
+    "description": "Servicio de importación de coches de EE.UU. a Bulgaria. Construido con Astro para páginas estáticas rápidas, Sanity CMS para gestión de contenido y base de datos Turso para datos dinámicos. Optimizado para SEO y rendimiento.",
+    "services": ["Desarrollo web", "Diseño UX/UI"],
+    "tools": ["Astro", "Sanity", "Turso"],
+    "desktopImage": "cars_desk.png",
+    "mobileImage": "cars_mob.png"
+  },
+  {
+    "title": "Yourmove AI",
+    "link": "https://www.yourmove.ai/",
+    "description": "App de asistente de citas con IA. Sitio Webflow con optimización de ancho de banda para manejar alto tráfico. Landing pages de carga rápida diseñadas para convertir visitantes en usuarios.",
+    "services": ["Desarrollo Webflow", "Optimización de ancho de banda"],
+    "tools": ["Webflow"],
+    "desktopImage": "yourmove_desk.png",
+    "mobileImage": "yourmove_mob.png"
+  },
+  {
+    "title": "New Voters",
+    "link": "https://www.new-voters.org/",
+    "description": "Organización sin fines de lucro que empodera a votantes jóvenes. Sitio Webflow con diseño personalizado enfocado en accesibilidad y arquitectura de información clara. Construido para involucrar y educar a votantes primerizos.",
+    "services": ["Desarrollo Webflow", "Diseño UX/UI"],
+    "tools": ["Webflow"],
+    "desktopImage": "voters_desk.png",
+    "mobileImage": "voters_mob.png"
+  },
+  {
+    "title": "Cleverix",
+    "link": "https://www.cleverix.com/",
+    "description": "Sitio web de empresa de outsourcing IT. Sitio Webflow con diseño profesional que muestra servicios y experiencia. UI limpia con animaciones suaves para generar confianza con clientes potenciales.",
+    "services": ["Desarrollo Webflow", "Diseño UX/UI"],
+    "tools": ["Webflow"],
+    "desktopImage": "cleverix_desk.png",
+    "mobileImage": "cleverix_mob.png"
+  },
+  {
+    "title": "Taboogrow",
+    "link": "",
+    "description": "Agencia de marketing especializada en promoción en Reddit. Sitio Webstudio con diseño personalizado destacando su experiencia única en estrategias de marketing basadas en Reddit.",
+    "services": ["Desarrollo web", "Diseño UX/UI"],
+    "tools": ["Webstudio"],
+    "desktopImage": "taboo_desk.png",
+    "mobileImage": "taboo_mob.png"
+  },
+  {
+    "title": "Mygiddi (18+)",
+    "link": "https://mygiddi.com/",
+    "description": "Tienda e-commerce de productos para adultos en Shopify. Construida con Replo page builder y código Liquid personalizado para funcionalidad mejorada y experiencia única en la tienda.",
+    "services": ["Desarrollo e-com", "SEO"],
+    "tools": ["Shopify"],
+    "desktopImage": "giddy_desk.png",
+    "mobileImage": "giddy_mob.png"
+  },
+  {
+    "title": "Videostudioalex",
+    "link": "https://videostudioalex.com/",
+    "description": "Sitio web de portafolio de videógrafo. Sitio Webflow con animaciones personalizadas mostrando trabajo de video. Diseño limpio que permite que el contenido visual sea el protagonista.",
+    "services": ["Desarrollo Webflow", "Diseño UX/UI"],
+    "tools": ["Webflow"],
+    "desktopImage": "alex_desk.png",
+    "mobileImage": "alex_mob.png"
+  },
+  {
+    "title": "MarkLevi",
+    "link": "https://marklevi.com/",
+    "description": "Sitio web de marca personal construido con Webstudio. Diseño minimalista con enfoque en contenido y rendimiento rápido. Tipografía limpia y experiencia de usuario fluida.",
+    "services": ["Desarrollo web"],
+    "tools": ["Webstudio"],
+    "desktopImage": "mark_desk.png",
+    "mobileImage": "mark_mob.png"
+  },
+  {
+    "title": "Sri Rupa Seva Kunj",
+    "link": "https://www.rupaseva.com/en/main",
+    "description": "Sitio web de organización espiritual. Implementé animaciones GSAP personalizadas para mejorar la experiencia del usuario con transiciones suaves y efectos activados por scroll.",
+    "services": ["Desarrollo Webflow"],
+    "tools": ["Webflow", "GSAP"],
+    "desktopImage": "srsk_desk.png",
+    "mobileImage": "srsk_mob.png"
+  },
+  {
+    "title": "Motorbunny (18+)",
+    "link": "https://motorbunny.com/",
+    "description": "Tienda e-commerce de productos para adultos en Shopify. Optimización SEO y mejoras de rendimiento con código Liquid personalizado para mejor experiencia de usuario y conversiones.",
+    "services": ["Desarrollo e-com", "SEO"],
+    "tools": ["Shopify"],
+    "desktopImage": "bunny_desk.png",
+    "mobileImage": "bunny_mob.png"
+  }
+]

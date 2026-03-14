@@ -1,21 +1,66 @@
 ---
 import "@styles/global.css";
 import { Font } from "astro:assets";
+import { ClientRouter } from "astro:transitions";
+import { type Locale, useTranslations } from "@i18n/ui";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL("/opengraph.webp", Astro.site).href;
 const enableAnalytics = import.meta.env.PUBLIC_ENABLE_ANALYTICS === "true";
 
-const {
-  title = "Ivan Pozdnovskii | Web Developer",
-  description = "Modern Website development with Astro, Webstudio, Webflow, and Shopify. Expert in site speed optimization, SEO, and accessibility for higher rankings.",
-  noindex = false,
-} = Astro.props;
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+  schema?: object;
+  locale: Locale;
+}
 
-  const isHome = Astro.url.pathname === "/";                                                                                                          
+const { locale, noindex = false, schema } = Astro.props;
+const t = useTranslations(locale);
+const title = Astro.props.title ?? t("meta.title");
+const description = Astro.props.description ?? t("meta.description");
+
+const localeMap: Record<Locale, string> = {
+  en: "en_US",
+  bg: "bg_BG",
+  es: "es_ES",
+};
+
+const pathWithoutLocale = Astro.url.pathname.replace(/^\/(bg|es)/, "") || "/";
+
+const isHome = pathWithoutLocale === "/" || pathWithoutLocale === "";
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Ivan Pozdnovskii",
+  jobTitle: t("meta.jobTitle"),
+  description: t("meta.description"),
+  url: "https://weblateweb.dev",
+  image: "https://weblateweb.dev/opengraph.webp",
+  email: "ivan@weblateweb.dev",
+  sameAs: [
+    "https://github.com/Pozdnovskii",
+    "https://www.linkedin.com/in/ivan-pozdnovskii",
+  ],
+  knowsAbout: [
+    "Astro",
+    "Tailwind CSS",
+    "SEO",
+    "Web Accessibility",
+    "Web Performance",
+    "Webflow",
+    "Webstudio",
+    "Shopify",
+  ],
+};
+
+const finalSchema = schema ?? (isHome ? personSchema : null);                                                                                                          
 ---
+
 <!doctype html>
-<html lang="en" class="antialiased">
+<html lang={locale} class="antialiased">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -32,12 +77,18 @@ const {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    <meta property="og:locale" content="en" />
+    <meta property="og:locale" content={localeMap[locale]} />
     <meta property="og:site_name" content="Weblate" />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="en" href={new URL(pathWithoutLocale, Astro.site)} />
+    <link rel="alternate" hreflang="bg" href={new URL(`/bg${pathWithoutLocale}`, Astro.site)} />
+    <link rel="alternate" hreflang="es" href={new URL(`/es${pathWithoutLocale}`, Astro.site)} />
+    <link rel="alternate" hreflang="x-default" href={new URL(pathWithoutLocale, Astro.site)} />
+    
     {(noindex || !enableAnalytics) && (
         <meta name="robots" content="noindex, nofollow" />
     )}
+
     {enableAnalytics && (
         <link rel="preconnect" href="https://cloud.umami.is" />
 
@@ -47,36 +98,12 @@ const {
           data-website-id="63b3ed92-ca97-4846-a043-2d135db38955"
         />
       )}
-{isHome && (                                                                                                                                      
-      
-    <script is:inline type="application/ld+json">
-      {
-          "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Ivan Pozdnovskii",
-        "jobTitle": "Web Developer",
-        "description": "Modern Website development with Astro, Webstudio, Webflow, and Shopify. Expert in site speed optimization, SEO, and accessibility.",
-        "url": "https://weblateweb.dev",
-        "image": "https://weblateweb.dev/opengraph.webp",
-        "email": "ivan@weblateweb.dev",
-        "sameAs": [
-            "https://github.com/Pozdnovskii",
-            "https://www.linkedin.com/in/ivan-pozdnovskii"
-        ],
-        "knowsAbout": [
-            "Astro",
-            "Tailwind CSS",
-            "SEO",
-            "Web Accessibility",
-            "Web Performance",
-            "Webflow",
-            "Webstudio",
-            "Shopify"
-        ]
-      }
-    </script>
+
+    {finalSchema && (
+      <script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
     )}      
 
     <Font cssVariable="--font-space-grotesk" preload />
     <Font cssVariable="--font-space-mono" preload />
+    <ClientRouter />
   </head>

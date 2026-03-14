@@ -1,10 +1,24 @@
 ---
 import Section from "@components/UI/Section.astro";
-import tabs from "@data/howTo.json";
 import PrinciplesIcon from "@images/principles.svg";
+import { type Locale, useTranslations } from "@i18n/ui";
+
+import howToEn from "@content/howTo/en.json";
+import howToBg from "@content/howTo/bg.json";
+import howToEs from "@content/howTo/es.json";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const howToMap = { en: howToEn, bg: howToBg, es: howToEs };
+const tabs = howToMap[locale];
 ---
 
-<Section id="how-to" title="Principles & Approach" class="wrapper">
+<Section id="how-to" title={t("howTo.title")} class="wrapper">
   <main data-tabs>
     <div role="tablist" aria-labelledby="how-to-title">
       {

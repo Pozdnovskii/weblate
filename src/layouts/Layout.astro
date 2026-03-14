@@ -1,19 +1,26 @@
 ---
 import Head from "@components/Head.astro";
 import Header from "@components/sections/Header.astro";
+import Footer from "@components/sections/Footer.astro";
+
+import { defaultLang, type Locale } from "@i18n/ui";
+
+const locale = (Astro.currentLocale ?? defaultLang) as Locale;
 ---
 
-<Head {...Astro.props} />
+<Head {...Astro.props} locale={locale} />
+
 <body>
-  <Header />
+  <Header locale={locale} />
+
   <slot />
+
+  <Footer />
+
   <script>
-    import { initHoverDirection } from "@scripts/animations/hoverDirection.js";
-    import { initHeader, initSmoothScroll } from "@scripts/header.js";
-
-    initHeader();
-    initSmoothScroll();
-
-    initHoverDirection();
+    import { initHeader } from "@scripts/header.js";
+    document.addEventListener("astro:page-load", () => {
+      initHeader();
+    });
   </script>
 </body>

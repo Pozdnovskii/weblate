@@ -1,0 +1,34 @@
+---
+import { languages, type Locale, useTranslations } from "@i18n/ui";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const pathWithoutLocale = Astro.url.pathname.replace(/^\/(bg|es)/, "") || "/";
+---
+
+<ul aria-label={t("languageSwitcher.label")} id="language-switcher">
+  {
+    Object.entries(languages).map(([lang, label]) => {
+      const href = getRelativeLocaleUrl(lang, pathWithoutLocale);
+      const isCurrent = lang === locale;
+
+      return (
+        <li>
+          <a
+            href={href}
+            aria-label={label}
+            aria-current={isCurrent ? "page" : undefined}
+          >
+            <span aria-hidden="true">{lang}</span>
+          </a>
+        </li>
+      );
+    })
+  }
+</ul>

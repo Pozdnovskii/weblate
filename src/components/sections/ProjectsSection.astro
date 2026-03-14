@@ -1,22 +1,36 @@
 ---
 import type { ImageMetadata } from "astro";
 import Section from "@components/UI/Section.astro";
-import projects from "@data/projects.json";
 import { Image } from "astro:assets";
+import { type Locale, useTranslations } from "@i18n/ui";
+
+import projectsEn from "@content/projects/en.json";
+import projectsBg from "@content/projects/bg.json";
+import projectsEs from "@content/projects/es.json";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const projectsMap = { en: projectsEn, bg: projectsBg, es: projectsEs };
+const projects = projectsMap[locale];
 
 const images = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/images/projects/*.{png,jpg,webp}",
   { eager: true },
 );
 
-function getImage(filename) {
+function getImage(filename: string | undefined) {
   if (!filename) return null;
   const path = `/src/assets/images/projects/${filename}`;
   return images[path]?.default || null;
 }
 ---
 
-<Section id="projects" title="Projects" class="wrapper">
+<Section id="projects" title={t("projects.title")} class="wrapper">
   <ul>
     {
       projects.map((project, index) => (
@@ -51,11 +65,11 @@ function getImage(filename) {
             </div>
 
             <div data-project-info>
-              <p>{project.description || "Project description coming soon."}</p>
+              <p>{project.description || t("projects.descriptionSoon")}</p>
 
               <div>
                 <div>
-                  <h4>Services</h4>
+                  <h4>{t("projects.services")}</h4>
                   <ul>
                     {project.services?.map((service) => (
                       <li>{service}</li>
@@ -63,7 +77,7 @@ function getImage(filename) {
                   </ul>
                 </div>
                 <div>
-                  <h4>Technologies</h4>
+                  <h4>{t("projects.technologies")}</h4>
                   <ul>
                     {project.tools?.map((tool) => (
                       <li>{tool}</li>
@@ -79,10 +93,10 @@ function getImage(filename) {
                   data-umami-event="project-visit"
                   data-umami-event-project={project.title}
                 >
-                  Visit Website
+                  {t("projects.visitWebsite")}
                 </a>
               ) : (
-                <span>Link temporarily unavailable</span>
+                <span>{t("projects.linkUnavailable")}</span>
               )}
             </div>
           </article>

@@ -1,0 +1,16 @@
+---
+import Section from "@components/UI/Section.astro";
+import ThoughtsList from "@components/sections/ThoughtsSection/ThoughtsList.astro";
+import { type Locale, useTranslations } from "@i18n/ui";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<Section id="thoughts" title={t("thoughts.title")} class="wrapper">
+  <ThoughtsList locale={locale} />
+</Section>

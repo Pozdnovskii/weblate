@@ -1,0 +1,73 @@
+---
+import { Image } from "astro:assets";
+import backgroundDesk from "@images/hero-bg-desk.webp";
+import type { Locale } from "@i18n/ui";
+import { useTranslations } from "@i18n/ui";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const heroWords = {
+  en: ["Meticulous", "Developer", "For", "Your", "Website"],
+  bg: ["Прецизен", "разработчик", "за", "вашия", "уебсайт"],
+  es: ["Desarrollador", "meticuloso", "para", "tu", "sitio web"],
+};
+
+const h1Width = { en: "w-[15em]", bg: "w-[15.5em]", es: "w-[16em]" };
+---
+
+<section
+  id="hero"
+  class="wrapper relative flex min-h-dvh w-full flex-col-reverse justify-between gap-[min(21svw,80px)] pt-27 pb-2 md:pt-5"
+>
+  <h1
+    id="main-page-h1"
+    data-fade-animation
+    class:list={[
+      "pb-section md:pb-svw max-w-full indent-[2ch] text-[clamp(1.313rem,5.625vw+0.188rem,5.25rem)] leading-[1.125] uppercase",
+      h1Width[locale],
+    ]}
+    style="--fade-index: 1"
+  >
+    {
+      heroWords[locale].map((word, i) => (
+        <>
+          <span style={`--item-index: ${i + 1}`}>{word}</span>{" "}
+        </>
+      ))
+    }
+  </h1>
+  <p
+    data-fade-animation
+    class="indent-text-indent ms-auto w-96 max-w-full leading-tight md:me-102 md:w-87 md:max-w-[calc(100%-var(--spacing)*99)]"
+    style="--fade-index: 2"
+  >
+    {t("hero.subtitle")}
+  </p>
+
+  <a
+    data-umami-event="click-explore"
+    href="#contacts"
+    data-fade-animation
+    style="--fade-index: 4"
+    class="heading-mono absolute flex gap-x-8 self-end md:w-xs md:max-w-[calc(100%-var(--spacing-svw)*2)]"
+  >
+    <span aria-hidden="true" class="hidden md:me-auto md:block">/</span><span
+      >{t("hero.cta")}</span
+    ><span>↓</span></a
+  >
+</section>
+
+<Image
+  src={backgroundDesk}
+  alt=""
+  aria-hidden="true"
+  class="absolute -z-1 h-[110svh] w-full max-w-500 object-cover"
+  widths={[640, 1280, 1920]}
+  sizes="100vw"
+  priority
+/>

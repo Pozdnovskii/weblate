@@ -3,34 +3,45 @@
     @apply grid-wrapper;
 
     & > ul {
-      @apply col-span-full grid grid-cols-1 gap-y-8 pt-7 border-t border-dashed border-neutral-500 md:grid-cols-2 gap-x-6;
+      @apply col-span-full grid auto-rows-max grid-cols-1 gap-x-6 gap-y-8 border-t border-dashed border-neutral-500 pt-7 md:grid-cols-2 xl:grid-cols-4;
 
       & > li {
-        @apply relative grid grid-cols-[auto_min(65ch,80%)] gap-x-3 gap-y-2;
+        @apply relative row-span-2 grid grid-cols-1 grid-rows-subgrid;
+      }
 
-        & > a {
-          @apply before:absolute before:inset-0;
-
-          & > h3 {
-            @apply text-2xl leading-tight text-balance;
-          }
-        }
+      & article {
+        @apply row-span-2 grid grid-cols-1 grid-rows-subgrid gap-x-3 gap-y-2 sm:max-md:grid-cols-[auto_min(65ch,80%)] lg:max-xl:grid-cols-[auto_min(65ch,80%)];
 
         & > p {
-          @apply col-span-2 text-neutral-200 sm:max-md:col-span-1;
+          @apply col-span-2 text-neutral-200 sm:max-md:col-span-1 lg:max-xl:col-span-1;
         }
 
         & > img {
-          @apply -order-1  self-stretch sm:max-md:row-span-2;
+          @apply hidden sm:-order-1 sm:row-span-2 sm:self-stretch sm:max-md:block lg:max-xl:block;
         }
       }
-    }
-  }
 
-  @media (width >= 80rem) {
-    #thoughts {
-      & > ul {
-        @apply grid-cols-4;
+      & :is(h2, h3) {
+        @apply w-[20em] text-[clamp(1.25rem,1rem+1.25vw,1.5rem)];
+      }
+
+      & a {
+        @apply after:bg-hover/0 before:absolute before:inset-0 after:absolute after:-inset-2 after:rounded-md after:transition-colors;
+        &:hover {
+          @apply after:bg-hover/10;
+        }
+      }
+
+      & > [data-element="view-all"] {
+        @apply flex min-h-24 items-center justify-center rounded-sm border border-dashed border-neutral-500;
+
+        & > a {
+          @apply hover:text-hover flex items-center justify-center transition-colors;
+
+          & > :is(h2, h3) {
+            @apply w-fit;
+          }
+        }
       }
     }
   }

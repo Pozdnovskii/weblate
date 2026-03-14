@@ -1,10 +1,24 @@
 ---
 import Section from "@components/UI/Section.astro";
 import ToolCard from "@components/sections/ToolsSection/ToolCard.astro";
-import tools from "@data/tools";
+import { type Locale, useTranslations } from "@i18n/ui";
+
+import toolsEn from "@content/tools/en";
+import toolsBg from "@content/tools/bg";
+import toolsEs from "@content/tools/es";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const toolsMap = { en: toolsEn, bg: toolsBg, es: toolsEs };
+const tools = toolsMap[locale];
 ---
 
-<Section id="tools" title="Technologies & Tools" class="wrapper">
+<Section id="tools" title={t("tools.title")} class="wrapper">
   <ul>
     {
       tools.map(({ figcaption, logos }) => (

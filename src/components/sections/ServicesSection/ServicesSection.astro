@@ -5,55 +5,46 @@ import Section from "@components/UI/Section.astro";
 import ServiceCodeIcon from "@images/service-code.svg";
 import ServiceUpgradeIcon from "@images/service-upgrade.svg";
 import ServiceDesignIcon from "@images/service-design.svg";
+import { type Locale, useTranslations } from "@i18n/ui";
+
+import servicesEn from "@content/services/en.json";
+import servicesBg from "@content/services/bg.json";
+import servicesEs from "@content/services/es.json";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const icons = [ServiceCodeIcon, ServiceUpgradeIcon, ServiceDesignIcon];
+const servicesMap = { en: servicesEn, bg: servicesBg, es: servicesEs };
+const cards = servicesMap[locale];
 ---
 
-<Section id="services" title="Services" class="wrapper">
+<Section id="services" title={t("services.title")} class="wrapper">
   <main>
-    <ServiceCard index="001" title="Website development">
-      <p>
-        I develop multi-page websites, corporate sites, landing pages,
-        portfolios, blogs, and online stores — always with performance,
-        accessibility, and SEO in mind.
-      </p>
-      <p>
-        For each project, I pick the perfect tech stack — custom code from
-        scratch or no/low-code platforms like Webflow, Webstudio, Shopify or
-        Framer, depending on your goals.
-      </p>
-      <ServiceCodeIcon slot="icon" />
-    </ServiceCard>
+    {cards.map((card, i) => {
+      const Icon = icons[i];
+      const index = String(i + 1).padStart(3, "0");
+      const isLast = i === cards.length - 1;
 
-    <ServiceCard index="002" title="Website Upgrades">
-      <p>
-        Is your site loading slowly, not ranking well, underperforming, or
-        looking outdated? I'll pinpoint what's holding it back and make it work
-        harder for your business.From complete redesigns to precise technical
-        improvements, I make websites faster, more engaging, and easier to grow.
-      </p>
-      <p>
-        Performance optimization, SEO improvements, design updates, engaging
-        animations, better user experience, and accessibility improvements —
-        everything your site needs to reach its full potential.
-      </p>
-      <ServiceUpgradeIcon slot="icon" />
-    </ServiceCard>
-
-    <ServiceCard index="003" title="Web Design">
-      <p>Design isn't my specialty, though I designed this site myself.</p>
-      <p>
-        That's why I partner with skilled and reliable designers who create
-        visuals that make you stand out from the crowd and boost your
-        conversions. Together, we create websites that don't just look good —
-        they work hard to grow your business.
-      </p>
-      <aside
-        slot="aside"
-        class="grid-wrapper__center-cell flex flex-wrap justify-between items-center gap-x-6 indent-0 max-w-prose mt-6"
-      >
-        <p>Designer? <span class="heading-mono"> Let's collaborate →</span></p>
-        <address><SocialLinksList /></address>
-      </aside>
-      <ServiceDesignIcon slot="icon" />
-    </ServiceCard>
+      return (
+        <ServiceCard index={index} title={card.title}>
+          {card.paragraphs.map((p) => <p>{p}</p>)}
+          {isLast && (
+            <aside
+              slot="aside"
+              class="grid-wrapper__center-cell mt-6 flex max-w-prose flex-wrap items-center justify-between gap-x-6 indent-0"
+            >
+              <p>{t("services.collaborate")} <span class="heading-mono">→</span></p>
+              <address><SocialLinksList /></address>
+            </aside>
+          )}
+          <Icon slot="icon" />
+        </ServiceCard>
+      );
+    })}
   </main>
 </Section>

@@ -1,32 +1,53 @@
-/* Article/Prose styles */
 .prose {
-  @apply max-w-[65ch] text-neutral-200;
+  @apply mb-36 max-w-prose;
 
-  > * + * {
-    @apply mt-6;
-  }
-
-  main {
+  #main {
     padding-top: 6rem;
   }
 
-  h1,
-  h2,
-  h3 {
-    @apply text-white font-bold;
+  & > :is(h2, h3) {
+    @apply mb-[.33em] w-[20em];
+  }
+  & > h2 {
+    @apply text-[clamp(1.5rem,1.125rem+1.875svw,1.875rem)];
   }
 
-  h1 {
-    @apply text-3xl md:text-4xl mt-0;
+  & > h3 {
+    @apply text-[clamp(1.25rem,1rem+1.25svw,1.5rem)];
   }
 
-  h2 {
-    @apply text-2xl md:text-3xl mt-12;
+  & > ul {
+    @apply flex flex-col gap-y-2;
   }
 
-  h3 {
-    @apply text-xl md:text-2xl mt-8;
+  & > hr {
+    @apply mb-8;
   }
+
+  & > video {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    padding-block: 40px;
+  }
+
+  & > :is(ul, ol, p) {
+    @apply mb-2 leading-relaxed text-neutral-200;
+
+    & > strong {
+      @apply font-secondary leading-tight font-normal text-white;
+    }
+
+    &:has(+ :is(h2, hr)) {
+      @apply mb-8;
+    }
+
+    &:has(+ :is(h3, ul, ol)) {
+      @apply mb-6;
+    }
+  }
+
+  /*   
 
   p {
     @apply leading-relaxed;
@@ -79,5 +100,5 @@
     code {
       @apply bg-transparent p-0;
     }
-  }
+  } */
 }

@@ -1,76 +1,86 @@
 ---
 import SocialLinksList from "@components/UI/SocialLinksList.astro";
+import LanguageSwitcher from "@components/UI/LanguageSwitcher.astro";
+import { type Locale, useTranslations } from "@i18n/ui";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const homeUrl = getRelativeLocaleUrl(locale, "/");
+const isHome =
+  Astro.url.pathname === homeUrl || Astro.url.pathname === homeUrl.slice(0, -1);
+
+const navItems = [
+  { label: t("nav.home"), href: getRelativeLocaleUrl(locale, "/") },
+  {
+    label: t("nav.services"),
+    href: `${getRelativeLocaleUrl(locale, "/")}#services`,
+  },
+  { label: t("nav.tools"), href: `${getRelativeLocaleUrl(locale, "/")}#tools` },
+  {
+    label: t("nav.howTo"),
+    href: `${getRelativeLocaleUrl(locale, "/")}#how-to`,
+  },
+  { label: t("nav.thoughts"), href: getRelativeLocaleUrl(locale, "thoughts") },
+];
 ---
 
 <header
   id="header"
-  class="wrapper fixed top-4 start-1/2 -translate-x-1/2"
+  class="wrapper"
   style="--fade-index: 3"
-  data-fade-animation
+  data-fade-animation={isHome || undefined}
+  transition:persist={`header-${locale}`}
 >
-  <div
-    id="header-content"
-    class="absolute end-svw w-96 max-w-[calc(100%-var(--spacing-svw)*2)] ms-auto"
-  >
+  <div id="header-content">
     <div id="header-top">
-      <p class="flex flex-col gap-y-1 p-3 font-secondary uppercase">
+      <p>
         <span>Ivan Pozdnovskii</span>
-        <span class="text-xs">Website Developer</span>
+        <span>Website Developer</span>
       </p>
       <button
         data-umami-event="header-navigation-toggle"
         id="header-btn"
-        aria-label="Toggle navigation menu"
+        aria-label={t("header.toggleMenu")}
         aria-controls="header-nav"
         aria-expanded="false"
       >
-        <div id="burger-line-middle" class="-order-1"></div>
+        <div id="burger-line-middle"></div>
       </button>
     </div>
 
-    <nav
-      inert
-      id="header-nav"
-      aria-label="Main navigation"
-      class="grid relative overflow-hidden transition-all duration-500 ease-in-out"
-    >
-      <div id="nav-content" class="pt-[2px]">
-        <ul
-          class="flex flex-col gap-y-3 relative overflow-visible p-3 [&_span]:me-2 [&_span]:font-secondary"
-        >
-          <li>
-            <a
-              data-umami-event="header-navigation"
-              data-umami-event-link="services"
-              href="#services"><span aria-hidden="true">01</span>Services</a
-            >
-          </li>
-          <li>
-            <a
-              data-umami-event="header-navigation"
-              data-umami-event-link="tools"
-              href="#tools"
-              ><span aria-hidden="true">02</span>Technologies & Tools</a
-            >
-          </li>
-          <li>
-            <a
-              data-umami-event="header-navigation"
-              data-umami-event-link="how-to"
-              href="#how-to"
-              ><span aria-hidden="true">03</span>Principles & Approach</a
-            >
-          </li>
-          <li>
-            <a
-              data-umami-event="header-navigation"
-              data-umami-event-link="projects"
-              href="#projects"
-              ><span aria-hidden="true">04</span>Projects</a
-            >
-          </li>
-        </ul>
-        <address class="">
+    <nav inert id="header-nav" aria-label="Main navigation">
+      <div id="nav-content">
+        <div>
+          <ul id="menu-list">
+            {
+              navItems.map((item, index) => (
+                <li>
+                  <a
+                    data-umami-event="header-navigation"
+                    data-umami-event-link={item.label
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}
+                    href={item.href}
+                  >
+                    <span aria-hidden="true">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+
+          <LanguageSwitcher locale={locale} />
+        </div>
+
+        <address>
           <SocialLinksList variant="vertical" />
         </address>
       </div>

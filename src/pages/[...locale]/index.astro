@@ -1,0 +1,65 @@
+---
+import type { GetStaticPaths } from "astro";
+
+import Layout from "@layouts/Layout.astro";
+
+import HeroSection from "@components/sections/HeroSection.astro";
+import ServicesSection from "@components/sections/ServicesSection/ServicesSection.astro";
+import ContactsSection from "@components/sections/ContactsSection.astro";
+import HowToSection from "@components/sections/HowToSection.astro";
+import ToolsSection from "@components/sections/ToolsSection/ToolsSection.astro";
+import ProjectsSection from "@components/sections/ProjectsSection.astro";
+import ThoughtsSection from "@components/sections/ThoughtsSection/ThoughtsSection.astro";
+
+import { defaultLang, type Locale } from "@i18n/ui";
+
+export const getStaticPaths = (() => {
+  return [
+    { params: { locale: undefined }, props: { locale: defaultLang } },
+    { params: { locale: "bg" }, props: { locale: "bg" as Locale } },
+    { params: { locale: "es" }, props: { locale: "es" as Locale } },
+  ];
+}) satisfies GetStaticPaths;
+
+const { locale } = Astro.props;
+---
+
+<Layout>
+  <main id="main" class="gap-y-section relative flex flex-col pt-0">
+    <HeroSection locale={locale} />
+
+    <ContactsSection locale={locale} />
+
+    <ServicesSection locale={locale} />
+
+    <ToolsSection locale={locale} />
+
+    <HowToSection locale={locale} />
+
+    <ProjectsSection locale={locale} />
+
+    <ThoughtsSection locale={locale} />
+  </main>
+</Layout>
+
+<script>
+  import { initAccordions } from "@scripts/accordion.js";
+  import { initHowToTabs } from "@scripts/how-to-tabs.js";
+  import { initServiceCardAnimations } from "@scripts/service-cards.js";
+  import { initHoverDirection } from "@scripts/animations/hoverDirection.js";
+  import { initSmoothScroll } from "@scripts/header.js";
+
+  function initHomePage() {
+    initAccordions();
+    initHowToTabs();
+    initServiceCardAnimations();
+    initHoverDirection();
+    initSmoothScroll();
+  }
+
+  document.addEventListener("astro:page-load", () => {
+    if (location.pathname === "/" || location.pathname.match(/^\/(bg|es)\/?$/)) {
+      initHomePage();
+    }
+  });
+</script>
