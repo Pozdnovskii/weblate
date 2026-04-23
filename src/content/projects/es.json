@@ -1,5 +1,14 @@
 [
   {
+    "title": "Albatros Real Estate",
+    "link": "https://albatrostenerife.quiet-mouse-638d.workers.dev/",
+    "description": "Agencia inmobiliaria en Tenerife. Migración de WordPress a Astro y Sanity CMS. Catálogo completo de propiedades, blog y soporte i18n para 6 idiomas. Desplegado en Cloudflare Workers con notificaciones por email via Resend.",
+    "services": ["Desarrollo web", "Migración CMS"],
+    "tools": ["Astro", "Sanity", "Resend", "Cloudflare Workers"],
+    "desktopImage": "albatros_desk.png",
+    "mobileImage": "albatros_mob.png"
+  },
+  {
     "title": "Xclusivecars",
     "link": "https://xclusivecars-website.pages.dev/",
     "description": "Servicio de importación de coches de Estados Unidos a Bulgaria. Construido con Astro para páginas estáticas rápidas, Sanity CMS para gestión de contenido y base de datos Turso para datos dinámicos. Optimizado para SEO y rendimiento.",

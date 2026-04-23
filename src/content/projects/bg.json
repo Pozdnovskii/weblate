@@ -1,5 +1,14 @@
 [
   {
+    "title": "Albatros Real Estate",
+    "link": "https://albatrostenerife.quiet-mouse-638d.workers.dev/",
+    "description": "Агенция за недвижими имоти в Тенерифе. Миграция от WordPress към Astro и Sanity CMS. Пълен каталог с обяви за имоти, блог публикации и i18n поддръжка за 6 езика. Хостван на Cloudflare Workers с имейл нотификации чрез Resend.",
+    "services": ["Уеб разработка", "Миграция на CMS"],
+    "tools": ["Astro", "Sanity", "Resend", "Cloudflare Workers"],
+    "desktopImage": "albatros_desk.png",
+    "mobileImage": "albatros_mob.png"
+  },
+  {
     "title": "Xclusivecars",
     "link": "https://xclusivecars-website.pages.dev/",
     "description": "Услуга за внос на автомобили от САЩ в България. Изградено с Astro за бързи статични страници, Sanity CMS за управление на съдържание и Turso база данни за динамични данни. Оптимизирано за SEO и производителност.",
