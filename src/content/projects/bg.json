@@ -1,7 +1,7 @@
 [
   {
     "title": "Albatros Real Estate",
-    "link": "https://albatrostenerife.quiet-mouse-638d.workers.dev/",
+    "link": "https://albatrostenerife.com/",
     "description": "Агенция за недвижими имоти в Тенерифе. Миграция от WordPress към Astro и Sanity CMS. Пълен каталог с обяви за имоти, блог публикации и i18n поддръжка за 6 езика. Хостван на Cloudflare Workers с имейл нотификации чрез Resend.",
     "services": ["Уеб разработка", "Миграция на CMS"],
     "tools": ["Astro", "Sanity", "Resend", "Cloudflare Workers"],
