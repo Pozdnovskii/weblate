@@ -1,7 +1,7 @@
 ---
 title: "Constructores de sitios web: Cuándo usarlos"
 description: "Una guía práctica para elegir constructores de sitios web según niveles de complejidad y compromisos entre velocidad y calidad."
-date: "2024-01-15"
+date: "2026-01-15"
 image: "../../../assets/images/thoughts/builders.webp"
 ---
 

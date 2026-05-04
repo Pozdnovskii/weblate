@@ -1,7 +1,7 @@
 ---
 title: "Mi mejor trabajo significa que los clientes no volverán pronto"
 description: "Suena como mal negocio, pero es realmente lo que los clientes necesitan — crear soluciones flexibles y reutilizables que puedan gestionar ellos mismos."
-date: "2025-03-11"
+date: "2026-03-11"
 image: "../../../assets/images/thoughts/builders.webp"
 ---
 

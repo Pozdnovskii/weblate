@@ -1,7 +1,7 @@
 ---
 title: "My Best Work Means Clients Won't Be Back Anytime Soon"
 description: "Sounds like bad business, but it's actually what clients need — building flexible, reusable solutions they can manage themselves."
-date: "2025-03-11"
+date: "2026-03-11"
 image: "../../../assets/images/thoughts/builders.webp"
 ---
 

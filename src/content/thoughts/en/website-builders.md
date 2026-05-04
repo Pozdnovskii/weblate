@@ -1,7 +1,7 @@
 ---
 title: "Website Builders: When to Use Them"
 description: "A practical guide to choosing website builders based on complexity levels and trade-offs between speed and quality."
-date: "2024-01-15"
+date: "2026-01-15"
 image: "../../../assets/images/thoughts/builders.webp"
 ---
 

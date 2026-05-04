@@ -27,6 +27,7 @@ const getSlug = (id: string) => id.split("/").pop() || id;
 
 const posts = (await getCollection("thoughts", ({ id }) => id.startsWith(`${locale}/`)))
   .filter((post) => getSlug(post.id) !== excludeId)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
   .slice(0, limit);
 ---
 
