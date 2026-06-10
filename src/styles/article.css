@@ -5,23 +5,32 @@
     padding-top: 6rem;
   }
 
-  & > :is(h2, h3) {
-    @apply mb-[.33em] w-[20em];
+  & > :is(h2, h3, h4) {
+    @apply mb-[.33em] max-w-[20em];
   }
   & > h2 {
     @apply text-[clamp(1.5rem,1.125rem+1.875svw,1.875rem)];
   }
-
   & > h3 {
     @apply text-[clamp(1.25rem,1rem+1.25svw,1.5rem)];
   }
+  & > h4 {
+    @apply text-[clamp(1.125rem,0.95rem+0.875svw,1.25rem)];
+  }
 
+  & > ul,
+  & > ol {
+    @apply mb-6 flex flex-col gap-y-2 pl-6;
+  }
   & > ul {
-    @apply flex flex-col gap-y-2;
+    @apply list-disc;
+  }
+  & > ol {
+    @apply list-decimal;
   }
 
   & > hr {
-    @apply mb-8;
+    @apply mb-8 border-neutral-700;
   }
 
   & > video {
@@ -29,6 +38,30 @@
     height: auto;
     border-radius: 8px;
     padding-block: 40px;
+  }
+
+  & > figure {
+    @apply mt-4 mb-10;
+
+    & > img {
+      @apply rounded-lg;
+    }
+
+    & > figcaption {
+      @apply mt-2 text-sm text-neutral-400;
+    }
+  }
+
+  & > blockquote {
+    @apply mb-6 border-l-4 border-neutral-600 pl-4 italic text-neutral-300;
+  }
+
+  & a {
+    @apply text-blue-400 underline underline-offset-2 transition-colors hover:text-blue-300;
+  }
+
+  & code {
+    @apply rounded bg-neutral-700 px-1.5 py-0.5 text-sm;
   }
 
   & > :is(ul, ol, p) {
@@ -42,63 +75,32 @@
       @apply mb-8;
     }
 
-    &:has(+ :is(h3, ul, ol)) {
+    &:has(+ :is(h3, h4)) {
       @apply mb-6;
     }
   }
+}
 
-  /*   
+.thought-faq {
+  @apply mt-16;
 
-  p {
-    @apply leading-relaxed;
+  & > h2 {
+    @apply mb-6 text-[clamp(1.5rem,1.125rem+1.875svw,1.875rem)];
   }
 
-  a {
-    @apply text-blue-400 underline underline-offset-2 hover:text-blue-300 transition-colors;
-  }
+  & > dl {
+    @apply flex flex-col gap-y-6;
 
-  strong {
-    @apply text-white font-semibold;
-  }
-
-  ul,
-  ol {
-    @apply pl-6 space-y-2;
-  }
-
-  ul {
-    @apply list-disc;
-  }
-
-  ol {
-    @apply list-decimal;
-  }
-
-  li {
-    @apply leading-relaxed;
-  }
-
-  blockquote {
-    @apply border-l-4 border-neutral-600 pl-4 italic text-neutral-400;
-  }
-
-  img {
-    @apply rounded-lg my-8;
-  }
-
-  hr {
-    @apply border-neutral-700 my-12;
-  }
-
-  code {
-    @apply bg-neutral-700 px-1.5 py-0.5 rounded text-sm;
-  }
-
-  pre {
-    @apply bg-neutral-900 p-4 rounded-lg overflow-x-auto;
-
-    code {
-      @apply bg-transparent p-0;
+    & > div {
+      @apply border-t border-neutral-700 pt-6;
     }
-  } */
+
+    & dt {
+      @apply mb-2 font-secondary leading-tight text-white;
+    }
+
+    & dd {
+      @apply leading-relaxed text-neutral-200;
+    }
+  }
 }

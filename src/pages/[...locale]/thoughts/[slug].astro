@@ -107,13 +107,14 @@ const alternateUrls = Object.fromEntries(
 >
   <main id="main" class="wrapper">
     <h1
-      class="mb-[1em] text-[clamp(1.6875rem,1.26rem+2.13svw,2.625rem)] sm:mx-auto sm:text-center"
+      class="mb-[1em] max-w-[20em] text-[clamp(1.6875rem,1.26rem+2.13svw,2.625rem)] sm:mx-auto sm:text-center"
     >
       {post.title}
     </h1>
     <article class="prose mx-auto">
       {heroUrl && (
         <Image
+          class="mb-16 rounded-lg"
           src={heroUrl}
           alt={post.mainImage.alt ?? `${post.title} cover`}
           width={1600}
@@ -124,14 +125,14 @@ const alternateUrls = Object.fromEntries(
       {post.body && <ThoughtBody body={post.body} />}
 
       {post.faq && post.faq.length > 0 && (
-        <section class="not-prose mt-12">
+        <section class="thought-faq">
           <h2>FAQ</h2>
           <dl>
             {post.faq.map((item) => (
-              <>
+              <div>
                 <dt>{item.question}</dt>
                 <dd>{item.answer}</dd>
-              </>
+              </div>
             ))}
           </dl>
         </section>
