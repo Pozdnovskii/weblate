@@ -5,7 +5,6 @@ export function initHeader() {
   const header = document.getElementById("header");
   const burger = document.getElementById("header-btn");
   const nav = document.getElementById("header-nav");
-  const headerContent = document.getElementById("header-content");
 
   if (!header || !burger || !nav) return;
 

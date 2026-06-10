@@ -1,8 +1,8 @@
 ---
-import { Image, type ImageMetadata } from "astro:assets";
-import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
 import { type Locale, useTranslations } from "@i18n/ui";
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { getThoughtCards, sanityImage } from "@lib/queries";
 
 interface Props {
   headingLevel?: "h2" | "h3";
@@ -23,27 +23,33 @@ const {
 const t = useTranslations(locale);
 const Heading = headingLevel;
 
-const getSlug = (id: string) => id.split("/").pop() || id;
-
-const posts = (await getCollection("thoughts", ({ id }) => id.startsWith(`${locale}/`)))
-  .filter((post) => getSlug(post.id) !== excludeId)
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-  .slice(0, limit);
+const posts = await getThoughtCards(locale, { excludeEnSlug: excludeId, limit });
 ---
 
 <ul>
   {
-    posts.map((post) => (
-      <li>
-        <article>
-          <a href={getRelativeLocaleUrl(locale, `thoughts/${getSlug(post.id)}`)}>
-            <Heading>{post.data.title}</Heading>
-          </a>
-          <p>{post.data.description}</p>
-          <Image src={post.data.image as ImageMetadata} alt={`${post.data.title} cover`} />
-        </article>
-      </li>
-    ))
+    posts.map((post) => {
+      const cardUrl = sanityImage(post.mainImage.url, { w: 600, h: 400, fit: "crop" });
+      return (
+        <li>
+          <article>
+            <a href={getRelativeLocaleUrl(locale, `thoughts/${post.slug}`)}>
+              <Heading>{post.title}</Heading>
+            </a>
+            <p>{post.description}</p>
+            {cardUrl && (
+              <Image
+                src={cardUrl}
+                alt={post.mainImage.alt ?? `${post.title} cover`}
+                width={600}
+                height={400}
+                loading="lazy"
+              />
+            )}
+          </article>
+        </li>
+      );
+    })
   }
   {
     showViewAll && (

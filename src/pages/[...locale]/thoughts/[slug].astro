@@ -1,42 +1,67 @@
 ---
 import type { GetStaticPaths } from "astro";
-import { getCollection, render } from "astro:content";
+import { Image } from "astro:assets";
 import { getAbsoluteLocaleUrl } from "astro:i18n";
 import Layout from "@layouts/Layout.astro";
 import ThoughtsList from "@components/sections/ThoughtsSection/ThoughtsList.astro";
+import ThoughtBody from "@components/sections/ThoughtsSection/ThoughtBody.astro";
 import SectionHeading from "@components/UI/SectionHeading.astro";
 import { useTranslations, defaultLang, type Locale } from "@i18n/ui";
+import { getThought, getThoughtPaths, sanityImage } from "@lib/queries";
 
 export const getStaticPaths = (async () => {
   const locales: Locale[] = ["en", "bg", "es"];
-  const posts = await getCollection("thoughts");
+  const paths = await getThoughtPaths();
 
   return locales.flatMap((locale) =>
-    posts
-      .filter((post) => post.id.startsWith(`${locale}/`))
-      .map((post) => ({
+    paths.map((p) => {
+      const localeSlug = p.slugs[locale] ?? p.enSlug;
+      return {
         params: {
           locale: locale === defaultLang ? undefined : locale,
-          slug: post.id.split("/").pop(),
+          slug: localeSlug,
         },
-        props: { post, locale },
-      }))
+        props: { enSlug: p.enSlug, locale, slugs: p.slugs },
+      };
+    }),
   );
 }) satisfies GetStaticPaths;
 
-const { post, locale } = Astro.props;
-const t = useTranslations(locale);
-const { Content } = await render(post);
-const slug = post.id.split("/").pop();
+const { enSlug, locale, slugs } = Astro.props as {
+  enSlug: string;
+  locale: Locale;
+  slugs: Partial<Record<Locale, string>>;
+};
 
-const articleSchema = {
-  "@context": "https://schema.org",
+const t = useTranslations(locale);
+const post = await getThought(locale, enSlug);
+
+if (!post) {
+  return Astro.redirect("/404");
+}
+
+const heroUrl = sanityImage(post.mainImage.url, { w: 1600 });
+const ogUrl = sanityImage(post.mainImage.url, {
+  w: 1200,
+  h: 630,
+  fit: "crop",
+});
+const pageUrl = getAbsoluteLocaleUrl(locale, `thoughts/${post.slug}`);
+
+const dateModified = post.updatedAt
+  ? post.updatedAt.slice(0, 10)
+  : post.date;
+
+const articleNode = {
   "@type": "Article",
-  headline: post.data.title,
-  description: post.data.description,
-  datePublished: post.data.date,
+  headline: post.title,
+  description: post.description,
+  datePublished: post.date,
+  dateModified,
   inLanguage: locale,
-  url: getAbsoluteLocaleUrl(locale, `thoughts/${slug}`),
+  url: pageUrl,
+  mainEntityOfPage: { "@type": "WebPage", "@id": pageUrl },
+  image: ogUrl ?? undefined,
   author: {
     "@type": "Person",
     name: "Ivan Pozdnovskii",
@@ -45,28 +70,77 @@ const articleSchema = {
   publisher: {
     "@type": "Person",
     name: "Ivan Pozdnovskii",
+    url: "https://weblateweb.dev",
   },
 };
+
+const faqNode =
+  post.faq && post.faq.length
+    ? {
+        "@type": "FAQPage",
+        mainEntity: post.faq.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: { "@type": "Answer", text: item.answer },
+        })),
+      }
+    : null;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@graph": faqNode ? [articleNode, faqNode] : [articleNode],
+};
+
+const alternateUrls = Object.fromEntries(
+  (["en", "bg", "es"] as Locale[])
+    .filter((l) => slugs[l])
+    .map((l) => [l, getAbsoluteLocaleUrl(l, `thoughts/${slugs[l]}`)]),
+);
 ---
 
 <Layout
-  title={`${post.data.title} | Ivan Pozdnovskii`}
-  description={post.data.description}
+  title={`${post.metaTitle ?? post.title} | Ivan Pozdnovskii`}
+  description={post.metaDescription ?? post.description}
   schema={articleSchema}
+  ogImage={ogUrl ?? undefined}
+  alternateUrls={alternateUrls}
 >
   <main id="main" class="wrapper">
     <h1
       class="mb-[1em] text-[clamp(1.6875rem,1.26rem+2.13svw,2.625rem)] sm:mx-auto sm:text-center"
     >
-      {post.data.title}
+      {post.title}
     </h1>
     <article class="prose mx-auto">
-      <Content />
+      {heroUrl && (
+        <Image
+          src={heroUrl}
+          alt={post.mainImage.alt ?? `${post.title} cover`}
+          width={1600}
+          height={900}
+          loading="eager"
+        />
+      )}
+      {post.body && <ThoughtBody body={post.body} />}
+
+      {post.faq && post.faq.length > 0 && (
+        <section class="not-prose mt-12">
+          <h2>FAQ</h2>
+          <dl>
+            {post.faq.map((item) => (
+              <>
+                <dt>{item.question}</dt>
+                <dd>{item.answer}</dd>
+              </>
+            ))}
+          </dl>
+        </section>
+      )}
     </article>
 
     <aside id="thoughts">
       <SectionHeading title={t("thoughts.recentTitle")} id="aside-title" />
-      <ThoughtsList excludeId={slug} locale={locale} />
+      <ThoughtsList excludeId={enSlug} locale={locale} />
     </aside>
   </main>
 </Layout>

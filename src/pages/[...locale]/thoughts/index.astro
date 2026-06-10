@@ -4,6 +4,7 @@ import { getAbsoluteLocaleUrl } from "astro:i18n";
 import Layout from "@layouts/Layout.astro";
 import ThoughtsList from "@components/sections/ThoughtsSection/ThoughtsList.astro";
 import { useTranslations, defaultLang, type Locale } from "@i18n/ui";
+import { getThoughtCards } from "@lib/queries";
 
 export const getStaticPaths = (() => {
   return [
@@ -15,19 +16,29 @@ export const getStaticPaths = (() => {
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
+const pageUrl = getAbsoluteLocaleUrl(locale, "thoughts");
+const posts = await getThoughtCards(locale, { limit: 100 });
 
 const blogSchema = {
   "@context": "https://schema.org",
   "@type": "Blog",
   name: t("thoughts.title"),
   description: t("thoughts.description"),
-  url: getAbsoluteLocaleUrl(locale, "thoughts"),
+  url: pageUrl,
   inLanguage: locale,
   author: {
     "@type": "Person",
     name: "Ivan Pozdnovskii",
     url: "https://weblateweb.dev",
   },
+  blogPost: posts.map((p) => ({
+    "@type": "BlogPosting",
+    headline: p.title,
+    description: p.description,
+    datePublished: p.date,
+    url: getAbsoluteLocaleUrl(locale, `thoughts/${p.slug}`),
+    image: p.mainImage.url ?? undefined,
+  })),
 };
 ---
 

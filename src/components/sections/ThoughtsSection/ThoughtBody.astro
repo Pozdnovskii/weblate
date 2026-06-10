@@ -1,0 +1,81 @@
+---
+import { Image } from "astro:assets";
+import { inlineHTML, type TextBlock } from "@lib/portableText";
+
+type ImageBlock = {
+  _key: string;
+  _type: "image";
+  asset: { url: string };
+  alt?: string;
+  caption?: string;
+};
+
+type Block = TextBlock | ImageBlock;
+
+type Chunk =
+  | { kind: "block"; block: TextBlock }
+  | { kind: "list"; listItem: "bullet" | "number"; items: TextBlock[] }
+  | { kind: "image"; block: ImageBlock };
+
+interface Props {
+  body: Block[];
+}
+
+const { body } = Astro.props;
+
+const chunks: Chunk[] = [];
+for (const raw of body as Block[]) {
+  if (raw._type === "image") {
+    chunks.push({ kind: "image", block: raw });
+  } else if (raw._type === "block" && raw.listItem) {
+    const last = chunks.at(-1);
+    if (last?.kind === "list" && last.listItem === raw.listItem) {
+      last.items.push(raw);
+    } else {
+      chunks.push({ kind: "list", listItem: raw.listItem, items: [raw] });
+    }
+  } else if (raw._type === "block") {
+    chunks.push({ kind: "block", block: raw });
+  }
+}
+---
+
+{
+  chunks.map((chunk) => {
+    if (chunk.kind === "image") {
+      const { block } = chunk;
+      if (!block.asset?.url) return null;
+      return (
+        <figure>
+          <Image
+            src={block.asset.url}
+            alt={block.alt ?? ""}
+            width={900}
+            height={600}
+            loading="lazy"
+          />
+          {block.caption && <figcaption>{block.caption}</figcaption>}
+        </figure>
+      );
+    }
+
+    if (chunk.kind === "list") {
+      const Tag = chunk.listItem === "bullet" ? "ul" : "ol";
+      return (
+        <Tag>
+          {chunk.items.map((item) => (
+            <li set:html={inlineHTML(item.children, item.markDefs)} />
+          ))}
+        </Tag>
+      );
+    }
+
+    const { block } = chunk;
+    const html = inlineHTML(block.children, block.markDefs);
+    if (block.style === "h2") return <h2 set:html={html} />;
+    if (block.style === "h3") return <h3 set:html={html} />;
+    if (block.style === "h4") return <h4 set:html={html} />;
+    if (block.style === "blockquote") return <blockquote set:html={html} />;
+    return <p set:html={html} />;
+  })
+}

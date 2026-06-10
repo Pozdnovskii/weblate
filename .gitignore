@@ -4,6 +4,9 @@ dist/
 # generated types
 .astro/
 
+# sanity build artifacts
+.sanity/
+
 # dependencies
 node_modules/
 

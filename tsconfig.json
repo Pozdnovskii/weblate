@@ -6,19 +6,22 @@
     "allowJs": true,
     "noImplicitAny": false,
 
-    "baseUrl": ".",
     "paths": {
-      "@assets/*": ["src/assets/*"],
-      "@components/*": ["src/components/*"],
-      "@images/*": ["src/assets/images/*"],
-      "@social-logos/*": ["src/assets/images/social-logos/*"],
-      "@tech-logos/*": ["src/assets/images/tech-logos/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@content/*": ["src/content/*"],
-      "@scripts/*": ["src/scripts/*"],
-      "@styles/*": ["src/styles/*"],
-      "@i18n/*": ["src/i18n/*"]
-    }
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@images/*": ["./src/assets/images/*"],
+      "@social-logos/*": ["./src/assets/images/social-logos/*"],
+      "@tech-logos/*": ["./src/assets/images/tech-logos/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@content/*": ["./src/content/*"],
+      "@scripts/*": ["./src/scripts/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@i18n/*": ["./src/i18n/*"],
+      "@lib/*": ["./src/lib/*"],
+      "@studio/*": ["./studio/*"]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
   },
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["node_modules", "dist"]

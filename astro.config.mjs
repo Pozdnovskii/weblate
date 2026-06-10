@@ -1,10 +1,11 @@
-import { defineConfig, fontProviders } from "astro/config";
+import { defineConfig, fontProviders, svgoOptimizer } from "astro/config";
 import { fileURLToPath } from "url";
 import path from "path";
 
 import tailwindcss from "@tailwindcss/vite";
 
 import sitemap from "@astrojs/sitemap";
+import sanity from "@sanity/astro";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -22,17 +23,35 @@ export default defineConfig({
     },
   },
   site: "https://weblateweb.dev",
+  trailingSlash: "never",
   integrations: [
     sitemap({
-      filter: (page) => !page.includes("/table") && !page.includes("/table-2"),
+      i18n: {
+        defaultLocale: "en",
+        locales: { en: "en-US", bg: "bg-BG", es: "es-ES" },
+      },
+    }),
+    sanity({
+      projectId: "64abwet3",
+      dataset: "production",
+      apiVersion: "2026-06-10",
+      useCdn: false,
     }),
   ],
   image: {
     responsiveStyles: true,
     layout: "constrained",
+    domains: ["cdn.sanity.io"],
+    service: {
+      entrypoint: "astro/assets/services/sharp",
+      config: {
+        webp: { effort: 6, quality: 75 },
+        avif: { effort: 6, quality: 75 },
+      },
+    },
   },
   experimental: {
-    svgo: true,
+    svgOptimizer: svgoOptimizer(),
   },
   fonts: [
     {

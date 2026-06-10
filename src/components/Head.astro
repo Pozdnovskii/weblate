@@ -5,7 +5,7 @@ import { ClientRouter } from "astro:transitions";
 import { type Locale, useTranslations } from "@i18n/ui";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL("/opengraph.webp", Astro.site).href;
+const defaultOgImage = new URL("/opengraph.webp", Astro.site).href;
 const enableAnalytics = import.meta.env.PUBLIC_ENABLE_ANALYTICS === "true";
 
 interface Props {
@@ -14,9 +14,19 @@ interface Props {
   noindex?: boolean;
   schema?: object;
   locale: Locale;
+  ogImage?: string;
+  ogType?: "website" | "article";
+  alternateUrls?: Partial<Record<Locale, string>>;
 }
 
-const { locale, noindex = false, schema } = Astro.props;
+const {
+  locale,
+  noindex = false,
+  schema,
+  ogType = "website",
+  alternateUrls,
+} = Astro.props;
+const ogImage = Astro.props.ogImage ?? defaultOgImage;
 const t = useTranslations(locale);
 const title = Astro.props.title ?? t("meta.title");
 const description = Astro.props.description ?? t("meta.description");
@@ -71,7 +81,7 @@ const finalSchema = schema ?? (isHome ? personSchema : null);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalURL} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -80,10 +90,21 @@ const finalSchema = schema ?? (isHome ? personSchema : null);
     <meta property="og:locale" content={localeMap[locale]} />
     <meta property="og:site_name" content="Weblate" />
     <link rel="canonical" href={canonicalURL} />
-    <link rel="alternate" hreflang="en" href={new URL(pathWithoutLocale, Astro.site)} />
-    <link rel="alternate" hreflang="bg" href={new URL(`/bg${pathWithoutLocale}`, Astro.site)} />
-    <link rel="alternate" hreflang="es" href={new URL(`/es${pathWithoutLocale}`, Astro.site)} />
-    <link rel="alternate" hreflang="x-default" href={new URL(pathWithoutLocale, Astro.site)} />
+    {alternateUrls ? (
+      <>
+        {alternateUrls.en && <link rel="alternate" hreflang="en" href={alternateUrls.en} />}
+        {alternateUrls.bg && <link rel="alternate" hreflang="bg" href={alternateUrls.bg} />}
+        {alternateUrls.es && <link rel="alternate" hreflang="es" href={alternateUrls.es} />}
+        {alternateUrls.en && <link rel="alternate" hreflang="x-default" href={alternateUrls.en} />}
+      </>
+    ) : (
+      <>
+        <link rel="alternate" hreflang="en" href={new URL(pathWithoutLocale, Astro.site)} />
+        <link rel="alternate" hreflang="bg" href={new URL(`/bg${pathWithoutLocale}`, Astro.site)} />
+        <link rel="alternate" hreflang="es" href={new URL(`/es${pathWithoutLocale}`, Astro.site)} />
+        <link rel="alternate" hreflang="x-default" href={new URL(pathWithoutLocale, Astro.site)} />
+      </>
+    )}
     
     {(noindex || !enableAnalytics) && (
         <meta name="robots" content="noindex, nofollow" />
