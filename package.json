@@ -2,6 +2,9 @@
   "name": "weblate",
   "type": "module",
   "version": "0.0.1",
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -9,7 +12,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/compiler-rs": "^0.2.2",
     "@astrojs/sitemap": "^3.7.1",
     "@sanity/astro": "^3.4.1",
     "@sanity/client": "^7.22.1",
@@ -31,4 +33,4 @@
   "overrides": {
     "vite": "^7.3.5"
   }
-  }
+}
