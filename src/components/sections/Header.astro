@@ -11,21 +11,20 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-const homeUrl = getCleanRelativeLocaleUrl(locale, "/");
+let homeUrl = getCleanRelativeLocaleUrl(locale, "/");
+// Absolute guarantee that homeUrl does not end in a slash before adding anchors
+// (unless it's the root English path "/")
+if (homeUrl !== "/" && homeUrl.endsWith("/")) {
+  homeUrl = homeUrl.slice(0, -1);
+}
 
-const isHome = Astro.url.pathname === homeUrl || Astro.url.pathname === `${homeUrl}/`;
+const isHome = Astro.url.pathname === homeUrl || Astro.url.pathname === homeUrl + "/";
 
 const navItems = [
   { label: t("nav.home"), href: homeUrl },
-  {
-    label: t("nav.services"),
-    href: `${homeUrl}#services`,
-  },
-  { label: t("nav.tools"), href: `${homeUrl}#tools` },
-  {
-    label: t("nav.howTo"),
-    href: `${homeUrl}#how-to`,
-  },
+  { label: t("nav.services"), href: homeUrl === "/" ? "/#services" : `${homeUrl}#services` },
+  { label: t("nav.tools"), href: homeUrl === "/" ? "/#tools" : `${homeUrl}#tools` },
+  { label: t("nav.howTo"), href: homeUrl === "/" ? "/#how-to" : `${homeUrl}#how-to` },
   { label: t("nav.thoughts"), href: getCleanRelativeLocaleUrl(locale, "thoughts") },
 ];
 ---
