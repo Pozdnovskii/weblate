@@ -3,6 +3,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 
 import tailwindcss from "@tailwindcss/vite";
+import cloudflare from "@astrojs/cloudflare";
 
 import sitemap from "@astrojs/sitemap";
 import sanity from "@sanity/astro";
@@ -20,6 +21,10 @@ export default defineConfig({
       alias: {
         "@styles": path.resolve(__dirname, "./src/styles"),
       },
+    },
+    optimizeDeps: {
+      exclude: ["@sanity/client"],
+      include: ["@sanity/eventsource"],
     },
   },
   site: "https://weblateweb.dev",
@@ -85,4 +90,9 @@ export default defineConfig({
       },
     },
   ],
+  adapter: cloudflare({
+    prerenderEnvironment: "node",
+    imageService: "custom",
+  }),
 });
+
