@@ -9,19 +9,32 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-const pathWithoutLocale = Astro.url.pathname.replace(/^\/(bg|es)/, "") || "/";
+// build.format: "file" might have been used, so we still clean up just in case
+const cleanPath = Astro.url.pathname
+  .replace(/index\.html$/, "")
+  .replace(/\.html$/, "")
+  .replace(/\/$/, "");
+
+const pathWithoutLocale = cleanPath.replace(/^\/(bg|es)/, "") || "/";
 ---
 
 <ul aria-label={t("languageSwitcher.label")} id="language-switcher">
   {
     Object.entries(languages).map(([lang, label]) => {
-      const href = getRelativeLocaleUrl(lang, pathWithoutLocale);
+      let href = getRelativeLocaleUrl(lang, pathWithoutLocale);
+      
+      // Ensure no trailing slash unless it's the root "/"
+      if (href.length > 1 && href.endsWith("/")) {
+        href = href.slice(0, -1);
+      }
+
       const isCurrent = lang === locale;
 
       return (
         <li>
           <a
             href={href}
+            data-lang={lang}
             aria-label={label}
             aria-current={isCurrent ? "page" : undefined}
           >
@@ -32,3 +45,68 @@ const pathWithoutLocale = Astro.url.pathname.replace(/^\/(bg|es)/, "") || "/";
     })
   }
 </ul>
+
+<script>
+  /**
+   * Universal Language Switcher Script
+   * Updates links on every navigation to match the current page's slug.
+   */
+  function updateLanguageSwitcher() {
+    const { pathname, hash } = window.location;
+    const langElements = document.querySelectorAll<HTMLAnchorElement>(
+      "#language-switcher a[data-lang]"
+    );
+    
+    if (!langElements.length) return;
+
+    const supportedLocales = Array.from(langElements).map(el => el.dataset.lang);
+
+    // 1. Identify current locale and base path
+    const currentLocaleMatch = pathname.match(/^\/([^\/]+)/);
+    const currentPrefix = currentLocaleMatch ? currentLocaleMatch[1] : "";
+    const isCurrentLocaleSupported = supportedLocales.includes(currentPrefix);
+
+    let cleanPath = pathname;
+    if (isCurrentLocaleSupported) {
+      cleanPath = pathname.replace(new RegExp(`^\\/${currentPrefix}(\\/|$)`), "/");
+    }
+    
+    // Remove technical artifacts and trailing slash
+    cleanPath = cleanPath
+      .replace(/\/index\.html$/, "")
+      .replace(/\.html$/, "")
+      .replace(/\/$/, "");
+
+    if (!cleanPath.startsWith("/")) cleanPath = "/" + cleanPath;
+
+    langElements.forEach((a) => {
+      const lang = a.dataset.lang!;
+      const isDefault = lang === "en";
+
+      let newHref = isDefault ? cleanPath : `/${lang}${cleanPath}`;
+
+      // Final URL cleanup
+      newHref = newHref.replace(/\/+/g, "/");
+      if (newHref.length > 1 && newHref.endsWith("/")) {
+        newHref = newHref.slice(0, -1);
+      }
+
+      // Preserve hash (e.g., #tools)
+      a.setAttribute("href", newHref + hash);
+
+      // Active state update
+      const isActive = (isDefault && !isCurrentLocaleSupported) || lang === currentPrefix;
+      if (isActive) {
+        a.setAttribute("aria-current", "page");
+      } else {
+        a.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  // Handle both initial load and ViewTransitions
+  document.addEventListener("astro:page-load", updateLanguageSwitcher);
+  
+  // Also update when hash changes (e.g. clicking a link to an anchor)
+  window.addEventListener("hashchange", updateLanguageSwitcher);
+</script>

@@ -2,7 +2,7 @@
 import SocialLinksList from "@components/UI/SocialLinksList.astro";
 import LanguageSwitcher from "@components/UI/LanguageSwitcher.astro";
 import { type Locale, useTranslations } from "@i18n/ui";
-import { getRelativeLocaleUrl } from "astro:i18n";
+import { getCleanRelativeLocaleUrl } from "@i18n/utils";
 
 interface Props {
   locale: Locale;
@@ -10,22 +10,23 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
-const homeUrl = getRelativeLocaleUrl(locale, "/");
-const isHome =
-  Astro.url.pathname === homeUrl || Astro.url.pathname === homeUrl.slice(0, -1);
+
+const homeUrl = getCleanRelativeLocaleUrl(locale, "/");
+
+const isHome = Astro.url.pathname === homeUrl || Astro.url.pathname === `${homeUrl}/`;
 
 const navItems = [
-  { label: t("nav.home"), href: getRelativeLocaleUrl(locale, "/") },
+  { label: t("nav.home"), href: homeUrl },
   {
     label: t("nav.services"),
-    href: `${getRelativeLocaleUrl(locale, "/")}#services`,
+    href: `${homeUrl}#services`,
   },
-  { label: t("nav.tools"), href: `${getRelativeLocaleUrl(locale, "/")}#tools` },
+  { label: t("nav.tools"), href: `${homeUrl}#tools` },
   {
     label: t("nav.howTo"),
-    href: `${getRelativeLocaleUrl(locale, "/")}#how-to`,
+    href: `${homeUrl}#how-to`,
   },
-  { label: t("nav.thoughts"), href: getRelativeLocaleUrl(locale, "thoughts") },
+  { label: t("nav.thoughts"), href: getCleanRelativeLocaleUrl(locale, "thoughts") },
 ];
 ---
 

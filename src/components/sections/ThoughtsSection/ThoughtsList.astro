@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { type Locale, useTranslations } from "@i18n/ui";
-import { getRelativeLocaleUrl } from "astro:i18n";
+import { getCleanRelativeLocaleUrl } from "@i18n/utils";
 import { getThoughtCards, sanityImage } from "@lib/queries";
 
 interface Props {
@@ -33,7 +33,7 @@ const posts = await getThoughtCards(locale, { excludeEnSlug: excludeId, limit })
       return (
         <li>
           <article>
-            <a href={getRelativeLocaleUrl(locale, `thoughts/${post.slug}`)}>
+            <a href={getCleanRelativeLocaleUrl(locale, `thoughts/${post.slug}`)}>
               <Heading>{post.title}</Heading>
             </a>
             <p>{post.description}</p>
@@ -54,7 +54,7 @@ const posts = await getThoughtCards(locale, { excludeEnSlug: excludeId, limit })
   {
     showViewAll && (
       <li data-element="view-all">
-        <a href={getRelativeLocaleUrl(locale, "thoughts")}>
+        <a href={getCleanRelativeLocaleUrl(locale, "thoughts")}>
           <Heading>
             <span>{t("thoughts.viewAll")}</span>
             <span aria-hidden="true">→</span>
