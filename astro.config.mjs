@@ -1,14 +1,11 @@
-import { defineConfig, fontProviders, svgoOptimizer, passthroughImageService } from "astro/config";
+import { defineConfig, fontProviders, svgoOptimizer } from "astro/config";
 import { fileURLToPath } from "url";
-import path from "path";
 
 import tailwindcss from "@tailwindcss/vite";
 import cloudflare from "@astrojs/cloudflare";
 
 import sitemap from "@astrojs/sitemap";
 import sanity from "@sanity/astro";
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   i18n: {
@@ -19,7 +16,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
     resolve: {
       alias: {
-        "@styles": path.resolve(__dirname, "./src/styles"),
+        "@styles": fileURLToPath(new URL("./src/styles", import.meta.url)),
       },
     },
     optimizeDeps: {
