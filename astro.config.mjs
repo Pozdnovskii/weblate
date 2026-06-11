@@ -24,6 +24,7 @@ export default defineConfig({
   },
   site: "https://weblateweb.dev",
   trailingSlash: "never",
+  build: { format: "file" },
   integrations: [
     sitemap({
       i18n: {
