@@ -44,14 +44,13 @@ export default defineConfig({
     }),
   ],
   image: {
-    responsiveStyles: true,
     layout: "constrained",
     domains: ["cdn.sanity.io"],
     service: {
       entrypoint: "astro/assets/services/sharp",
       config: {
-        webp: { effort: 6, quality: 75 },
-        avif: { effort: 6, quality: 75 },
+        webp: { effort: 6, quality: 80 },
+        avif: { effort: 9, quality: 70 },
       },
     },
   },
