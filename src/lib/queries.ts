@@ -127,6 +127,18 @@ export type Project = {
   mobileImage: { url: string; width: number; height: number };
 };
 
+export type SiteSettings = {
+  heroBg: SanityImage;
+};
+
+export async function getSiteSettings(): Promise<SiteSettings> {
+  return sanityClient.fetch(
+    `*[_type == "siteSettings" && _id == "siteSettings"][0]{
+      "heroBg": { "url": heroBg.asset->url }
+    }`,
+  );
+}
+
 export async function getProjects(lang: Locale): Promise<Project[]> {
   return sanityClient.fetch(
     `*[_type == "project"] | order(order asc, _createdAt asc) {

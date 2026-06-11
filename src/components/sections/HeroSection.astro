@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
-import backgroundDesk from "@images/hero-bg-desk.webp";
 import type { Locale } from "@i18n/ui";
 import { useTranslations } from "@i18n/ui";
+import { getSiteSettings } from "@lib/queries";
 
 interface Props {
   locale: Locale;
@@ -10,6 +10,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const t = useTranslations(locale);
+const settings = await getSiteSettings();
 
 const heroWords = {
   en: ["Meticulous", "Developer", "For", "Your", "Website"],
@@ -63,10 +64,12 @@ const h1Width = { en: "w-[15em]", bg: "w-[15.5em]", es: "w-[16em]" };
 </section>
 
 <Image
-  src={backgroundDesk}
+  src={settings.heroBg.url!}
+  width={2000}
+  height={1600}
   alt=""
   aria-hidden="true"
-  class="absolute -z-1 h-[110svh] w-full max-w-500 object-cover"
+  class="absolute -z-1 hidden h-[110svh] w-full max-w-500 object-cover sm:block"
   widths={[640, 1280, 1920]}
   sizes="100vw"
   priority

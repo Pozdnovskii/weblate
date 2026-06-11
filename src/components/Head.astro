@@ -119,11 +119,11 @@ const finalSchema = schema ?? (isHome ? personSchema : null);
           defer
           src="https://cloud.umami.is/script.js"
           data-website-id="63b3ed92-ca97-4846-a043-2d135db38955"
-        />
+        ></script>
       )}
 
     {finalSchema && (
-      <script type="application/ld+json" set:html={JSON.stringify(finalSchema)} />
+      <script type="application/ld+json" set:html={JSON.stringify(finalSchema)}></script>
     )}      
 
     <Font cssVariable="--font-space-grotesk" preload />

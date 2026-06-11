@@ -1,10 +1,11 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
-import { ComposeIcon, RocketIcon } from "@sanity/icons";
+import { CogIcon, ComposeIcon, RocketIcon } from "@sanity/icons";
 
 import { thought } from "@studio/schemas/thought";
 import { project } from "@studio/schemas/project";
+import { siteSettings } from "@studio/schemas/siteSettings";
 
 export default defineConfig({
   name: "weblate",
@@ -31,12 +32,16 @@ export default defineConfig({
               .title("Thoughts")
               .icon(ComposeIcon)
               .child(S.documentTypeList("thought").title("Thoughts")),
+            S.listItem()
+              .title("Site Settings")
+              .icon(CogIcon)
+              .child(S.document().schemaType("siteSettings").documentId("siteSettings")),
           ]),
     }),
     visionTool(),
   ],
 
   schema: {
-    types: [thought, project],
+    types: [thought, project, siteSettings],
   },
 });
