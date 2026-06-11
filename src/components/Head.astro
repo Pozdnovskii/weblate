@@ -4,7 +4,9 @@ import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 import { type Locale, useTranslations } from "@i18n/ui";
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+// build.format: "file" puts ".html" into pathname — strip it so canonical/hreflang match served URLs
+const cleanPath = Astro.url.pathname.replace(/index\.html$/, "").replace(/\.html$/, "");
+const canonicalURL = new URL(cleanPath, Astro.site);
 const defaultOgImage = new URL("/opengraph.webp", Astro.site).href;
 const enableAnalytics = import.meta.env.PUBLIC_ENABLE_ANALYTICS === "true";
 
@@ -37,7 +39,7 @@ const localeMap: Record<Locale, string> = {
   es: "es_ES",
 };
 
-const pathWithoutLocale = Astro.url.pathname.replace(/^\/(bg|es)/, "") || "/";
+const pathWithoutLocale = cleanPath.replace(/^\/(bg|es)/, "").replace(/\/$/, "");
 
 const isHome = pathWithoutLocale === "/" || pathWithoutLocale === "";
 
