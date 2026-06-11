@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import { type Locale, useTranslations } from "@i18n/ui";
 import { getCleanRelativeLocaleUrl } from "@i18n/utils";
 import { getThoughtCards, sanityImage } from "@lib/queries";
@@ -38,12 +37,13 @@ const posts = await getThoughtCards(locale, { excludeEnSlug: excludeId, limit })
             </a>
             <p>{post.description}</p>
             {cardUrl && (
-              <Image
+              <img
                 src={cardUrl}
                 alt={post.mainImage.alt ?? `${post.title} cover`}
                 width={600}
                 height={400}
                 loading="lazy"
+                decoding="async"
               />
             )}
           </article>

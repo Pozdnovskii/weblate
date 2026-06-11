@@ -1,4 +1,4 @@
-import { defineConfig, fontProviders, svgoOptimizer } from "astro/config";
+import { defineConfig, fontProviders, svgoOptimizer, passthroughImageService } from "astro/config";
 import { fileURLToPath } from "url";
 import path from "path";
 
@@ -43,17 +43,6 @@ export default defineConfig({
       useCdn: false,
     }),
   ],
-  image: {
-    layout: "constrained",
-    domains: ["cdn.sanity.io"],
-    service: {
-      entrypoint: "astro/assets/services/sharp",
-      config: {
-        webp: { effort: 6, quality: 80 },
-        avif: { effort: 9, quality: 70 },
-      },
-    },
-  },
   experimental: {
     svgOptimizer: svgoOptimizer(),
   },
@@ -89,9 +78,6 @@ export default defineConfig({
       },
     },
   ],
-  adapter: cloudflare({
-    prerenderEnvironment: "node",
-    imageService: "custom",
-  }),
+  adapter: cloudflare(),
 });
 

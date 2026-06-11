@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import { inlineHTML, type TextBlock } from "@lib/portableText";
 
 type ImageBlock = {
@@ -47,12 +46,13 @@ for (const raw of body as Block[]) {
       if (!block.asset?.url) return null;
       return (
         <figure>
-          <Image
+          <img
             src={block.asset.url}
             alt={block.alt ?? ""}
             width={900}
             height={600}
             loading="lazy"
+            decoding="async"
           />
           {block.caption && <figcaption>{block.caption}</figcaption>}
         </figure>
