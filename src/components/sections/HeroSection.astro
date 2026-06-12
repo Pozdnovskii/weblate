@@ -1,7 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import type { Locale } from "@i18n/ui";
 import { useTranslations } from "@i18n/ui";
-import { getSiteSettings, sanityImage } from "@lib/queries";
+import { getSiteSettings } from "@lib/queries";
 
 interface Props {
   locale: Locale;
@@ -62,15 +63,14 @@ const h1Width = { en: "w-[15em]", bg: "w-[15.5em]", es: "w-[16em]" };
   >
 </section>
 
-<img
-  src={sanityImage(settings.heroBg.url, { w: 1920 })!}
-  srcset={[640, 1280, 1920].map((w) => `${sanityImage(settings.heroBg.url, { w })} ${w}w`).join(", ")}
-  sizes="100vw"
-  width="2000"
-  height="1600"
+<Image
+  src={settings.heroBg.url!}
+  width={2000}
+  height={1600}
   alt=""
   aria-hidden="true"
   class="absolute -z-1 hidden h-[110svh] w-full max-w-500 object-cover sm:block"
-  loading="eager"
-  fetchpriority="high"
+  widths={[640, 1280, 1920]}
+  sizes="100vw"
+  priority
 />

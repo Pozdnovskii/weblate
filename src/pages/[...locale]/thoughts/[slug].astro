@@ -1,5 +1,6 @@
 ---
 import type { GetStaticPaths } from "astro";
+import { Image } from "astro:assets";
 import { getAbsoluteLocaleUrl } from "astro:i18n";
 import Layout from "@layouts/Layout.astro";
 import ThoughtsList from "@components/sections/ThoughtsSection/ThoughtsList.astro";
@@ -112,14 +113,13 @@ const alternateUrls = Object.fromEntries(
     </h1>
     <article class="prose mx-auto">
       {heroUrl && (
-        <img
+        <Image
           class="mb-16 rounded-lg"
           src={heroUrl}
           alt={post.mainImage.alt ?? `${post.title} cover`}
           width={1600}
           height={900}
           loading="eager"
-          decoding="async"
         />
       )}
       {post.body && <ThoughtBody body={post.body} />}

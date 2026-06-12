@@ -1,5 +1,6 @@
 ---
 import Section from "@components/UI/Section.astro";
+import { Image } from "astro:assets";
 import { type Locale, useTranslations } from "@i18n/ui";
 import { getProjects, sanityImage } from "@lib/queries";
 
@@ -32,21 +33,19 @@ const projects = await getProjects(locale);
 
           <article id={`project-${index}`} hidden>
             <div data-project-img>
-              <img
+              <Image
                 src={sanityImage(project.desktopImage.url, { w: 1200 })!}
                 alt={`${project.title} desktop screenshot`}
                 width={project.desktopImage.width}
                 height={project.desktopImage.height}
                 loading="lazy"
-                decoding="async"
               />
-              <img
+              <Image
                 src={sanityImage(project.mobileImage.url, { w: 600 })!}
                 alt={`${project.title} mobile screenshot`}
                 width={project.mobileImage.width}
                 height={project.mobileImage.height}
                 loading="lazy"
-                decoding="async"
               />
             </div>
 
