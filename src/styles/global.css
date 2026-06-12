@@ -76,6 +76,12 @@
       animation-delay: calc(var(--fade-index) * 0.2s);
     }
 
+    /* Chrome ignores opacity:0 paints for LCP, so the LCP element (h1)
+       must stay visible and animate transform only */
+    [data-fade-animation="transform"] {
+      opacity: 1;
+    }
+
     @keyframes fadeUp {
       to {
         opacity: 1;
