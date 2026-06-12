@@ -2,7 +2,6 @@ import { defineConfig, fontProviders, svgoOptimizer } from "astro/config";
 import { fileURLToPath } from "url";
 
 import tailwindcss from "@tailwindcss/vite";
-import cloudflare from "@astrojs/cloudflare";
 
 import sitemap from "@astrojs/sitemap";
 import sanity from "@sanity/astro";
@@ -19,14 +18,13 @@ export default defineConfig({
         "@styles": fileURLToPath(new URL("./src/styles", import.meta.url)),
       },
     },
-    // optimizeDeps: {
-    //   exclude: ["@sanity/client"],
-    //   include: ["@sanity/eventsource"],
-    // },
+    optimizeDeps: {
+      exclude: ["@sanity/client"],
+      include: ["@sanity/eventsource"],
+    },
   },
   site: "https://weblateweb.dev",
   trailingSlash: "never",
-  // build: { format: "file" },
   integrations: [
     sitemap({
       i18n: {
@@ -76,5 +74,4 @@ export default defineConfig({
       },
     },
   ],
-  adapter: cloudflare(),
 });

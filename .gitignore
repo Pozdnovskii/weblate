@@ -29,3 +29,4 @@ pnpm-debug.log*
 # claude code context
 .claude/
 .node-version
+.wrangler

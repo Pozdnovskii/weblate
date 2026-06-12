@@ -1,0 +1,9 @@
+{
+  "name": "weblate",
+  "compatibility_date": "2026-06-12",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
