@@ -71,8 +71,6 @@ const personSchema = {
 const finalSchema = schema ?? (isHome ? personSchema : null);                                                                                                          
 ---
 
-<!doctype html>
-<html lang={locale} class="antialiased">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -113,13 +111,15 @@ const finalSchema = schema ?? (isHome ? personSchema : null);
     )}
 
     {enableAnalytics && (
-        <link rel="preconnect" href="https://cloud.umami.is" />
+        <>
+          <link rel="preconnect" href="https://cloud.umami.is" />
 
-        <script
-          defer
-          src="https://cloud.umami.is/script.js"
-          data-website-id="63b3ed92-ca97-4846-a043-2d135db38955"
-        ></script>
+          <script
+            defer
+            src="https://cloud.umami.is/script.js"
+            data-website-id="63b3ed92-ca97-4846-a043-2d135db38955"
+          ></script>
+        </>
       )}
 
     {finalSchema && (

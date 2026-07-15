@@ -8,19 +8,22 @@ import { defaultLang, type Locale } from "@i18n/ui";
 const locale = (Astro.currentLocale ?? defaultLang) as Locale;
 ---
 
-<Head {...Astro.props} locale={locale} />
+<!doctype html>
+<html lang={locale} class="antialiased">
+  <Head {...Astro.props} locale={locale} />
 
-<body>
-  <Header locale={locale} />
+  <body>
+    <Header locale={locale} />
 
-  <slot />
+    <slot />
 
-  <Footer />
+    <Footer />
 
-  <script>
-    import { initHeader } from "@scripts/header.js";
-    document.addEventListener("astro:page-load", () => {
-      initHeader();
-    });
-  </script>
-</body>
+    <script>
+      import { initHeader } from "@scripts/header.js";
+      document.addEventListener("astro:page-load", () => {
+        initHeader();
+      });
+    </script>
+  </body>
+</html>
