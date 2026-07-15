@@ -146,8 +146,8 @@ export async function getProjects(lang: Locale): Promise<Project[]> {
       title,
       link,
       "description": coalesce(description.${lang}, description.en),
-      "services":    coalesce(services.${lang}, services.en, []),
-      tools,
+      "services": services[]->{"title": coalesce(title.${lang}, title.en)}.title,
+      "tools": tools[]->name,
       "desktopImage": desktopImage.asset->{
         "url": url,
         "width": metadata.dimensions.width,

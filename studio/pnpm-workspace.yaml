@@ -1,0 +1,14 @@
+# Presence of this file stops pnpm's upward workspace-root search at this
+# directory, keeping studio/ an independent install from the site root
+# (otherwise pnpm treats the root pnpm-workspace.yaml as the workspace root
+# and silently no-ops installs run from here).
+allowBuilds:
+  esbuild: true
+minimumReleaseAgeExclude:
+  - '@sanity/diff@6.5.0'
+  - '@sanity/mutator@6.5.0'
+  - '@sanity/schema@6.5.0'
+  - '@sanity/types@6.5.0'
+  - '@sanity/util@6.5.0'
+  - sanity@6.5.0
+  - '@sanity/vision@6.5.0'

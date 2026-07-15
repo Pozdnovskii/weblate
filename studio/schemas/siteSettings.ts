@@ -6,7 +6,6 @@ export const siteSettings = defineType({
   title: "Site Settings",
   type: "document",
   icon: CogIcon,
-  __experimental_actions: ["update", "publish", "discardDraft"],
 
   fields: [
     defineField({

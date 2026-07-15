@@ -2,6 +2,7 @@
   "name": "weblate",
   "type": "module",
   "version": "0.0.1",
+  "packageManager": "pnpm@11.10.0",
   "engines": {
     "node": ">=24.0.0"
   },
@@ -13,24 +14,18 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
-    "@sanity/astro": "^3.4.1",
-    "@sanity/client": "^7.22.1",
-    "@tailwindcss/vite": "^4.3.0",
-    "astro": "^6.4.6",
-    "sharp": "^0.35.1",
-    "tailwindcss": "^4.3.0"
+    "@sanity/astro": "^3.4.2",
+    "@sanity/client": "^7.23.2",
+    "@sanity/eventsource": "^5.0.4",
+    "@tailwindcss/vite": "^4.3.2",
+    "astro": "^7.0.9",
+    "sharp": "^0.35.3",
+    "tailwindcss": "^4.3.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
-    "@sanity/icons": "^3.7.4",
-    "@sanity/vision": "^5.30.0",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.8.0",
-    "sanity": "^5.30.0",
-    "styled-components": "^6.4.2",
-    "typescript": "^5.9.3"
-  },
-  "overrides": {
-    "vite": "^7.3.5"
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "typescript": "^6.0.3"
   }
 }

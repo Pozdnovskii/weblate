@@ -1,0 +1,9 @@
+# pnpm skips dependency build scripts unless allow-listed here. These are
+# native packages whose binaries the build needs.
+allowBuilds:
+  esbuild: true
+  sharp: true
+minimumReleaseAgeExclude:
+  - '@sanity/client@7.23.2'
+  - '@sanity/eventsource@5.0.4'
+  - prettier-plugin-tailwindcss@0.8.1

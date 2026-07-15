@@ -6,14 +6,15 @@ export default defineCliConfig({
     projectId: "64abwet3",
     dataset: "production",
   },
+  studioHost: "weblate",
   deployment: {
-    appId: "jute1j65w6k7z9zftppy2vzd",
+    appId: "vl6i9w06ktyrsfqccrajy9fn",
   },
   vite: {
     resolve: {
       alias: {
-        "@studio": path.resolve("./studio"),
-        "@i18n": path.resolve("./src/i18n"),
+        "@studio": path.resolve("."),
+        "@i18n": path.resolve("../src/i18n"),
       },
     },
   },

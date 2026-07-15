@@ -1,12 +1,6 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { RocketIcon } from "@sanity/icons";
-import {
-  translatedField,
-  LANGUAGES,
-  LANGUAGE_TITLES,
-  DEFAULT_LOCALE,
-} from "../lib/constants";
-import type { Locale } from "@i18n/ui";
+import { translatedField } from "../lib/constants";
 
 export const project = defineType({
   name: "project",
@@ -52,8 +46,7 @@ export const project = defineType({
       title: "Tools",
       type: "array",
       group: "main",
-      of: [defineArrayMember({ type: "string" })],
-      options: { layout: "tags" },
+      of: [defineArrayMember({ type: "reference", to: [{ type: "tool" }] })],
     }),
 
     translatedField("description", "Description", {
@@ -65,19 +58,9 @@ export const project = defineType({
     defineField({
       name: "services",
       title: "Services",
-      type: "object",
-      group: "translated",
-      fields: LANGUAGES.map((lang) =>
-        defineField({
-          name: lang,
-          title: LANGUAGE_TITLES[lang as Locale],
-          type: "array",
-          of: [defineArrayMember({ type: "string" })],
-          options: { layout: "tags" },
-          validation:
-            lang === DEFAULT_LOCALE ? (r) => r.required() : undefined,
-        }),
-      ),
+      type: "array",
+      group: "main",
+      of: [defineArrayMember({ type: "reference", to: [{ type: "service" }] })],
     }),
 
     defineField({

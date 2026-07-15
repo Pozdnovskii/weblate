@@ -17,12 +17,9 @@
       "@scripts/*": ["./src/scripts/*"],
       "@styles/*": ["./src/styles/*"],
       "@i18n/*": ["./src/i18n/*"],
-      "@lib/*": ["./src/lib/*"],
-      "@studio/*": ["./studio/*"]
-    },
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
+      "@lib/*": ["./src/lib/*"]
+    }
   },
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist", "studio"]
 }
