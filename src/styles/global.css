@@ -1,4 +1,12 @@
-@import "tailwindcss";
+/* Utilities come only from the templates. Tailwind's automatic source detection
+   scans .ts/.js too, where it cannot tell a class name from an ordinary English
+   word: `const filter = …` emitted `.filter`, and the word "static" in a comment
+   emitted `.static`. Dead rules, but they moved the bundle hash on every prose
+   edit. Classes toggled from JS (e.g. `header--open`) are hand-written in the
+   CSS files below, so they do not depend on this scan. */
+@import "tailwindcss" source(none);
+@source "../**/*.astro";
+
 @import "@styles/header.css";
 @import "@styles/HomePage/contacts.css";
 @import "@styles/HomePage/tools.css";

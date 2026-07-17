@@ -5,5 +5,4 @@ allowBuilds:
   sharp: true
 minimumReleaseAgeExclude:
   - '@sanity/client@7.23.2'
-  - '@sanity/eventsource@5.0.4'
   - prettier-plugin-tailwindcss@0.8.1

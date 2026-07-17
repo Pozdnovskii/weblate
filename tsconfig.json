@@ -1,10 +1,7 @@
 {
-  "extends": "astro/tsconfigs/base",
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "strict": false,
-    "strictNullChecks": false,
     "allowJs": true,
-    "noImplicitAny": false,
 
     "paths": {
       "@assets/*": ["./src/assets/*"],

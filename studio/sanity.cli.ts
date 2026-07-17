@@ -18,4 +18,13 @@ export default defineCliConfig({
       },
     },
   },
+  // Types are generated into src/lib/ so the site's existing @lib alias resolves
+  // them. Run via `pnpm sanity-typegen` from the repo root — never a bare
+  // `sanity schema extract`, which drops --enforce-required-fields silently.
+  typegen: {
+    enabled: true,
+    path: "../src/**/*.{ts,tsx}",
+    schema: "schema.json",
+    generates: "../src/lib/sanity.types.ts",
+  },
 });

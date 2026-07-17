@@ -1,4 +1,12 @@
 ---
+import type { SvgComponent } from "astro/types";
+
+interface Props {
+  figcaption: string;
+  // SVG imports are components in Astro; the last tools entry has no logos.
+  logos?: (SvgComponent & ImageMetadata)[];
+}
+
 const { figcaption, logos } = Astro.props;
 ---
 

@@ -2,7 +2,8 @@
 import { Image } from "astro:assets";
 import { type Locale, useTranslations } from "@i18n/ui";
 import { getCleanRelativeLocaleUrl } from "@i18n/utils";
-import { getThoughtCards, sanityImage } from "@lib/queries";
+import { getThoughtCards } from "@lib/queries";
+import { urlFor } from "@lib/image";
 
 interface Props {
   headingLevel?: "h2" | "h3";
@@ -29,7 +30,14 @@ const posts = await getThoughtCards(locale, { excludeEnSlug: excludeId, limit })
 <ul>
   {
     posts.map((post) => {
-      const cardUrl = sanityImage(post.mainImage.url, { w: 600, h: 400, fit: "crop" });
+      // Sanity does this crop, so the editor's hotspot is honoured here.
+      const cardUrl = urlFor(post.mainImage)
+        .width(600)
+        .height(400)
+        .fit("crop")
+        .auto("format")
+        .quality(80)
+        .url();
       return (
         <li>
           <article>

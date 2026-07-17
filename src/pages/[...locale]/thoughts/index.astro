@@ -5,6 +5,7 @@ import Layout from "@layouts/Layout.astro";
 import ThoughtsList from "@components/sections/ThoughtsSection/ThoughtsList.astro";
 import { useTranslations, defaultLang, type Locale } from "@i18n/ui";
 import { getThoughtCards } from "@lib/queries";
+import { urlFor } from "@lib/image";
 
 export const getStaticPaths = (() => {
   return [
@@ -37,7 +38,7 @@ const blogSchema = {
     description: p.description,
     datePublished: p.date,
     url: getAbsoluteLocaleUrl(locale, `thoughts/${p.slug}`),
-    image: p.mainImage.url ?? undefined,
+    image: urlFor(p.mainImage).url(),
   })),
 };
 ---

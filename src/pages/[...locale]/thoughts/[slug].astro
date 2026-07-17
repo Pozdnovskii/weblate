@@ -7,7 +7,8 @@ import ThoughtsList from "@components/sections/ThoughtsSection/ThoughtsList.astr
 import ThoughtBody from "@components/sections/ThoughtsSection/ThoughtBody.astro";
 import SectionHeading from "@components/UI/SectionHeading.astro";
 import { useTranslations, defaultLang, type Locale } from "@i18n/ui";
-import { getThought, getThoughtPaths, sanityImage } from "@lib/queries";
+import { getThought, getThoughtPaths } from "@lib/queries";
+import { urlFor } from "@lib/image";
 
 export const getStaticPaths = (async () => {
   const locales: Locale[] = ["en", "bg", "es"];
@@ -40,12 +41,22 @@ if (!post) {
   return Astro.redirect("/404");
 }
 
-const heroUrl = sanityImage(post.mainImage.url, { w: 1600 });
-const ogUrl = sanityImage(post.mainImage.url, {
-  w: 1200,
-  h: 630,
-  fit: "crop",
-});
+// Only resized here — the <Image> below asks for 1600x900, so Sharp does the
+// actual crop (centred, hotspot-blind).
+const heroUrl = urlFor(post.mainImage)
+  .width(1600)
+  .auto("format")
+  .quality(80)
+  .url();
+
+// Cropped by Sanity and used as a plain URL, so the hotspot applies.
+const ogUrl = urlFor(post.mainImage)
+  .width(1200)
+  .height(630)
+  .fit("crop")
+  .auto("format")
+  .quality(80)
+  .url();
 const pageUrl = getAbsoluteLocaleUrl(locale, `thoughts/${post.slug}`);
 
 const dateModified = post.updatedAt
