@@ -20,6 +20,7 @@ import { toolGroup } from "@studio/schemas/toolGroup";
 import { principle } from "@studio/schemas/principle";
 import { contacts } from "@studio/schemas/contacts";
 import { DEFAULT_LOCALE } from "@studio/lib/constants";
+import { DeployButton } from "@studio/plugins/DeployButton";
 
 /** One document each, opened straight from the list: no delete, no duplicate. */
 const SINGLETONS = new Set(["siteSettings", "contacts"]);
@@ -106,6 +107,11 @@ export default defineConfig({
     }),
     visionTool(),
   ],
+
+  // The site is static: published content goes live with the next build.
+  studio: {
+    components: { navbar: DeployButton },
+  },
 
   document: {
     actions: (prev, context) =>
