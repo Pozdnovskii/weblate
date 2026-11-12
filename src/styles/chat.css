@@ -1,0 +1,184 @@
+/* Chat widget (src/components/ChatWidget.astro). Every class here is set or
+   toggled from the widget's script too, so it is hand-written, not utilities. */
+@layer components {
+  .chat-modal {
+    @apply overflow-hidden;
+  }
+
+  #chat {
+    --chat-gap: 1rem;
+    /* The header's right edge: its wrapper's gutter, inside the 2xl container
+       (96rem) once the screen is wider than that. A percentage here resolves
+       against the viewport, the fixed elements' containing block. */
+    --chat-end: max(var(--spacing-svw), calc((100% - 96rem) / 2 + var(--spacing-svw)));
+    @apply contents;
+  }
+
+  /* ── Toggle ──────────────────────────────────────────────────────────── */
+
+  /* A grey plate like the header's, cut at all four corners: 7px, a touch
+     deeper than the header's 6px, which looks timid on a plate on its own.
+     It shows a prompt, ">_", or × while the panel is open. */
+  #chat-toggle {
+    --cut: transparent 7px, black 7px;
+    mask:
+      radial-gradient(circle at -1px -1px, var(--cut)),
+      radial-gradient(circle at calc(100% + 1px) -1px, var(--cut)),
+      radial-gradient(circle at -1px calc(100% + 1px), var(--cut)),
+      radial-gradient(circle at calc(100% + 1px) calc(100% + 1px), var(--cut));
+    @apply font-secondary bg-grey fixed end-(--chat-end) bottom-(--chat-gap) z-50 grid size-11 cursor-pointer place-items-center rounded-sm text-white shadow-lg shadow-zinc-800/10 transition-colors mask-intersect;
+
+    &:hover {
+      @apply text-hover;
+    }
+
+    & > .chat-toggle-close {
+      @apply hidden text-2xl leading-none;
+    }
+
+    /* Open, it closes the panel; on a phone the panel covers it and has its
+       own close button. */
+    &[aria-expanded="true"] {
+      @apply max-sm:hidden;
+
+      & > .chat-toggle-cursor {
+        @apply hidden;
+      }
+
+      & > .chat-toggle-close {
+        @apply block;
+      }
+    }
+  }
+
+  /* The prompt's cursor blinks, unless motion is reduced. */
+  @media (prefers-reduced-motion: no-preference) {
+    .chat-toggle-cursor > span {
+      animation: chat-blink 1.1s steps(1) infinite;
+    }
+  }
+
+  @keyframes chat-blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* ── Panel ───────────────────────────────────────────────────────────── */
+
+  #chat-panel {
+    @apply fixed inset-0 z-50 flex flex-col bg-zinc-900;
+
+    &[hidden] {
+      @apply hidden;
+    }
+
+    /* A card above the toggle, clear of the header at the top. */
+    @media (width >= 40rem) {
+      @apply inset-auto end-(--chat-end) bottom-[calc(var(--chat-gap)+3.25rem)] h-[min(40rem,calc(100dvh-16rem))] w-[26rem] bg-transparent;
+    }
+  }
+
+  .chat-close {
+    @apply absolute end-1 top-1 grid size-11 cursor-pointer place-items-center text-3xl leading-none transition-colors sm:hidden;
+
+    &:hover {
+      @apply text-hover;
+    }
+  }
+
+  .chat-log,
+  .chat-form {
+    @apply bg-zinc-900 px-4;
+
+    @media (width >= 40rem) {
+      @apply border-x border-neutral-700;
+    }
+  }
+
+  .chat-log {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-neutral-600) transparent;
+    @apply flex grow flex-col overflow-y-auto overscroll-contain pt-10 sm:pt-2;
+
+    @media (width >= 40rem) {
+      @apply rounded-t-sm border-t;
+    }
+  }
+
+  .chat-msg {
+    @apply flex flex-col gap-y-2 border-b border-dashed border-neutral-500 py-4 leading-6;
+
+    &::before {
+      content: attr(data-label);
+      @apply font-secondary text-grey text-xs uppercase;
+    }
+
+    &.chat-msg-user {
+      @apply whitespace-pre-wrap;
+    }
+
+    &.chat-msg-pending {
+      @apply text-grey animate-pulse;
+    }
+
+    &.chat-msg-error {
+      @apply text-red-300;
+    }
+
+    ul,
+    ol {
+      @apply flex list-outside flex-col gap-y-1 ps-5;
+    }
+
+    ul {
+      @apply list-disc;
+    }
+
+    ol {
+      @apply list-decimal;
+    }
+
+    a {
+      @apply underline underline-offset-2 transition-colors;
+
+      &:hover {
+        @apply text-hover;
+      }
+    }
+
+    strong {
+      @apply font-normal text-blue-100;
+    }
+  }
+
+  /* The input as in the footer form: a bare line that whitens on focus. */
+  .chat-form {
+    @apply flex items-end gap-4 pt-2 pb-4;
+
+    @media (width >= 40rem) {
+      @apply rounded-b-sm border-b;
+    }
+
+    textarea {
+      field-sizing: content;
+      @apply max-h-32 min-h-8 grow resize-none border-b border-white/40 bg-transparent pb-2 leading-normal transition-colors outline-none placeholder:text-white/50;
+
+      &:focus {
+        @apply border-white;
+      }
+    }
+
+    button {
+      @apply font-secondary shrink-0 cursor-pointer pb-2 text-sm uppercase transition-colors;
+
+      &:hover {
+        @apply text-hover;
+      }
+
+      &:disabled {
+        @apply cursor-wait opacity-50;
+      }
+    }
+  }
+}

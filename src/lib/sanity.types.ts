@@ -626,6 +626,11 @@ export type SITE_SETTINGS_QUERY_RESULT = {
 } | null;
 
 // Source: ../src/lib/queries.ts
+// Variable: PROJECT_LINKS_QUERY
+// Query: *[_type == "project" && defined(link)].link
+export type PROJECT_LINKS_QUERY_RESULT = Array<string>;
+
+// Source: ../src/lib/queries.ts
 // Variable: PROJECTS_QUERY
 // Query: *[_type == "project"] | order(order asc, _createdAt asc) {    _id,    title,    link,    description,    "services": services[]->title,    "tools": tools[]->name,    "desktopImage": desktopImage{      ...,      "width":  asset->metadata.dimensions.width,      "height": asset->metadata.dimensions.height    },    "mobileImage": mobileImage{      ...,      "width":  asset->metadata.dimensions.width,      "height": asset->metadata.dimensions.height    }  }
 export type PROJECTS_QUERY_RESULT = Array<{
@@ -670,6 +675,7 @@ declare global {
     '\n  *[_type == "thought" && defined(slug.en.current)]{\n    "enSlug": slug.en.current,\n    slug\n  }\n': THOUGHT_PATHS_QUERY_RESULT;
     '\n  *[_type == "thought" && slug.en.current == $enSlug][0]{\n    "enSlug": slug.en.current,\n    slug,\n    title,\n    description,\n    metaTitle,\n    metaDescription,\n    date,\n    "updatedAt": _updatedAt,\n    mainImage,\n    "body": body{\n      "en": en[]{ ..., _type == "image" => { ..., "asset": asset->{ url } } },\n      "bg": bg[]{ ..., _type == "image" => { ..., "asset": asset->{ url } } },\n      "es": es[]{ ..., _type == "image" => { ..., "asset": asset->{ url } } }\n    },\n    faq\n  }\n': THOUGHT_QUERY_RESULT;
     '\n  *[_type == "siteSettings" && _id == "siteSettings"][0]{\n    "heroBg": { "url": heroBg.asset->url }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
+    '\n  *[_type == "project" && defined(link)].link\n': PROJECT_LINKS_QUERY_RESULT;
     '\n  *[_type == "project"] | order(order asc, _createdAt asc) {\n    _id,\n    title,\n    link,\n    description,\n    "services": services[]->title,\n    "tools": tools[]->name,\n    "desktopImage": desktopImage{\n      ...,\n      "width":  asset->metadata.dimensions.width,\n      "height": asset->metadata.dimensions.height\n    },\n    "mobileImage": mobileImage{\n      ...,\n      "width":  asset->metadata.dimensions.width,\n      "height": asset->metadata.dimensions.height\n    }\n  }\n': PROJECTS_QUERY_RESULT;
   }
 }

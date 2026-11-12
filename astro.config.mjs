@@ -7,10 +7,10 @@ import sitemap from "@astrojs/sitemap";
 import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
-  // Only for /api/chat (prerender = false); every page stays static. Pages are
-  // prerendered in Node and images go through the Sharp service configured
-  // below ("custom"), so the build is the same as without the adapter.
-  adapter: cloudflare({ imageService: "custom", prerenderEnvironment: "node" }),
+  // Only for /api/chat (prerender = false); every page stays static, prerendered
+  // in Node. "compile" optimises images at build with the Sharp config below;
+  // "custom" did too, but broke /_image in dev, where Sharp cannot load in workerd.
+  adapter: cloudflare({ imageService: "compile", prerenderEnvironment: "node" }),
   i18n: {
     locales: ["en", "bg", "es"],
     defaultLocale: "en",

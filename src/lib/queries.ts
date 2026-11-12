@@ -106,6 +106,11 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
   }
 `);
 
+/** Project websites: the only outside links the chat widget makes clickable. */
+export const PROJECT_LINKS_QUERY = defineQuery(`
+  *[_type == "project" && defined(link)].link
+`);
+
 export const PROJECTS_QUERY = defineQuery(`
   *[_type == "project"] | order(order asc, _createdAt asc) {
     _id,
@@ -270,4 +275,23 @@ export async function getProjects(lang: Locale): Promise<Project[]> {
     desktopImage: withDimensions(r.desktopImage, "project.desktopImage"),
     mobileImage: withDimensions(r.mobileImage, "project.mobileImage"),
   }));
+}
+
+// Every page renders the chat widget, so the build fetches this once.
+let projectHosts: Promise<string[]> | undefined;
+
+/** Hostnames of the project websites, for the chat widget's link allow-list. */
+export function getProjectHosts(): Promise<string[]> {
+  projectHosts ??= sanityClient.fetch(PROJECT_LINKS_QUERY).then((links) => [
+    ...new Set(
+      links.flatMap((link) => {
+        try {
+          return [new URL(link).hostname];
+        } catch {
+          return [];
+        }
+      }),
+    ),
+  ]);
+  return projectHosts;
 }

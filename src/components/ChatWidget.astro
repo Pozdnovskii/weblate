@@ -1,0 +1,264 @@
+---
+/**
+ * The site chat: a button in the corner that opens a panel talking to /api/chat.
+ * The conversation lives in localStorage, so it follows the visitor across pages,
+ * locales and tabs, until a day without a message ends it.
+ */
+import { type Locale, useTranslations } from "@i18n/ui";
+import { getProjectHosts } from "@lib/queries";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const hosts = await getProjectHosts();
+
+// What the script needs in the page's language.
+const strings = {
+  you: t("chat.you"),
+  ai: t("chat.ai"),
+  pending: t("chat.pending"),
+  rateLimited: t("chat.rateLimited"),
+  error: t("chat.error"),
+  open: t("chat.open"),
+  close: t("chat.close"),
+};
+---
+
+<div
+  id="chat"
+  data-chat
+  data-locale={locale}
+  data-strings={JSON.stringify(strings)}
+  data-hosts={JSON.stringify(hosts)}
+  transition:persist={`chat-${locale}`}
+>
+  <button
+    type="button"
+    id="chat-toggle"
+    data-chat-toggle
+    aria-expanded="false"
+    aria-controls="chat-panel"
+    aria-label={t("chat.open")}
+    data-umami-event="chat-toggle"
+  >
+    <span class="chat-toggle-cursor" aria-hidden="true">&gt;<span>_</span></span>
+    <span class="chat-toggle-close" aria-hidden="true">×</span>
+  </button>
+
+  <section id="chat-panel" data-chat-panel aria-label={t("chat.title")} hidden>
+    <!-- On a phone the panel covers the toggle, so it has its own close. -->
+    <button type="button" class="chat-close" data-chat-close aria-label={t("chat.close")}>
+      <span aria-hidden="true">×</span>
+    </button>
+
+    <div class="chat-log" data-chat-log role="log">
+      <div class="chat-msg chat-msg-assistant" data-label={strings.ai}>
+        <p>{t("chat.greeting")}</p>
+      </div>
+    </div>
+
+    <form class="chat-form" data-chat-form>
+      <label for="chat-input" class="sr-only">{t("chat.placeholder")}</label>
+      <textarea
+        id="chat-input"
+        data-chat-input
+        rows="1"
+        maxlength="1000"
+        placeholder={t("chat.placeholder")}></textarea>
+      <button type="submit">{t("chat.send")} <span aria-hidden="true">→</span></button>
+    </form>
+  </section>
+</div>
+
+<script>
+  import { renderReply } from "@lib/chatRender";
+
+  type Message = { role: "user" | "assistant"; content: string };
+  /** The messages, and the thread id that will name the conversation in Insights. */
+  type Conversation = { thread: string; active: number; messages: Message[] };
+  type Strings = {
+    you: string;
+    ai: string;
+    pending: string;
+    rateLimited: string;
+    error: string;
+    open: string;
+    close: string;
+  };
+
+  const STORAGE_KEY = "chat:conversation";
+  /** A conversation left this long starts over. */
+  const IDLE_MS = 24 * 60 * 60 * 1000;
+  /** The server's limits: 40 messages, a reply of at most 8000 characters. */
+  const HISTORY_MAX = 40;
+  const REPLY_MAX = 8000;
+
+  // The widget persists across ClientRouter navigations within a locale and is
+  // replaced when the locale changes, so each new element is set up once.
+  document.addEventListener("astro:page-load", () => {
+    const root = document.querySelector<HTMLElement>("[data-chat]:not([data-ready])");
+    if (root) init(root);
+  });
+
+  function init(root: HTMLElement) {
+    root.dataset.ready = "";
+    const toggle = root.querySelector<HTMLButtonElement>("[data-chat-toggle]")!;
+    const panel = root.querySelector<HTMLElement>("[data-chat-panel]")!;
+    const log = root.querySelector<HTMLElement>("[data-chat-log]")!;
+    const form = root.querySelector<HTMLFormElement>("[data-chat-form]")!;
+    const input = root.querySelector<HTMLTextAreaElement>("[data-chat-input]")!;
+    const send = form.querySelector<HTMLButtonElement>("[type=submit]")!;
+    const strings: Strings = JSON.parse(root.dataset.strings!);
+    const hosts = new Set<string>(JSON.parse(root.dataset.hosts!));
+    const locale = root.dataset.locale;
+
+    const greeting = log.firstElementChild!;
+    let conversation = load();
+    let history = conversation.messages;
+    for (const message of history) bubble(message.role, message.content);
+
+    // Another tab went on with the conversation: show where it is now, unless a
+    // reply is streaming here (its save comes after and wins).
+    window.addEventListener("storage", (event) => {
+      if (event.key !== STORAGE_KEY || send.disabled || !root.isConnected) return;
+      conversation = load();
+      history = conversation.messages;
+      log.replaceChildren(greeting);
+      for (const message of history) bubble(message.role, message.content);
+    });
+
+    // Below 40rem the panel covers the screen, so it acts as a modal there: the
+    // page under it leaves the tab order and stops scrolling.
+    const fullscreen = window.matchMedia("(width < 40rem)");
+    const setModal = (on: boolean) => {
+      for (const element of document.body.children) {
+        if (element !== root && element instanceof HTMLElement) element.inert = on;
+      }
+      document.documentElement.classList.toggle("chat-modal", on);
+    };
+    fullscreen.addEventListener("change", () => setModal(!panel.hidden && fullscreen.matches));
+
+    const open = (value: boolean) => {
+      panel.hidden = !value;
+      setModal(value && fullscreen.matches);
+      toggle.setAttribute("aria-expanded", String(value));
+      toggle.setAttribute("aria-label", value ? strings.close : strings.open);
+      if (value) {
+        log.scrollTop = log.scrollHeight;
+        input.focus();
+      } else {
+        toggle.focus();
+      }
+    };
+
+    toggle.addEventListener("click", () => open(panel.hidden !== false));
+    root.querySelector("[data-chat-close]")!.addEventListener("click", () => open(false));
+    root.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !panel.hidden) open(false);
+    });
+
+    // Enter sends, Shift+Enter starts a new line.
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" && !event.shiftKey && !event.isComposing) {
+        event.preventDefault();
+        form.requestSubmit();
+      }
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const question = input.value.trim();
+      if (!question || send.disabled) return;
+
+      input.value = "";
+      send.disabled = true;
+      history.push({ role: "user", content: question });
+      save(conversation);
+      bubble("user", question);
+
+      const reply = bubble("assistant", "");
+      reply.classList.add("chat-msg-pending");
+      reply.textContent = strings.pending;
+      // Busy until complete: the log announces the reply once, not every chunk.
+      log.setAttribute("aria-busy", "true");
+
+      let text = "";
+      try {
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ messages: outgoing(history), locale, threadId: conversation.thread }),
+        });
+        if (!response.ok || !response.body) throw new Error(String(response.status));
+
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        for (;;) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          text += decoder.decode(value, { stream: true });
+          reply.classList.remove("chat-msg-pending");
+          reply.replaceChildren(renderReply(text, hosts));
+          log.scrollTop = log.scrollHeight;
+        }
+        if (!text) throw new Error("empty reply");
+
+        history.push({ role: "assistant", content: text });
+        save(conversation);
+      } catch (error) {
+        reply.classList.remove("chat-msg-pending");
+        reply.classList.add("chat-msg-error");
+        reply.textContent = (error as Error).message === "429" ? strings.rateLimited : strings.error;
+        // An unanswered question would make the next request start with two in a row.
+        if (!text) history.pop();
+        save(conversation);
+      } finally {
+        log.removeAttribute("aria-busy");
+        send.disabled = false;
+        input.focus();
+      }
+    });
+
+    function bubble(role: Message["role"], content: string) {
+      const element = document.createElement("div");
+      element.className = `chat-msg chat-msg-${role}`;
+      element.dataset.label = role === "user" ? strings.you : strings.ai;
+      if (role === "assistant") element.appendChild(renderReply(content, hosts));
+      else element.textContent = content;
+      log.appendChild(element);
+      log.scrollTop = log.scrollHeight;
+      return element;
+    }
+  }
+
+  /** The last messages the server accepts, starting with a visitor message. */
+  function outgoing(history: Message[]): Message[] {
+    const recent = history.slice(-HISTORY_MAX);
+    if (recent[0]?.role === "assistant") recent.shift();
+    return recent.map((m) => ({ ...m, content: m.content.slice(0, REPLY_MAX) }));
+  }
+
+  // Storage can be missing or throw (private mode, blocked site data): the chat
+  // then simply forgets on reload.
+  function load(): Conversation {
+    try {
+      const stored: Conversation | null = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "null");
+      if (stored && Date.now() - stored.active < IDLE_MS) return stored;
+    } catch {
+      // a new conversation, below
+    }
+    return { thread: crypto.randomUUID(), active: Date.now(), messages: [] };
+  }
+
+  function save(conversation: Conversation) {
+    conversation.active = Date.now();
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(conversation));
+    } catch {
+      // see load()
+    }
+  }
+</script>
