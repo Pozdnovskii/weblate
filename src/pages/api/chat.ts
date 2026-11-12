@@ -5,11 +5,13 @@ import type { APIRoute } from "astro";
 import { env } from "cloudflare:workers";
 
 import { CHAT_LOCALES, type ChatLocale, type ChatMessage, chatCost, streamChat } from "@lib/chat";
+import { isThreadId, saveConversation } from "@lib/insights";
 
 const MESSAGE_MAX = 1000;
 /**
- * Visitor and assistant messages together, the whole conversation; older ones
- * are the client's to drop. The model reads only the last few (see streamChat).
+ * Visitor and assistant messages together, the whole conversation as Insights
+ * records it; older ones are the client's to drop. The model reads only the
+ * last few (see streamChat).
  */
 const HISTORY_MAX = 40;
 /** Assistant replies come back from the client too; long, but not unbounded. */
@@ -45,7 +47,7 @@ function parseLocale(body: unknown): ChatLocale {
  * streamed as plain text. Failures are logged here (Workers log), the client gets a
  * bare status.
  */
-export const POST: APIRoute = async ({ request, clientAddress }) => {
+export const POST: APIRoute = async ({ request, clientAddress, locals }) => {
   if (request.headers.get("origin") !== new URL(request.url).origin) return fail(403);
 
   const ip = clientAddress || "unknown";
@@ -59,6 +61,8 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
   const history = parseHistory(body);
   if (!history) return fail(400);
   const locale = parseLocale(body);
+  // Without one (an older page still open) the conversation simply isn't recorded.
+  const threadId = (body as { threadId?: unknown }).threadId;
 
   const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY });
   const encoder = new TextEncoder();
@@ -67,21 +71,37 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     async start(controller) {
       let cost = 0;
       let search = {};
+      let reply = "";
+      const usage = { input: 0, output: 0 };
+      let failure: string | undefined;
       try {
         for await (const event of streamChat(client, history, locale)) {
           if (event.type === "text") {
+            reply += event.text;
             controller.enqueue(encoder.encode(event.text));
           } else if (event.type === "search") {
             search = { semantic: event.semantic, searchMs: event.ms };
           } else {
             cost += chatCost(event.message.usage);
+            usage.input += event.message.usage.input_tokens;
+            usage.output += event.message.usage.output_tokens;
           }
         }
         console.log({ reason: "chat", ip, locale, turns: history.length, ...search, cost: Number(cost.toFixed(4)) });
         controller.close();
       } catch (error) {
-        console.error({ reason: "chat_failed", ip, error: String(error) });
+        failure = String(error);
+        console.error({ reason: "chat_failed", ip, error: failure });
         controller.error(error);
+      }
+
+      // After the reply is out, so the visitor never waits on it.
+      if (isThreadId(threadId)) {
+        locals.cfContext.waitUntil(
+          saveConversation(env.SANITY_ORGANIZATION_TOKEN, { threadId, history, reply, error: failure, usage }).catch(
+            (error) => console.error({ reason: "conversation_save_failed", error: String(error) }),
+          ),
+        );
       }
     },
   });

@@ -14,14 +14,18 @@
     "sanity-typegen": "pnpm -C studio typegen",
     "ask": "node --env-file=.env scripts/ask.ts",
     "cf-typegen": "wrangler types",
-    "check": "astro check"
+    "check": "astro check",
+    "classify": "node --env-file=.env scripts/classify.ts"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^4.0.102",
     "@anthropic-ai/sdk": "^1.8.0",
     "@astrojs/sitemap": "^3.7.4",
     "@sanity/client": "^8.15.1",
+    "@sanity/context": "^3.0.1",
     "@sanity/image-url": "^2.1.1",
     "@tailwindcss/vite": "^4.3.5",
+    "ai": "^7.0.169",
     "astro": "^7.4.10",
     "groq": "^6.23.0",
     "sharp": "^0.35.5",

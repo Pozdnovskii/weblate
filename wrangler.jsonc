@@ -1,6 +1,6 @@
 {
   "name": "weblate",
-  "main": "@astrojs/cloudflare/entrypoints/server",
+  "main": "./src/worker.ts",
   "compatibility_date": "2026-06-12",
   "assets": {
     // Only the chat endpoint runs the Worker; pages and files come straight
@@ -11,8 +11,8 @@
     "html_handling": "drop-trailing-slash",
     "not_found_handling": "404-page",
   },
-  // Secret, set in the dashboard as type Secret (locally read from .env):
-  // ANTHROPIC_API_KEY.
+  // Secrets, set in the dashboard as type Secret (locally read from .env):
+  // ANTHROPIC_API_KEY, SANITY_ORGANIZATION_TOKEN (Context Editor).
   // Astro's sessions binding, unused by the site but always added by the adapter.
   // Pinned to the namespace left from the earlier adapter: without an id, deploy
   // tries to create "weblate-session" again and fails (code 10014).
@@ -24,5 +24,7 @@
       "simple": { "limit": 5, "period": 60 },
     },
   ],
+  // Daily scoring of the chat conversations for Insights (src/worker.ts).
+  "triggers": { "crons": ["0 4 * * *"] },
   "observability": { "enabled": true },
 }
