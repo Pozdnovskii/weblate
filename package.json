@@ -12,7 +12,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "sanity-typegen": "pnpm -C studio typegen",
-    "ask": "node --env-file=.env scripts/ask.ts"
+    "ask": "node --env-file=.env scripts/ask.ts",
+    "cf-typegen": "wrangler types",
+    "check": "astro check"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.8.0",
@@ -27,9 +29,11 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@astrojs/cloudflare": "^14.4.7",
     "@types/node": "^26.6.6",
     "prettier-plugin-astro": "^1.1.2",
     "prettier-plugin-tailwindcss": "^0.8.1",
-    "typescript": "^6.0.3"
+    "typescript": "^6.0.3",
+    "wrangler": "^4.160.0"
   }
 }

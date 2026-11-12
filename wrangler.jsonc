@@ -1,9 +1,24 @@
 {
   "name": "weblate",
+  "main": "@astrojs/cloudflare/entrypoints/server",
   "compatibility_date": "2026-06-12",
   "assets": {
+    // Only the chat endpoint runs the Worker; pages and files come straight
+    // from the assets, never through Astro's handler and its cache headers.
+    "run_worker_first": ["/api/*"],
     "directory": "./dist",
+    "binding": "ASSETS",
     "html_handling": "drop-trailing-slash",
-    "not_found_handling": "404-page"
-  }
+    "not_found_handling": "404-page",
+  },
+  // Secret, set in the dashboard as type Secret (locally read from .env):
+  // ANTHROPIC_API_KEY.
+  "ratelimits": [
+    {
+      "name": "CHAT_RATE_LIMIT",
+      "namespace_id": "2002",
+      "simple": { "limit": 5, "period": 60 },
+    },
+  ],
+  "observability": { "enabled": true },
 }
