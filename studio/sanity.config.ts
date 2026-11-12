@@ -1,7 +1,11 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
-import { CogIcon, ComposeIcon, RocketIcon, TagIcon, WrenchIcon } from "@sanity/icons";
+import { CogIcon } from "@sanity/icons/Cog";
+import { ComposeIcon } from "@sanity/icons/Compose";
+import { RocketIcon } from "@sanity/icons/Rocket";
+import { TagIcon } from "@sanity/icons/Tag";
+import { WrenchIcon } from "@sanity/icons/Wrench";
 
 import { thought } from "@studio/schemas/thought";
 import { project } from "@studio/schemas/project";

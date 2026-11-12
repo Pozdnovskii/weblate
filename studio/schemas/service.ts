@@ -1,5 +1,5 @@
 import { defineType } from "sanity";
-import { TagIcon } from "@sanity/icons";
+import { TagIcon } from "@sanity/icons/Tag";
 import { translatedField, DEFAULT_LOCALE } from "../lib/constants";
 
 export const service = defineType({

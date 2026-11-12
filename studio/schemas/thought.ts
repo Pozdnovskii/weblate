@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
-import { ComposeIcon } from "@sanity/icons";
+import { ComposeIcon } from "@sanity/icons/Compose";
 import {
   translatedField,
   LANGUAGES,

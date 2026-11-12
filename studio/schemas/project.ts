@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
-import { RocketIcon } from "@sanity/icons";
+import { RocketIcon } from "@sanity/icons/Rocket";
 import { translatedField } from "../lib/constants";
 
 export const project = defineType({

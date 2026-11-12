@@ -1,5 +1,5 @@
 import { defineField, defineType } from "sanity";
-import { WrenchIcon } from "@sanity/icons";
+import { WrenchIcon } from "@sanity/icons/Wrench";
 
 export const tool = defineType({
   name: "tool",
