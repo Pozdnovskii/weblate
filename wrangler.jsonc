@@ -13,6 +13,10 @@
   },
   // Secret, set in the dashboard as type Secret (locally read from .env):
   // ANTHROPIC_API_KEY.
+  // Astro's sessions binding, unused by the site but always added by the adapter.
+  // Pinned to the namespace left from the earlier adapter: without an id, deploy
+  // tries to create "weblate-session" again and fails (code 10014).
+  "kv_namespaces": [{ "binding": "SESSION", "id": "7b5a2baa741b47cd90f3cb8cf37a47e0" }],
   "ratelimits": [
     {
       "name": "CHAT_RATE_LIMIT",
