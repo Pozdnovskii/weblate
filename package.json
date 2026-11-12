@@ -11,9 +11,11 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "sanity-typegen": "pnpm -C studio typegen"
+    "sanity-typegen": "pnpm -C studio typegen",
+    "ask": "node --env-file=.env scripts/ask.ts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.8.0",
     "@astrojs/sitemap": "^3.7.4",
     "@sanity/client": "^8.15.1",
     "@sanity/image-url": "^2.1.1",

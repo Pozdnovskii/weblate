@@ -33,3 +33,6 @@ pnpm-debug.log*
 # claude code context
 .claude/
 .wrangler
+
+# local chat logs (pnpm ask)
+_internal/
