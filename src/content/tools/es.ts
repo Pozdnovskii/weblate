@@ -17,7 +17,7 @@ import WebstudioLogo from "@tech-logos/webstudio.svg";
 export default [
   {
     figcaption:
-      "Mi stack principal para construir sitios web. Astro es un framework moderno que ofrece rendimiento ultra rápido con JavaScript mínimo — perfecto para sitios que necesitan posicionarse bien y convertir visitantes.",
+      "Astro genera HTML estático casi sin JavaScript. En una migración reciente desde WordPress, la carga móvil bajó de más de 5 s a menos de 1 s, con una puntuación de 100 en Google PageSpeed.",
     logos: [AstroLogo, HtmlLogo, CssLogo, JsLogo, TailwindLogo],
   },
   {
@@ -27,7 +27,7 @@ export default [
   },
   {
     figcaption:
-      "Soluciones CDN para carga ultrarrápida, confiabilidad y seguridad.",
+      "Las páginas se sirven desde el servidor más cercano al visitante, con HTTPS y protección DDoS incluidos.",
     logos: [CloudflareLogo, VercelLogo],
   },
   {
@@ -47,6 +47,6 @@ export default [
   },
   {
     figcaption:
-      "Nunca dejo de aprender — explorando nuevas herramientas, siguiendo tendencias de la industria y encontrando mejores formas para cada proyecto, para que tu sitio esté siempre un paso adelante.",
+      "Pruebo nuevas herramientas y estándares, y me quedo con los que hacen los sitios más rápidos o más fáciles de encontrar.",
   },
 ];

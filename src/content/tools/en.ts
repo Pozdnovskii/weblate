@@ -17,7 +17,7 @@ import WebstudioLogo from "@tech-logos/webstudio.svg";
 export default [
   {
     figcaption:
-      "My go-to stack for building websites. Astro is a modern framework that delivers ultra-fast performance with minimal JavaScript — perfect for sites that need to rank well and convert visitors.",
+      "Astro ships static HTML with almost no JavaScript. On a recent WordPress migration, mobile load dropped from over 5s to under 1s, with a Google PageSpeed score of 100.",
     logos: [AstroLogo, HtmlLogo, CssLogo, JsLogo, TailwindLogo],
   },
   {
@@ -27,7 +27,7 @@ export default [
   },
   {
     figcaption:
-      "CDN solutions for lightning-fast loading, reliability and security.",
+      "Pages are served from the edge location closest to the visitor, with HTTPS and DDoS protection included.",
     logos: [CloudflareLogo, VercelLogo],
   },
   {
@@ -47,6 +47,6 @@ export default [
   },
   {
     figcaption:
-      "I never stop learning — exploring new tools, following industry trends, and finding better ways for every project, so your site stays one step ahead.",
+      "I try new tools and standards, and keep the ones that make sites faster or easier to find.",
   },
 ];

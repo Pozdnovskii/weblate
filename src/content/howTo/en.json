@@ -4,7 +4,7 @@
     "items": [
       {
         "title": "Quick Turnarounds",
-        "description": "Fast delivery without delays or missed deadlines."
+        "description": "Clear timeline agreed up front. A 6-language WordPress migration took about 2 weeks."
       },
       {
         "title": "Regular Progress Updates",
@@ -25,11 +25,11 @@
       },
       {
         "title": "Responsive Layout",
-        "description": "Looks and works perfectly on any screen, from phones to desktops."
+        "description": "Tested on screens from 320px phones to wide desktops."
       },
       {
         "title": "Animations & Interactions",
-        "description": "Smooth, engaging experiences that hook visitors and make your brand more memorable."
+        "description": "Lightweight animations that respect users' reduced-motion settings and don't slow down the page."
       },
       {
         "title": "Easily Scalable",
@@ -54,7 +54,7 @@
       },
       {
         "title": "Fast-Loading",
-        "description": "Meets Core Web Vitals standards, ensuring a smooth user experience—because no one waits for slow sites to load."
+        "description": "Built to score 95–100 on mobile in Google PageSpeed."
       },
       {
         "title": "Technical SEO",

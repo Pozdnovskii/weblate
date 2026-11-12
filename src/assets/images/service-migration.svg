@@ -1,0 +1,77 @@
+<svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="service-icon">
+  <!-- NB: no opacity="0" start states — SVGO (astro.config svgOptimizer) strips them as hidden. -->
+
+  <!-- Old site phone: drawn, emptied, then erased -->
+  <g stroke-linecap="round">
+    <rect x="20" y="40" width="56" height="120" rx="10" stroke="#4A66A9" stroke-width="2" stroke-dasharray="352" stroke-dashoffset="352">
+      <animate attributeName="stroke-dashoffset" from="352" to="0" dur="0.6s" fill="freeze" begin="indefinite" data-delay="0"/>
+      <animate attributeName="stroke-dashoffset" from="0" to="352" dur="0.5s" fill="freeze" begin="indefinite" data-delay="2.8"/>
+    </rect>
+    <line x1="41" y1="51" x2="55" y2="51" stroke="#4A66A9" stroke-width="2" stroke-dasharray="14" stroke-dashoffset="14">
+      <animate attributeName="stroke-dashoffset" from="14" to="0" dur="0.2s" fill="freeze" begin="indefinite" data-delay="0.5"/>
+      <animate attributeName="stroke-dashoffset" from="0" to="14" dur="0.2s" fill="freeze" begin="indefinite" data-delay="2.8"/>
+    </line>
+    <line x1="36" y1="150" x2="60" y2="150" stroke="#4A66A9" stroke-width="2" stroke-dasharray="24" stroke-dashoffset="24">
+      <animate attributeName="stroke-dashoffset" from="24" to="0" dur="0.2s" fill="freeze" begin="indefinite" data-delay="0.6"/>
+      <animate attributeName="stroke-dashoffset" from="0" to="24" dur="0.2s" fill="freeze" begin="indefinite" data-delay="2.9"/>
+    </line>
+
+    <!-- Old content: fades out line by line -->
+    <line x1="31" y1="82" x2="65" y2="82" stroke="#4A66A9" stroke-width="3" stroke-dasharray="34" stroke-dashoffset="34">
+      <animate attributeName="stroke-dashoffset" from="34" to="0" dur="0.2s" fill="freeze" begin="indefinite" data-delay="0.7"/>
+      <animate attributeName="opacity" from="1" to="0" dur="0.3s" fill="freeze" begin="indefinite" data-delay="1.4"/>
+    </line>
+    <line x1="31" y1="100" x2="57" y2="100" stroke="#5068A8" stroke-width="3" stroke-dasharray="26" stroke-dashoffset="26">
+      <animate attributeName="stroke-dashoffset" from="26" to="0" dur="0.2s" fill="freeze" begin="indefinite" data-delay="0.8"/>
+      <animate attributeName="opacity" from="1" to="0" dur="0.3s" fill="freeze" begin="indefinite" data-delay="1.8"/>
+    </line>
+    <line x1="31" y1="118" x2="61" y2="118" stroke="#566BA8" stroke-width="3" stroke-dasharray="30" stroke-dashoffset="30">
+      <animate attributeName="stroke-dashoffset" from="30" to="0" dur="0.2s" fill="freeze" begin="indefinite" data-delay="0.9"/>
+      <animate attributeName="opacity" from="1" to="0" dur="0.3s" fill="freeze" begin="indefinite" data-delay="2.2"/>
+    </line>
+  </g>
+
+  <!-- Horizontal dashed arrow; dashes run left → right, hidden again once the old phone is gone -->
+  <g stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="84" y1="100" x2="114" y2="100" stroke="transparent" stroke-dasharray="4 5">
+      <animate attributeName="stroke" values="transparent;#5C6EA8" dur="0.01s" fill="freeze" begin="indefinite" data-delay="1.0"/>
+      <animate attributeName="stroke-dashoffset" from="9" to="0" dur="0.6s" repeatCount="indefinite" begin="indefinite" data-delay="1.0"/>
+      <animate attributeName="stroke" values="#5C6EA8;transparent" dur="0.01s" fill="freeze" begin="indefinite" data-delay="2.9"/>
+    </line>
+    <path d="M110 94 L116 100 L110 106" stroke="transparent">
+      <animate attributeName="stroke" values="transparent;#5C6EA8" dur="0.01s" fill="freeze" begin="indefinite" data-delay="1.0"/>
+      <animate attributeName="stroke" values="#5C6EA8;transparent" dur="0.01s" fill="freeze" begin="indefinite" data-delay="2.9"/>
+    </path>
+  </g>
+
+  <!-- New site phone: drawn, filled, then slides to the centre -->
+  <g stroke-linecap="round">
+    <animateTransform attributeName="transform" type="translate" from="0 0" to="-52 0"
+      dur="0.6s" fill="freeze" begin="indefinite" data-delay="3.3"
+      calcMode="spline" keyTimes="0;1" keySplines="0.4 0 0.2 1"/>
+
+    <rect x="124" y="40" width="56" height="120" rx="10" stroke="#6274A9" stroke-width="2" stroke-dasharray="352" stroke-dashoffset="352">
+      <animate attributeName="stroke-dashoffset" from="352" to="0" dur="0.6s" fill="freeze" begin="indefinite" data-delay="0.2"/>
+    </rect>
+    <line x1="145" y1="51" x2="159" y2="51" stroke="#6274A9" stroke-width="2" stroke-dasharray="14" stroke-dashoffset="14">
+      <animate attributeName="stroke-dashoffset" from="14" to="0" dur="0.2s" fill="freeze" begin="indefinite" data-delay="0.7"/>
+    </line>
+    <line x1="140" y1="150" x2="164" y2="150" stroke="#6274A9" stroke-width="2" stroke-dasharray="24" stroke-dashoffset="24">
+      <animate attributeName="stroke-dashoffset" from="24" to="0" dur="0.2s" fill="freeze" begin="indefinite" data-delay="0.8"/>
+    </line>
+
+    <!-- New content: draws in, then keeps a slow pulse wave -->
+    <line x1="135" y1="82" x2="169" y2="82" stroke="#6F79AA" stroke-width="3" stroke-dasharray="34" stroke-dashoffset="34">
+      <animate attributeName="stroke-dashoffset" from="34" to="0" dur="0.3s" fill="freeze" begin="indefinite" data-delay="1.6"/>
+      <animate attributeName="opacity" values="1;0.35;1" dur="1.8s" repeatCount="indefinite" begin="indefinite" data-delay="4.0"/>
+    </line>
+    <line x1="135" y1="100" x2="161" y2="100" stroke="#767CAA" stroke-width="3" stroke-dasharray="26" stroke-dashoffset="26">
+      <animate attributeName="stroke-dashoffset" from="26" to="0" dur="0.3s" fill="freeze" begin="indefinite" data-delay="2.0"/>
+      <animate attributeName="opacity" values="1;0.35;1" dur="1.8s" repeatCount="indefinite" begin="indefinite" data-delay="4.2"/>
+    </line>
+    <line x1="135" y1="118" x2="165" y2="118" stroke="#7C7EAB" stroke-width="3" stroke-dasharray="30" stroke-dashoffset="30">
+      <animate attributeName="stroke-dashoffset" from="30" to="0" dur="0.3s" fill="freeze" begin="indefinite" data-delay="2.4"/>
+      <animate attributeName="opacity" values="1;0.35;1" dur="1.8s" repeatCount="indefinite" begin="indefinite" data-delay="4.4"/>
+    </line>
+  </g>
+</svg>

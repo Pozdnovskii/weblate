@@ -3,6 +3,7 @@ import ServiceCard from "@components/sections/ServicesSection/ServiceCard.astro"
 import SocialLinksList from "@components/UI/SocialLinksList.astro";
 import Section from "@components/UI/Section.astro";
 import ServiceCodeIcon from "@images/service-code.svg";
+import ServiceMigrationIcon from "@images/service-migration.svg";
 import ServiceUpgradeIcon from "@images/service-upgrade.svg";
 import ServiceDesignIcon from "@images/service-design.svg";
 import { type Locale, useTranslations } from "@i18n/ui";
@@ -18,7 +19,7 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-const icons = [ServiceCodeIcon, ServiceUpgradeIcon, ServiceDesignIcon];
+const icons = [ServiceCodeIcon, ServiceMigrationIcon, ServiceUpgradeIcon, ServiceDesignIcon];
 const servicesMap = { en: servicesEn, bg: servicesBg, es: servicesEs };
 const cards = servicesMap[locale];
 ---
