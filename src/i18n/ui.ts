@@ -8,8 +8,8 @@ export const defaultLang = "en" as const;
 
 export const ui = {
   en: {
-    "meta.title": "Ivan Pozdnovskii | Web Developer",
-    "meta.description": "Modern Website development with Astro, Webstudio, Webflow, and Shopify. Expert in site speed optimization, SEO, and accessibility for higher rankings.",
+    "meta.title": "Web Developer for Page Speed & SEO | Ivan Pozdnovskii",
+    "meta.description": "I build fast, SEO-ready websites and speed up existing ones. Technical SEO, Core Web Vitals, and migrations from WordPress and Webflow to Astro + Sanity.",
     "meta.jobTitle": "Web Developer",
     "nav.home": "Home",
     "nav.services": "Services",
@@ -18,7 +18,6 @@ export const ui = {
     "nav.thoughts": "Thoughts",
     "header.toggleMenu": "Toggle navigation menu",
     "hero.subtitle": "I specialize in fast-loading, SEO-friendly, accessible websites — built to rank higher and perform better.",
-    "hero.cta": "Explore",
     "contacts.title": "Contact Me",
     "contacts.description": "I prefer clean code, as it creates the fastest, most SEO-optimized, and accessible websites. This brings more traffic, better engagement, and future scalability as your business grows.",
     "services.title": "Services",
@@ -39,8 +38,8 @@ export const ui = {
   },
 
   bg: {
-    "meta.title": "Иван Поздновски | Уеб разработчик",
-    "meta.description": "Модерна разработка на уебсайтове с Astro, Webstudio, Webflow и Shopify. Експерт в оптимизация на скоростта, SEO и достъпност.",
+    "meta.title": "Уеб разработчик за скорост и SEO | Иван Поздновски",
+    "meta.description": "Създавам бързи, SEO-готови сайтове и ускорявам съществуващи. Техническо SEO, Core Web Vitals и миграции от WordPress и Webflow към Astro + Sanity.",
     "meta.jobTitle": "Уеб разработчик",
     "nav.home": "Начало",
     "nav.services": "Услуги",
@@ -49,7 +48,6 @@ export const ui = {
     "nav.thoughts": "Мисли",
     "header.toggleMenu": "Превключване на навигационното меню",
     "hero.subtitle": "Специализирам се в бързо зареждащи се, SEO-оптимизирани, достъпни уебсайтове — създадени да се класират по-високо и да работят по-добре.",
-    "hero.cta": "Разгледайте",
     "contacts.title": "Свържете се с мен",
     "contacts.description": "Предпочитам чист код, защото създава най-бързите, SEO-оптимизирани и достъпни уебсайтове. Това носи повече трафик, по-добра ангажираност и бъдеща мащабируемост за вашия бизнес.",
     "services.title": "Услуги",
@@ -70,8 +68,8 @@ export const ui = {
   },
 
   es: {
-    "meta.title": "Ivan Pozdnovskii | Desarrollador Web",
-    "meta.description": "Desarrollo web moderno con Astro, Webstudio, Webflow y Shopify. Experto en optimización de velocidad, SEO y accesibilidad.",
+    "meta.title": "Desarrollador web: velocidad y SEO | Ivan Pozdnovskii",
+    "meta.description": "Creo sitios rápidos y listos para SEO, y acelero los existentes. SEO técnico, Core Web Vitals y migraciones de WordPress y Webflow a Astro + Sanity.",
     "meta.jobTitle": "Desarrollador Web",
     "nav.home": "Inicio",
     "nav.services": "Servicios",
@@ -80,7 +78,6 @@ export const ui = {
     "nav.thoughts": "Pensamientos",
     "header.toggleMenu": "Alternar menú de navegación",
     "hero.subtitle": "Me especializo en sitios web de carga rápida, optimizados para SEO y accesibles — diseñados para posicionarse mejor y rendir más.",
-    "hero.cta": "Explorar",
     "contacts.title": "Contáctame",
     "contacts.description": "Prefiero código limpio, ya que crea los sitios web más rápidos, optimizados para SEO y accesibles. Esto trae más tráfico, mejor engagement y escalabilidad futura a medida que tu negocio crece.",
     "services.title": "Servicios",

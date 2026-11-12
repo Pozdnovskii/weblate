@@ -13,9 +13,9 @@ const t = useTranslations(locale);
 const settings = await getSiteSettings();
 
 const heroWords = {
-  en: ["Meticulous", "Developer", "For", "Your", "Website"],
-  bg: ["Прецизен", "разработчик", "за", "вашия", "уебсайт"],
-  es: ["Desarrollador", "meticuloso", "para", "tu", "sitio web"],
+  en: ["Web", "developer", "for", "fast,", "SEO-ready", "websites"],
+  bg: ["Уеб", "разработчик", "за", "бързи,", "SEO-готови", "сайтове"],
+  es: ["Desarrollador", "web", "de", "sitios", "rápidos", "con SEO"],
 };
 
 const h1Width = { en: "w-[15em]", bg: "w-[15.5em]", es: "w-[16em]" };
@@ -49,18 +49,6 @@ const h1Width = { en: "w-[15em]", bg: "w-[15.5em]", es: "w-[16em]" };
   >
     {t("hero.subtitle")}
   </p>
-
-  <a
-    data-umami-event="click-explore"
-    href="#contacts"
-    data-fade-animation
-    style="--fade-index: 4"
-    class="heading-mono absolute flex gap-x-8 self-end md:w-xs md:max-w-[calc(100%-var(--spacing-svw)*2)]"
-  >
-    <span aria-hidden="true" class="hidden md:me-auto md:block">/</span><span
-      >{t("hero.cta")}</span
-    ><span>↓</span></a
-  >
 </section>
 
 <Image
