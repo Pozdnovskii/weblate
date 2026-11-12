@@ -126,7 +126,8 @@ const finalSchema = schema ?? (isHome ? personSchema : null);
       <script type="application/ld+json" set:html={JSON.stringify(finalSchema)}></script>
     )}      
 
-    <Font cssVariable="--font-space-grotesk" preload />
-    <Font cssVariable="--font-space-mono" preload />
+    {/* Not preloaded where unused: the Bulgarian pages use system fonts (global.css). */}
+    <Font cssVariable="--font-space-grotesk" preload={locale !== "bg"} />
+    <Font cssVariable="--font-space-mono" preload={locale !== "bg"} />
     <ClientRouter />
   </head>

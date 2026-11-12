@@ -16,6 +16,7 @@
 @import "@styles/HomePage/thoughts.css";
 @import "@styles/footer.css";
 @import "@styles/article.css";
+@import "@styles/chat.css";
 
 @theme {
   --font-body: var(--font-space-grotesk);
@@ -46,6 +47,13 @@
 }
 
 @layer base {
+  /* Space Grotesk and Space Mono have no Cyrillic: the Bulgarian pages use the
+     system fonts throughout rather than mixing them letter by letter. */
+  html:lang(bg) {
+    --font-body: system-ui, sans-serif;
+    --font-secondary: ui-monospace, monospace;
+  }
+
   html > body {
     scrollbar-gutter: stable;
     font-family: var(--font-body);
