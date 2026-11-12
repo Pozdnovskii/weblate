@@ -72,8 +72,7 @@
   /* On a phone, top and height follow the visual viewport (set by the
      script), so the panel stays above the keyboard. */
   #chat-panel {
-    /* On a phone the page shows through, blurred; the desktop card is opaque. */
-    @apply fixed inset-x-0 top-0 z-50 flex h-dvh flex-col overscroll-none bg-zinc-900/70 backdrop-blur-lg;
+    @apply fixed inset-x-0 top-0 z-50 flex h-dvh flex-col overscroll-none;
 
     &[hidden] {
       @apply hidden;
@@ -81,7 +80,20 @@
 
     /* A card above the toggle, clear of the header at the top. */
     @media (width >= 40rem) {
-      @apply inset-auto end-(--chat-end) bottom-[calc(var(--chat-gap)+3.25rem)] h-[min(40rem,calc(100dvh-16rem))] w-[26rem] bg-transparent backdrop-blur-none;
+      @apply inset-auto end-(--chat-end) bottom-[calc(var(--chat-gap)+3.25rem)] h-[min(40rem,calc(100dvh-16rem))] w-[26rem];
+    }
+  }
+
+  /* On a phone the page shows through the panel, blurred. The backdrop is its
+     own element, not the panel's background: the panel ends above the keyboard,
+     and the page would show sharp behind the keyboard and the strip above it.
+     It reaches well past the screen, as iOS shifts the page when the keyboard
+     opens. */
+  .chat-backdrop {
+    @apply fixed inset-x-0 -top-[50vh] -bottom-[50vh] z-49 hidden bg-zinc-900/70 backdrop-blur-lg;
+
+    .chat-modal & {
+      @apply block;
     }
   }
 
