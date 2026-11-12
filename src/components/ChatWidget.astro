@@ -160,6 +160,29 @@ const strings = {
     viewport?.addEventListener("resize", fit);
     viewport?.addEventListener("scroll", fit);
 
+    // iOS Safari scrolls the page under the full-screen panel despite
+    // `overflow: hidden` on <body>, and `overscroll-behavior` only helps once the
+    // log itself can scroll. So while the panel is modal, a touch drag is
+    // cancelled unless it scrolls the log (or the input) within its bounds, the
+    // way body-scroll-lock does it, without fixing <body> in place.
+    let touchY = 0;
+    document.addEventListener("touchstart", (event) => {
+      touchY = event.touches[0].clientY;
+    }, { passive: true });
+    document.addEventListener("touchmove", (event) => {
+      if (!root.isConnected || panel.hidden || !fullscreen.matches || event.touches.length > 1) return;
+      const scroller = (event.target as Element).closest<HTMLElement>(".chat-log, #chat-input");
+      const y = event.touches[0].clientY;
+      const dy = y - touchY;
+      touchY = y;
+      const canScroll =
+        scroller &&
+        scroller.scrollHeight > scroller.clientHeight &&
+        // Dragging down scrolls up: blocked at the top; and the other way round.
+        (dy > 0 ? scroller.scrollTop > 0 : scroller.scrollTop + scroller.clientHeight < scroller.scrollHeight);
+      if (!canScroll) event.preventDefault();
+    }, { passive: false });
+
     const open = (value: boolean) => {
       panel.hidden = !value;
       setModal(value && fullscreen.matches);
