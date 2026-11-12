@@ -45,7 +45,6 @@ const strings = {
     aria-expanded="false"
     aria-controls="chat-panel"
     aria-label={t("chat.open")}
-    data-umami-event="chat-toggle"
     data-fade-animation={isHome || undefined}
     style="--fade-index: 6"
   >
@@ -194,6 +193,8 @@ const strings = {
       toggle.setAttribute("aria-expanded", String(value));
       toggle.setAttribute("aria-label", value ? strings.close : strings.open);
       if (value) {
+        // Opening only: a click on the toggle closes the panel too.
+        (window as { umami?: { track(event: string): void } }).umami?.track("chat-open");
         log.scrollTop = log.scrollHeight;
         input.focus();
       } else {
