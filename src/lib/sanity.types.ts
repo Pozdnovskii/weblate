@@ -664,8 +664,7 @@ export type PROJECTS_QUERY_RESULT = Array<{
 }>;
 
 // Query TypeMap
-import "@sanity/client";
-declare module "@sanity/client" {
+declare global {
   interface SanityQueries {
     '\n  *[_type == "thought" && defined(slug.en.current)] | order(date desc) {\n    "enSlug": slug.en.current,\n    slug,\n    title,\n    description,\n    date,\n    mainImage\n  }\n': THOUGHT_CARDS_QUERY_RESULT;
     '\n  *[_type == "thought" && defined(slug.en.current)]{\n    "enSlug": slug.en.current,\n    slug\n  }\n': THOUGHT_PATHS_QUERY_RESULT;
@@ -673,4 +672,8 @@ declare module "@sanity/client" {
     '\n  *[_type == "siteSettings" && _id == "siteSettings"][0]{\n    "heroBg": { "url": heroBg.asset->url }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
     '\n  *[_type == "project"] | order(order asc, _createdAt asc) {\n    _id,\n    title,\n    link,\n    description,\n    "services": services[]->title,\n    "tools": tools[]->name,\n    "desktopImage": desktopImage{\n      ...,\n      "width":  asset->metadata.dimensions.width,\n      "height": asset->metadata.dimensions.height\n    },\n    "mobileImage": mobileImage{\n      ...,\n      "width":  asset->metadata.dimensions.width,\n      "height": asset->metadata.dimensions.height\n    }\n  }\n': PROJECTS_QUERY_RESULT;
   }
+}
+// Lets @sanity/client releases that predate the global registry read it too
+declare module "@sanity/client" {
+  interface SanityQueries extends globalThis.SanityQueries {}
 }

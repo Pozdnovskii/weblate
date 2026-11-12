@@ -3,6 +3,3 @@
 allowBuilds:
   esbuild: true
   sharp: true
-minimumReleaseAgeExclude:
-  - '@sanity/client@7.23.2'
-  - prettier-plugin-tailwindcss@0.8.1

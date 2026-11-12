@@ -4,11 +4,3 @@
 # and silently no-ops installs run from here).
 allowBuilds:
   esbuild: true
-minimumReleaseAgeExclude:
-  - '@sanity/diff@6.5.0'
-  - '@sanity/mutator@6.5.0'
-  - '@sanity/schema@6.5.0'
-  - '@sanity/types@6.5.0'
-  - '@sanity/util@6.5.0'
-  - sanity@6.5.0
-  - '@sanity/vision@6.5.0'
