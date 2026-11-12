@@ -1,8 +1,11 @@
 /* Chat widget (src/components/ChatWidget.astro). Every class here is set or
    toggled from the widget's script too, so it is hand-written, not utilities. */
 @layer components {
-  .chat-modal {
-    @apply overflow-hidden;
+  /* The page under the full-screen panel must not scroll: iOS ignores
+     overflow on <html> alone. */
+  .chat-modal,
+  .chat-modal body {
+    @apply overflow-hidden overscroll-none;
   }
 
   #chat {
@@ -66,8 +69,10 @@
 
   /* ── Panel ───────────────────────────────────────────────────────────── */
 
+  /* On a phone, top and height follow the visual viewport (set by the
+     script), so the panel stays above the keyboard. */
   #chat-panel {
-    @apply fixed inset-0 z-50 flex flex-col bg-zinc-900;
+    @apply fixed inset-x-0 top-0 z-50 flex h-dvh flex-col overscroll-none bg-zinc-900;
 
     &[hidden] {
       @apply hidden;

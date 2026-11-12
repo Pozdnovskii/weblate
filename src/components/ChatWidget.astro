@@ -138,8 +138,27 @@ const strings = {
         if (element !== root && element instanceof HTMLElement) element.inert = on;
       }
       document.documentElement.classList.toggle("chat-modal", on);
+      fit();
     };
     fullscreen.addEventListener("change", () => setModal(!panel.hidden && fullscreen.matches));
+
+    // The on-screen keyboard shrinks only the visual viewport: a panel pinned to
+    // the layout viewport ends up half under the keyboard, and iOS scrolls the
+    // page to show the input. So on a phone the panel follows the visual
+    // viewport, the part of the screen above the keyboard.
+    const viewport = window.visualViewport;
+    function fit() {
+      if (!viewport || panel.hidden || !fullscreen.matches) {
+        panel.style.removeProperty("top");
+        panel.style.removeProperty("height");
+        return;
+      }
+      panel.style.top = `${viewport.offsetTop}px`;
+      panel.style.height = `${viewport.height}px`;
+      log.scrollTop = log.scrollHeight;
+    }
+    viewport?.addEventListener("resize", fit);
+    viewport?.addEventListener("scroll", fit);
 
     const open = (value: boolean) => {
       panel.hidden = !value;
