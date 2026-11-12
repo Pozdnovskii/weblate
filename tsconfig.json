@@ -10,7 +10,6 @@
       "@social-logos/*": ["./src/assets/images/social-logos/*"],
       "@tech-logos/*": ["./src/assets/images/tech-logos/*"],
       "@layouts/*": ["./src/layouts/*"],
-      "@content/*": ["./src/content/*"],
       "@scripts/*": ["./src/scripts/*"],
       "@styles/*": ["./src/styles/*"],
       "@i18n/*": ["./src/i18n/*"],

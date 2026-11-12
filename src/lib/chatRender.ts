@@ -69,7 +69,10 @@ function appendAll(parent: Node, nodes: Node[]) {
   for (const node of nodes) parent.appendChild(node);
 }
 
-/** A link to the site or to a project's website, or else just its words. */
+/**
+ * A link to the site, a project's website or one of Ivan's contacts (a host, or
+ * a whole mailto: URL), or else just its words.
+ */
 function link(label: string, href: string, externalHosts: ReadonlySet<string>): Node {
   let url: URL;
   try {
@@ -85,9 +88,12 @@ function link(label: string, href: string, externalHosts: ReadonlySet<string>): 
     anchor.href = url.href;
     anchor.target = "_blank";
     anchor.rel = "noopener noreferrer";
+  } else if (url.protocol === "mailto:" && externalHosts.has(url.href)) {
+    anchor.href = url.href;
   } else {
     return document.createTextNode(label);
   }
-  anchor.textContent = label === href ? url.hostname + url.pathname.replace(/\/$/, "") : label;
+  anchor.textContent =
+    label !== href ? label : url.protocol === "mailto:" ? url.pathname : url.hostname + url.pathname.replace(/\/$/, "");
   return anchor;
 }

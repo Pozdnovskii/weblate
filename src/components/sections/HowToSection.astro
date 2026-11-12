@@ -3,9 +3,7 @@ import Section from "@components/UI/Section.astro";
 import PrinciplesIcon from "@images/principles.svg";
 import { type Locale, useTranslations } from "@i18n/ui";
 
-import howToEn from "@content/howTo/en.json";
-import howToBg from "@content/howTo/bg.json";
-import howToEs from "@content/howTo/es.json";
+import { getPrinciples } from "@lib/queries";
 
 interface Props {
   locale: Locale;
@@ -14,8 +12,10 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-const howToMap = { en: howToEn, bg: howToBg, es: howToEs };
-const tabs = howToMap[locale];
+const tabs = (await getPrinciples(locale)).map(({ group, items }) => ({
+  title: t(`howTo.${group}`),
+  items,
+}));
 ---
 
 <Section id="how-to" title={t("howTo.title")} class="wrapper">

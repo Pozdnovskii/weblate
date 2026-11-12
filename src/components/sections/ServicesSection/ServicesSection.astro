@@ -7,10 +7,7 @@ import ServiceMigrationIcon from "@images/service-migration.svg";
 import ServiceUpgradeIcon from "@images/service-upgrade.svg";
 import ServiceDesignIcon from "@images/service-design.svg";
 import { type Locale, useTranslations } from "@i18n/ui";
-
-import servicesEn from "@content/services/en.json";
-import servicesBg from "@content/services/bg.json";
-import servicesEs from "@content/services/es.json";
+import { getServiceCards } from "@lib/queries";
 
 interface Props {
   locale: Locale;
@@ -19,15 +16,19 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-const icons = [ServiceCodeIcon, ServiceMigrationIcon, ServiceUpgradeIcon, ServiceDesignIcon];
-const servicesMap = { en: servicesEn, bg: servicesBg, es: servicesEs };
-const cards = servicesMap[locale];
+const icons = {
+  code: ServiceCodeIcon,
+  migration: ServiceMigrationIcon,
+  upgrade: ServiceUpgradeIcon,
+  design: ServiceDesignIcon,
+};
+const cards = await getServiceCards(locale);
 ---
 
 <Section id="services" title={t("services.title")} class="wrapper">
   <main>
     {cards.map((card, i) => {
-      const Icon = icons[i];
+      const Icon = icons[card.icon];
       const index = String(i + 1).padStart(3, "0");
       const isLast = i === cards.length - 1;
 

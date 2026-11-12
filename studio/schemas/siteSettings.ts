@@ -14,6 +14,14 @@ export const siteSettings = defineType({
       type: "image",
       validation: (r) => r.required(),
     }),
+    defineField({
+      name: "chatKnowledge",
+      title: "AI chat: about Ivan",
+      description:
+        "Facts the site's AI chat may tell visitors beyond the pages: who Ivan is, prices, availability, reviews. English; the chat answers in the visitor's language. Not shown on the site.",
+      type: "text",
+      rows: 30,
+    }),
   ],
 
   preview: {

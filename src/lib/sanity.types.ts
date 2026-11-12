@@ -15,6 +15,61 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type Principle = {
+  _id: string;
+  _type: "principle";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  group: "process" | "quality" | "technical";
+  title?: {
+    en: string;
+    bg?: string;
+    es?: string;
+  };
+  description?: {
+    en: string;
+    bg?: string;
+    es?: string;
+  };
+  order: number;
+};
+
+export type ToolGroup = {
+  _id: string;
+  _type: "toolGroup";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  caption?: {
+    en: string;
+    bg?: string;
+    es?: string;
+  };
+  logos?: Array<string>;
+  order: number;
+};
+
+export type ServiceCard = {
+  _id: string;
+  _type: "serviceCard";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: {
+    en: string;
+    bg?: string;
+    es?: string;
+  };
+  text?: {
+    en: string;
+    bg?: string;
+    es?: string;
+  };
+  icon: "code" | "migration" | "upgrade" | "design";
+  order: number;
+};
+
 export type Service = {
   _id: string;
   _type: "service";
@@ -37,6 +92,20 @@ export type Tool = {
   name: string;
 };
 
+export type Contacts = {
+  _id: string;
+  _type: "contacts";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  links: Array<{
+    platform:
+      "contra" | "upwork" | "github" | "linkedin" | "telegram" | "email";
+    url: string;
+    _key: string;
+  }>;
+};
+
 export type SanityImageAssetReference = {
   _ref: string;
   _type: "reference";
@@ -57,6 +126,7 @@ export type SiteSettings = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  chatKnowledge?: string;
 };
 
 export type SanityImageCrop = {
@@ -388,8 +458,12 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | Principle
+  | ToolGroup
+  | ServiceCard
   | Service
   | Tool
+  | Contacts
   | SanityImageAssetReference
   | SiteSettings
   | SanityImageCrop
@@ -626,6 +700,60 @@ export type SITE_SETTINGS_QUERY_RESULT = {
 } | null;
 
 // Source: ../src/lib/queries.ts
+// Variable: SERVICE_CARDS_QUERY
+// Query: *[_type == "serviceCard"] | order(order asc) { title, text, icon }
+export type SERVICE_CARDS_QUERY_RESULT = Array<{
+  title: {
+    en: string;
+    bg?: string;
+    es?: string;
+  } | null;
+  text: {
+    en: string;
+    bg?: string;
+    es?: string;
+  } | null;
+  icon: "code" | "design" | "migration" | "upgrade";
+}>;
+
+// Source: ../src/lib/queries.ts
+// Variable: TOOL_GROUPS_QUERY
+// Query: *[_type == "toolGroup"] | order(order asc) { caption, logos }
+export type TOOL_GROUPS_QUERY_RESULT = Array<{
+  caption: {
+    en: string;
+    bg?: string;
+    es?: string;
+  } | null;
+  logos: Array<string> | null;
+}>;
+
+// Source: ../src/lib/queries.ts
+// Variable: PRINCIPLES_QUERY
+// Query: *[_type == "principle"] | order(order asc) { group, title, description }
+export type PRINCIPLES_QUERY_RESULT = Array<{
+  group: "process" | "quality" | "technical";
+  title: {
+    en: string;
+    bg?: string;
+    es?: string;
+  } | null;
+  description: {
+    en: string;
+    bg?: string;
+    es?: string;
+  } | null;
+}>;
+
+// Source: ../src/lib/queries.ts
+// Variable: CONTACTS_QUERY
+// Query: *[_type == "contacts" && _id == "contacts"][0].links[]{ platform, url }
+export type CONTACTS_QUERY_RESULT = Array<{
+  platform: "contra" | "email" | "github" | "linkedin" | "telegram" | "upwork";
+  url: string;
+}> | null;
+
+// Source: ../src/lib/queries.ts
 // Variable: PROJECT_LINKS_QUERY
 // Query: *[_type == "project" && defined(link)].link
 export type PROJECT_LINKS_QUERY_RESULT = Array<string>;
@@ -675,6 +803,10 @@ declare global {
     '\n  *[_type == "thought" && defined(slug.en.current)]{\n    "enSlug": slug.en.current,\n    slug\n  }\n': THOUGHT_PATHS_QUERY_RESULT;
     '\n  *[_type == "thought" && slug.en.current == $enSlug][0]{\n    "enSlug": slug.en.current,\n    slug,\n    title,\n    description,\n    metaTitle,\n    metaDescription,\n    date,\n    "updatedAt": _updatedAt,\n    mainImage,\n    "body": body{\n      "en": en[]{ ..., _type == "image" => { ..., "asset": asset->{ url } } },\n      "bg": bg[]{ ..., _type == "image" => { ..., "asset": asset->{ url } } },\n      "es": es[]{ ..., _type == "image" => { ..., "asset": asset->{ url } } }\n    },\n    faq\n  }\n': THOUGHT_QUERY_RESULT;
     '\n  *[_type == "siteSettings" && _id == "siteSettings"][0]{\n    "heroBg": { "url": heroBg.asset->url }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
+    '\n  *[_type == "serviceCard"] | order(order asc) { title, text, icon }\n': SERVICE_CARDS_QUERY_RESULT;
+    '\n  *[_type == "toolGroup"] | order(order asc) { caption, logos }\n': TOOL_GROUPS_QUERY_RESULT;
+    '\n  *[_type == "principle"] | order(order asc) { group, title, description }\n': PRINCIPLES_QUERY_RESULT;
+    '\n  *[_type == "contacts" && _id == "contacts"][0].links[]{ platform, url }\n': CONTACTS_QUERY_RESULT;
     '\n  *[_type == "project" && defined(link)].link\n': PROJECT_LINKS_QUERY_RESULT;
     '\n  *[_type == "project"] | order(order asc, _createdAt asc) {\n    _id,\n    title,\n    link,\n    description,\n    "services": services[]->title,\n    "tools": tools[]->name,\n    "desktopImage": desktopImage{\n      ...,\n      "width":  asset->metadata.dimensions.width,\n      "height": asset->metadata.dimensions.height\n    },\n    "mobileImage": mobileImage{\n      ...,\n      "width":  asset->metadata.dimensions.width,\n      "height": asset->metadata.dimensions.height\n    }\n  }\n': PROJECTS_QUERY_RESULT;
   }

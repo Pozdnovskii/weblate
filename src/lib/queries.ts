@@ -106,6 +106,22 @@ export const SITE_SETTINGS_QUERY = defineQuery(`
   }
 `);
 
+export const SERVICE_CARDS_QUERY = defineQuery(`
+  *[_type == "serviceCard"] | order(order asc) { title, text, icon }
+`);
+
+export const TOOL_GROUPS_QUERY = defineQuery(`
+  *[_type == "toolGroup"] | order(order asc) { caption, logos }
+`);
+
+export const PRINCIPLES_QUERY = defineQuery(`
+  *[_type == "principle"] | order(order asc) { group, title, description }
+`);
+
+export const CONTACTS_QUERY = defineQuery(`
+  *[_type == "contacts" && _id == "contacts"][0].links[]{ platform, url }
+`);
+
 /** Project websites: the only outside links the chat widget makes clickable. */
 export const PROJECT_LINKS_QUERY = defineQuery(`
   *[_type == "project" && defined(link)].link
@@ -294,4 +310,67 @@ export function getProjectHosts(): Promise<string[]> {
     ),
   ]);
   return projectHosts;
+}
+
+// ── Home page sections ────────────────────────────────────────────────────────
+
+export type ServiceCard = {
+  title: string;
+  paragraphs: string[];
+  icon: "code" | "migration" | "upgrade" | "design";
+};
+
+export async function getServiceCards(lang: Locale): Promise<ServiceCard[]> {
+  const rows = await sanityClient.fetch(SERVICE_CARDS_QUERY);
+  return rows.map((r) => ({
+    title: req(pick(r.title, lang), "serviceCard.title"),
+    paragraphs: req(pick(r.text, lang), "serviceCard.text").split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean),
+    icon: req(r.icon, "serviceCard.icon"),
+  }));
+}
+
+export type ToolGroup = { caption: string; logos: string[] };
+
+export async function getToolGroups(lang: Locale): Promise<ToolGroup[]> {
+  const rows = await sanityClient.fetch(TOOL_GROUPS_QUERY);
+  return rows.map((r) => ({
+    caption: req(pick(r.caption, lang), "toolGroup.caption"),
+    logos: r.logos ?? [],
+  }));
+}
+
+export type PrincipleGroup = "process" | "quality" | "technical";
+export type Principle = { title: string; description: string };
+
+/** The principles by tab, tabs in their fixed order. */
+export async function getPrinciples(lang: Locale): Promise<{ group: PrincipleGroup; items: Principle[] }[]> {
+  const rows = await sanityClient.fetch(PRINCIPLES_QUERY);
+  const groups: PrincipleGroup[] = ["process", "quality", "technical"];
+  return groups.map((group) => ({
+    group,
+    items: rows
+      .filter((r) => r.group === group)
+      .map((r) => ({
+        title: req(pick(r.title, lang), "principle.title"),
+        description: req(pick(r.description, lang), "principle.description"),
+      })),
+  }));
+}
+
+export type ContactLink = {
+  platform: "contra" | "upwork" | "github" | "linkedin" | "telegram" | "email";
+  url: string;
+};
+
+// The header, the services and the contacts sections all show these.
+let contacts: Promise<ContactLink[]> | undefined;
+
+export function getContacts(): Promise<ContactLink[]> {
+  contacts ??= sanityClient.fetch(CONTACTS_QUERY).then((links) =>
+    req(links, "contacts document").map((l) => ({
+      platform: req(l.platform, "contacts.platform"),
+      url: req(l.url, "contacts.url"),
+    })),
+  );
+  return contacts;
 }

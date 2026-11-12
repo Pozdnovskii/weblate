@@ -21,11 +21,13 @@ export function translatedField(
     type = "string",
     group,
     rows,
+    description,
   }: {
     required?: "all" | "default" | false;
     type?: string;
     group?: string;
     rows?: number;
+    description?: string;
   } = {},
 ) {
   return defineField({
@@ -33,6 +35,7 @@ export function translatedField(
     title,
     type: "object",
     group,
+    description,
     fields: LANGUAGES.map((lang) =>
       defineField({
         name: lang,

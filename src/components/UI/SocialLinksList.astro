@@ -1,5 +1,6 @@
 ---
 import SocialLink from "@components/UI/SocialLink.astro";
+import { type ContactLink, getContacts } from "@lib/queries";
 
 import ContraLogo from "@social-logos/contra_logo.svg";
 import UpworkLogo from "@social-logos/upwork_logo.svg";
@@ -11,6 +12,16 @@ import GitHubLogo from "@social-logos/github_logo.svg";
 const { variant } = Astro.props;
 const dataUmamiEvent =
   variant === "vertical" ? "header-address-click" : "contacts-address-click";
+
+const PLATFORMS: Record<ContactLink["platform"], { label: string; Icon: typeof ContraLogo }> = {
+  contra: { label: "Contra account", Icon: ContraLogo },
+  upwork: { label: "Upwork account", Icon: UpworkLogo },
+  github: { label: "GitHub account", Icon: GitHubLogo },
+  linkedin: { label: "Linkedin account", Icon: LinkedinLogo },
+  telegram: { label: "Telegram account", Icon: TgLogo },
+  email: { label: "Email me", Icon: EmailLogo },
+};
+const links = await getContacts();
 ---
 
 <ul
@@ -20,41 +31,14 @@ const dataUmamiEvent =
       : "flex-wrap gap-x-1 translate-x-[calc(clamp(45px,2.5em,78px)/-6)]"
   }`}
 >
-  <SocialLink
-    dataUmamiEvent={dataUmamiEvent}
-    href="https://contra.com/ipozdnovskii?referralExperimentNid=SOCIAL_REFERRAL_PROGRAM&referrerUsername=ipozdnovskii"
-    ariaLabel="Contra account"
-    Icon={ContraLogo}
-  />
-  <SocialLink
-    dataUmamiEvent={dataUmamiEvent}
-    href="https://www.upwork.com/freelancers/~014d1e5fca851a8c3a?mp_source=share"
-    ariaLabel="Upwork account"
-    Icon={UpworkLogo}
-  />
-  <SocialLink
-    dataUmamiEvent={dataUmamiEvent}
-    href="https://github.com/Pozdnovskii"
-    ariaLabel="GitHub account"
-    Icon={GitHubLogo}
-  />
-  <SocialLink
-    dataUmamiEvent={dataUmamiEvent}
-    href="https://www.linkedin.com/in/ivan-pozdnovskii/?locale=en_US"
-    ariaLabel="Linkedin account"
-    Icon={LinkedinLogo}
-  />
-  <SocialLink
-    dataUmamiEvent={dataUmamiEvent}
-    href="https://t.me/pozdnovskii"
-    ariaLabel="Telegram account"
-    Icon={TgLogo}
-  />
-  <SocialLink
-    dataUmamiEvent={dataUmamiEvent}
-    href="mailto:ivan@weblateweb.dev"
-    ariaLabel="Email me"
-    Icon={EmailLogo}
-    fill="#000"
-  />
+  {
+    links.map(({ platform, url }) => (
+      <SocialLink
+        dataUmamiEvent={dataUmamiEvent}
+        href={url}
+        ariaLabel={PLATFORMS[platform].label}
+        Icon={PLATFORMS[platform].Icon}
+      />
+    ))
+  }
 </ul>

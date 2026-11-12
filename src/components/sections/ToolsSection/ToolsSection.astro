@@ -2,10 +2,22 @@
 import Section from "@components/UI/Section.astro";
 import ToolCard from "@components/sections/ToolsSection/ToolCard.astro";
 import { type Locale, useTranslations } from "@i18n/ui";
-
-import toolsEn from "@content/tools/en";
-import toolsBg from "@content/tools/bg";
-import toolsEs from "@content/tools/es";
+import { getToolGroups } from "@lib/queries";
+import AnimejsLogo from "@tech-logos/animejs.svg";
+import AstroLogo from "@tech-logos/astro.svg";
+import CloudflareLogo from "@tech-logos/cloudflare.svg";
+import CssLogo from "@tech-logos/css.svg";
+import FramerLogo from "@tech-logos/framer.svg";
+import GsapLogo from "@tech-logos/gsap.svg";
+import HtmlLogo from "@tech-logos/html.svg";
+import JsLogo from "@tech-logos/js.svg";
+import ReploLogo from "@tech-logos/replo.svg";
+import SanityLogo from "@tech-logos/sanity.svg";
+import ShopifyLogo from "@tech-logos/shopify.svg";
+import TailwindLogo from "@tech-logos/tailwind.svg";
+import VercelLogo from "@tech-logos/vercel.svg";
+import WebflowLogo from "@tech-logos/webflow.svg";
+import WebstudioLogo from "@tech-logos/webstudio.svg";
 
 interface Props {
   locale: Locale;
@@ -14,8 +26,29 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 
-const toolsMap = { en: toolsEn, bg: toolsBg, es: toolsEs };
-const tools = toolsMap[locale];
+// The names Studio offers for a tool group's logos (studio/schemas/toolGroup.ts).
+const LOGOS: Record<string, typeof AstroLogo> = {
+  Astro: AstroLogo,
+  HTML: HtmlLogo,
+  CSS: CssLogo,
+  JavaScript: JsLogo,
+  Tailwind: TailwindLogo,
+  Sanity: SanityLogo,
+  Cloudflare: CloudflareLogo,
+  Vercel: VercelLogo,
+  Webflow: WebflowLogo,
+  Webstudio: WebstudioLogo,
+  Framer: FramerLogo,
+  "Anime.js": AnimejsLogo,
+  GSAP: GsapLogo,
+  Shopify: ShopifyLogo,
+  Replo: ReploLogo,
+};
+
+const tools = (await getToolGroups(locale)).map(({ caption, logos }) => {
+  const icons = logos.flatMap((name) => LOGOS[name] ?? []);
+  return { figcaption: caption, logos: icons.length ? icons : undefined };
+});
 ---
 
 <Section id="tools" title={t("tools.title")} class="wrapper">

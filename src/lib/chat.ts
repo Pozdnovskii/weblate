@@ -1,7 +1,9 @@
 /**
  * The site chat. The visitor's question is run as a semantic search over the
  * site's content in Sanity (the dataset's embeddings), and the matches go to
- * Claude with the question, so it answers in one pass, without tools. Same
+ * Claude with the question, so it answers in one pass, without tools. What
+ * every answer may need (about Ivan, prices, contacts, the home page's services,
+ * tools and principles) is short and goes into the system prompt instead. Same
  * approach as the idelsoft chat, where attaching the Sanity Context MCP endpoint
  * as a tool cost ~2 s and twice the tokens per reply.
  *
@@ -62,11 +64,63 @@ const KEYWORD_QUERY = `*[_type in $types] | score([
   pt::text(body.en), pt::text(body.bg), pt::text(body.es)
 ] match $q) | order(_score desc)[0...${HITS}]${PROJECTION}`;
 
-/** Per locale only for the contacts link; the rest is the same text. */
-const system = (locale: ChatLocale) => `You are the assistant on weblateweb.dev, the personal site of Ivan Pozdnovskii (Иван Поздновски in Bulgarian), a web developer. Speak about Ivan in the third person; you are his site's assistant, not Ivan himself.
-About Ivan: he builds fast-loading, SEO-friendly, accessible websites with Astro, Webstudio, Webflow and Shopify, and prefers clean code. To reach him, point to the contacts at the bottom of the home page: ${home(locale)}#contacts
-Each visitor message comes with <search_results> found on the site for it. Answer from them and the facts above only. If they do not cover the question, say so plainly. Never make anything up.
-Your text goes straight to the visitor as the reply: write in the language of their question, briefly, with no preamble or notes to yourself.
+/** Facts for every answer, edited in Studio. */
+const FACTS_QUERY = `{
+  "about": *[_id == "siteSettings"][0].chatKnowledge,
+  "contacts": *[_id == "contacts"][0].links[]{ platform, url },
+  "services": *[_type == "serviceCard"] | order(order asc){ title, text },
+  "tools": *[_type == "toolGroup"] | order(order asc){ caption, logos },
+  "principles": *[_type == "principle"] | order(group asc, order asc){ group, title, description }
+}`;
+type Facts = {
+  about: string | null;
+  contacts: { platform: string; url: string }[] | null;
+  services: { title: Localized<string>; text: Localized<string> }[];
+  tools: { caption: Localized<string>; logos: string[] | null }[];
+  principles: { group: string; title: Localized<string>; description: Localized<string> }[];
+};
+
+/** A Worker isolate lives for minutes to hours: Studio edits reach the chat within this. */
+const FACTS_TTL = 5 * 60 * 1000;
+let facts: { value: Promise<Facts>; at: number } | undefined;
+
+function getFacts(): Promise<Facts> {
+  if (!facts || Date.now() - facts.at > FACTS_TTL) {
+    const value = groq<Facts>(FACTS_QUERY, {});
+    // A failed fetch is not kept: the next message tries again.
+    value.catch(() => (facts = undefined));
+    facts = { value, at: Date.now() };
+  }
+  return facts.value;
+}
+
+function factsBlock(f: Facts, locale: ChatLocale): string {
+  const services = f.services.map((s) => `## ${loc(s.title, locale)}\n${loc(s.text, locale)}`).join("\n\n");
+  const tools = f.tools
+    .map((t) => `- ${t.logos?.length ? `${t.logos.join(", ")}: ` : ""}${loc(t.caption, locale)}`)
+    .join("\n");
+  const principles = f.principles.map((p) => `- ${p.group}: ${loc(p.title, locale)}. ${loc(p.description, locale)}`).join("\n");
+  const contacts = (f.contacts ?? []).map((c) => `- ${c.platform}: ${c.url}`).join("\n");
+  return [
+    f.about && `<about_ivan>\n${f.about}\n</about_ivan>`,
+    `<services url="${home(locale)}#services">\n${services}\n</services>`,
+    `<technologies url="${home(locale)}#tools">\n${tools}\n</technologies>`,
+    `<principles url="${home(locale)}#how-to">\n${principles}\n</principles>`,
+    `<contacts url="${home(locale)}#contacts">\n${contacts}\n</contacts>`,
+  ]
+    .filter(Boolean)
+    .join("\n\n");
+}
+
+const system = (locale: ChatLocale, f: Facts) => `You are the assistant on weblateweb.dev, the personal site of Ivan Pozdnovskii (Иван Поздновски in Bulgarian), a web developer. Speak about Ivan in the third person; you are his site's assistant, not Ivan himself.
+
+Facts from the site, for any question:
+${factsBlock(f, locale)}
+
+Each visitor message also comes with <search_results> found on the site for it: articles, projects, services and technologies. Answer from them and the facts above only. If they do not cover the question, say so plainly and point to the contacts. Never make anything up.
+Name only the projects that appear in the search results. Never promise a PageSpeed score for the visitor's site: it depends on the platform and the tools the site needs. When a visitor describes a slow site or asks about a migration, suggest sending Ivan the site's URL so he can say what slows it down.
+To reach Ivan, give the contact that fits (email, Telegram, Upwork…) as a Markdown link, with the platform's name or the address as the words.
+Your text goes straight to the visitor as the reply: write in the language of their question, briefly and plainly, without marketing language, with no preamble or notes to yourself.
 Link the pages you used as Markdown links with the page title as the words, using the url given: [Title](url). A project's own website may be linked the same way. Never write a bare URL, and never use a URL as the link words.
 In Bulgarian, write his name in Cyrillic: Иван.`;
 
@@ -110,7 +164,7 @@ export async function* streamChat(
   const query = users.slice(-2).join("\n");
 
   const started = Date.now();
-  const { hits, semantic } = await search(query);
+  const [{ hits, semantic }, f] = await Promise.all([search(query), getFacts()]);
   yield { type: "search", query, semantic, titles: hits.map((h) => titleOf(h, locale)), ms: Date.now() - started };
 
   const recent = history.slice(-CONTEXT_MESSAGES);
@@ -125,7 +179,7 @@ export async function* streamChat(
     model: CHAT_MODEL,
     max_tokens: 8000,
     output_config: { effort: "low" },
-    system: system(locale),
+    system: system(locale, f),
     messages,
   });
 
@@ -140,21 +194,21 @@ export async function* streamChat(
 
 async function search(q: string): Promise<{ hits: Hit[]; semantic: boolean }> {
   try {
-    return { hits: await groq(SEMANTIC_QUERY, q), semantic: true };
+    return { hits: await groq<Hit[]>(SEMANTIC_QUERY, { q, types: SEARCHED_TYPES }), semantic: true };
   } catch (error) {
     console.error({ reason: "semantic_search_failed", error: String(error) });
-    return { hits: await groq(KEYWORD_QUERY, q), semantic: false };
+    return { hits: await groq<Hit[]>(KEYWORD_QUERY, { q, types: SEARCHED_TYPES }), semantic: false };
   }
 }
 
-async function groq(query: string, q: string): Promise<Hit[]> {
+async function groq<T>(query: string, params: Record<string, unknown>): Promise<T> {
   const response = await fetch(SANITY_QUERY_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query, params: { q, types: SEARCHED_TYPES } }),
+    body: JSON.stringify({ query, params }),
   });
   if (!response.ok) throw new Error(`Sanity query: HTTP ${response.status} ${await response.text()}`);
-  return ((await response.json()) as { result: Hit[] }).result;
+  return ((await response.json()) as { result: T }).result;
 }
 
 /**
