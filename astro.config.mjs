@@ -39,7 +39,9 @@ export default defineConfig({
     service: {
       entrypoint: "astro/assets/services/sharp",
       config: {
-        webp: { effort: 6, quality: 80 },
+        // effort 6 took ~30x longer than 4 (Sharp's default) for ~3% smaller files;
+        // with ~260 variants it was 5 of the 6 build minutes.
+        webp: { effort: 4, quality: 80 },
         avif: { effort: 9, quality: 70 },
       },
     },
