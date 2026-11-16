@@ -67,6 +67,7 @@ const KEYWORD_QUERY = `*[_type in $types] | score([
 /** Facts for every answer, edited in Studio. */
 const FACTS_QUERY = `{
   "about": *[_id == "siteSettings"][0].chatKnowledge,
+  "offTopic": *[_id == "siteSettings"][0].chatOffTopic,
   "contacts": *[_id == "contacts"][0].links[]{ platform, url },
   "services": *[_type == "serviceCard"] | order(order asc){ title, text },
   "tools": *[_type == "toolGroup"] | order(order asc){ caption, logos },
@@ -74,6 +75,7 @@ const FACTS_QUERY = `{
 }`;
 type Facts = {
   about: string | null;
+  offTopic: string | null;
   contacts: { platform: string; url: string }[] | null;
   services: { title: Localized<string>; text: Localized<string> }[];
   tools: { caption: Localized<string>; logos: string[] | null }[];
@@ -117,7 +119,8 @@ const system = (locale: ChatLocale, f: Facts) => `You are the assistant on webla
 Facts from the site, for any question:
 ${factsBlock(f, locale)}
 
-Each visitor message also comes with <search_results> found on the site for it: articles, projects, services and technologies. Answer from them and the facts above only. If they do not cover the question, say so plainly and point to the contacts. Never make anything up.
+Each visitor message also comes with <search_results> found on the site for it: articles, projects, services and technologies. Answer from them and the facts above only. If they do not cover a question about Ivan's work, say so plainly and point to the contacts. Never make anything up.
+${f.offTopic ? `For a question that has nothing to do with Ivan, his work or the site:\n<off_topic>\n${f.offTopic}\n</off_topic>` : "For a question that has nothing to do with Ivan, his work or the site, say briefly that you only cover Ivan's work."}
 Name only the projects that appear in the search results. Never promise a PageSpeed score for the visitor's site: it depends on the platform and the tools the site needs. When a visitor describes a slow site or asks about a migration, suggest sending Ivan the site's URL so he can say what slows it down.
 To reach Ivan, give the contact that fits (email, Telegram, Upwork…) as a Markdown link, with the platform's name or the address as the words.
 Your text goes straight to the visitor as the reply: write in the language of their question, briefly and plainly, without marketing language, with no preamble or notes to yourself.

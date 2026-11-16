@@ -127,6 +127,7 @@ export type SiteSettings = {
     _type: "image";
   };
   chatKnowledge?: string;
+  chatOffTopic?: string;
 };
 
 export type SanityImageCrop = {

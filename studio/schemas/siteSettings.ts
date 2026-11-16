@@ -22,6 +22,14 @@ export const siteSettings = defineType({
       type: "text",
       rows: 30,
     }),
+    defineField({
+      name: "chatOffTopic",
+      title: "AI chat: off-topic questions",
+      description:
+        "How the chat answers questions that have nothing to do with Ivan's work: tone, examples, limits. English; empty means a plain reply that the chat covers only Ivan's work.",
+      type: "text",
+      rows: 12,
+    }),
   ],
 
   preview: {
