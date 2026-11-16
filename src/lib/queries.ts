@@ -17,7 +17,7 @@ import type { TextBlock } from "@lib/portableText";
 type PortableTextImage = {
   _key: string;
   _type: "image";
-  asset: { url: string };
+  asset: { url: string; width: number; height: number };
   alt?: string;
   caption?: string;
 };
@@ -92,9 +92,9 @@ export const THOUGHT_QUERY = defineQuery(`
     "updatedAt": _updatedAt,
     mainImage,
     "body": body{
-      "en": en[]{ ..., _type == "image" => { ..., "asset": asset->{ url } } },
-      "bg": bg[]{ ..., _type == "image" => { ..., "asset": asset->{ url } } },
-      "es": es[]{ ..., _type == "image" => { ..., "asset": asset->{ url } } }
+      "en": en[]{ ..., _type == "image" => { ..., "asset": asset->{ url, "width": metadata.dimensions.width, "height": metadata.dimensions.height } } },
+      "bg": bg[]{ ..., _type == "image" => { ..., "asset": asset->{ url, "width": metadata.dimensions.width, "height": metadata.dimensions.height } } },
+      "es": es[]{ ..., _type == "image" => { ..., "asset": asset->{ url, "width": metadata.dimensions.width, "height": metadata.dimensions.height } } }
     },
     faq
   }

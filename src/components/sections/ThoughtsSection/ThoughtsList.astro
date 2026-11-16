@@ -33,7 +33,7 @@ const posts = await getThoughtCards(locale, { excludeEnSlug: excludeId, limit })
       // Sanity does this crop, so the editor's hotspot is honoured here.
       const cardUrl = urlFor(post.mainImage)
         .width(600)
-        .height(400)
+        .height(315)
         .fit("crop")
         .auto("format")
         .quality(80)
@@ -50,7 +50,7 @@ const posts = await getThoughtCards(locale, { excludeEnSlug: excludeId, limit })
                 src={cardUrl}
                 alt={post.mainImage.alt ?? `${post.title} cover`}
                 width={600}
-                height={400}
+                height={315}
                 loading="lazy"
               />
             )}

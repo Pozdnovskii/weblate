@@ -532,7 +532,7 @@ export type THOUGHT_PATHS_QUERY_RESULT = Array<{
 
 // Source: ../src/lib/queries.ts
 // Variable: THOUGHT_QUERY
-// Query: *[_type == "thought" && slug.en.current == $enSlug][0]{    "enSlug": slug.en.current,    slug,    title,    description,    metaTitle,    metaDescription,    date,    "updatedAt": _updatedAt,    mainImage,    "body": body{      "en": en[]{ ..., _type == "image" => { ..., "asset": asset->{ url } } },      "bg": bg[]{ ..., _type == "image" => { ..., "asset": asset->{ url } } },      "es": es[]{ ..., _type == "image" => { ..., "asset": asset->{ url } } }    },    faq  }
+// Query: *[_type == "thought" && slug.en.current == $enSlug][0]{    "enSlug": slug.en.current,    slug,    title,    description,    metaTitle,    metaDescription,    date,    "updatedAt": _updatedAt,    mainImage,    "body": body{      "en": en[]{ ..., _type == "image" => { ..., "asset": asset->{ url, "width": metadata.dimensions.width, "height": metadata.dimensions.height } } },      "bg": bg[]{ ..., _type == "image" => { ..., "asset": asset->{ url, "width": metadata.dimensions.width, "height": metadata.dimensions.height } } },      "es": es[]{ ..., _type == "image" => { ..., "asset": asset->{ url, "width": metadata.dimensions.width, "height": metadata.dimensions.height } } }    },    faq  }
 export type THOUGHT_QUERY_RESULT = {
   enSlug: string | null;
   slug: {
@@ -598,6 +598,8 @@ export type THOUGHT_QUERY_RESULT = {
       | {
           asset: {
             url: string;
+            width: number | null;
+            height: number | null;
           } | null;
           media?: unknown;
           hotspot?: SanityImageHotspot;
@@ -631,6 +633,8 @@ export type THOUGHT_QUERY_RESULT = {
       | {
           asset: {
             url: string;
+            width: number | null;
+            height: number | null;
           } | null;
           media?: unknown;
           hotspot?: SanityImageHotspot;
@@ -664,6 +668,8 @@ export type THOUGHT_QUERY_RESULT = {
       | {
           asset: {
             url: string;
+            width: number | null;
+            height: number | null;
           } | null;
           media?: unknown;
           hotspot?: SanityImageHotspot;
@@ -802,7 +808,7 @@ declare global {
   interface SanityQueries {
     '\n  *[_type == "thought" && defined(slug.en.current)] | order(date desc) {\n    "enSlug": slug.en.current,\n    slug,\n    title,\n    description,\n    date,\n    mainImage\n  }\n': THOUGHT_CARDS_QUERY_RESULT;
     '\n  *[_type == "thought" && defined(slug.en.current)]{\n    "enSlug": slug.en.current,\n    slug\n  }\n': THOUGHT_PATHS_QUERY_RESULT;
-    '\n  *[_type == "thought" && slug.en.current == $enSlug][0]{\n    "enSlug": slug.en.current,\n    slug,\n    title,\n    description,\n    metaTitle,\n    metaDescription,\n    date,\n    "updatedAt": _updatedAt,\n    mainImage,\n    "body": body{\n      "en": en[]{ ..., _type == "image" => { ..., "asset": asset->{ url } } },\n      "bg": bg[]{ ..., _type == "image" => { ..., "asset": asset->{ url } } },\n      "es": es[]{ ..., _type == "image" => { ..., "asset": asset->{ url } } }\n    },\n    faq\n  }\n': THOUGHT_QUERY_RESULT;
+    '\n  *[_type == "thought" && slug.en.current == $enSlug][0]{\n    "enSlug": slug.en.current,\n    slug,\n    title,\n    description,\n    metaTitle,\n    metaDescription,\n    date,\n    "updatedAt": _updatedAt,\n    mainImage,\n    "body": body{\n      "en": en[]{ ..., _type == "image" => { ..., "asset": asset->{ url, "width": metadata.dimensions.width, "height": metadata.dimensions.height } } },\n      "bg": bg[]{ ..., _type == "image" => { ..., "asset": asset->{ url, "width": metadata.dimensions.width, "height": metadata.dimensions.height } } },\n      "es": es[]{ ..., _type == "image" => { ..., "asset": asset->{ url, "width": metadata.dimensions.width, "height": metadata.dimensions.height } } }\n    },\n    faq\n  }\n': THOUGHT_QUERY_RESULT;
     '\n  *[_type == "siteSettings" && _id == "siteSettings"][0]{\n    "heroBg": { "url": heroBg.asset->url }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
     '\n  *[_type == "serviceCard"] | order(order asc) { title, text, icon }\n': SERVICE_CARDS_QUERY_RESULT;
     '\n  *[_type == "toolGroup"] | order(order asc) { caption, logos }\n': TOOL_GROUPS_QUERY_RESULT;

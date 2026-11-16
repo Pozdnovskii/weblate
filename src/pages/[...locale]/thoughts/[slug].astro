@@ -41,7 +41,7 @@ if (!post) {
   return Astro.redirect("/404");
 }
 
-// Only resized here — the <Image> below asks for 1600x900, so Sharp does the
+// Only resized here — the <Image> below asks for 1600x840, so Sharp does the
 // actual crop (centred, hotspot-blind).
 const heroUrl = urlFor(post.mainImage)
   .width(1600)
@@ -129,8 +129,8 @@ const alternateUrls = Object.fromEntries(
           src={heroUrl}
           alt={post.mainImage.alt ?? `${post.title} cover`}
           width={1600}
-          height={900}
-          loading="eager"
+          height={840}
+          priority
         />
       )}
       {post.body && <ThoughtBody body={post.body} />}
