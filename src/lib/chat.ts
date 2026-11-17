@@ -69,6 +69,7 @@ const FACTS_QUERY = `{
   "about": *[_id == "siteSettings"][0].chatKnowledge,
   "offTopic": *[_id == "siteSettings"][0].chatOffTopic,
   "contacts": *[_id == "contacts"][0].links[]{ platform, url },
+  "reviews": *[_type == "review"] | order(order asc).text,
   "services": *[_type == "serviceCard"] | order(order asc){ title, text },
   "tools": *[_type == "toolGroup"] | order(order asc){ caption, logos },
   "principles": *[_type == "principle"] | order(group asc, order asc){ group, title, description }
@@ -77,6 +78,7 @@ type Facts = {
   about: string | null;
   offTopic: string | null;
   contacts: { platform: string; url: string }[] | null;
+  reviews: Localized<string>[];
   services: { title: Localized<string>; text: Localized<string> }[];
   tools: { caption: Localized<string>; logos: string[] | null }[];
   principles: { group: string; title: Localized<string>; description: Localized<string> }[];
@@ -103,11 +105,13 @@ function factsBlock(f: Facts, locale: ChatLocale): string {
     .join("\n");
   const principles = f.principles.map((p) => `- ${p.group}: ${loc(p.title, locale)}. ${loc(p.description, locale)}`).join("\n");
   const contacts = (f.contacts ?? []).map((c) => `- ${c.platform}: ${c.url}`).join("\n");
+  const reviews = f.reviews.map((r) => `- "${loc(r, locale)?.replace(/\s*\n\s*/g, " ")}"`).join("\n");
   return [
     f.about && `<about_ivan>\n${f.about}\n</about_ivan>`,
     `<services url="${home(locale)}#services">\n${services}\n</services>`,
     `<technologies url="${home(locale)}#tools">\n${tools}\n</technologies>`,
     `<principles url="${home(locale)}#how-to">\n${principles}\n</principles>`,
+    `<reviews source="Upwork clients" url="${home(locale)}#reviews">\n${reviews}\n</reviews>`,
     `<contacts url="${home(locale)}#contacts">\n${contacts}\n</contacts>`,
   ]
     .filter(Boolean)
@@ -122,10 +126,11 @@ ${factsBlock(f, locale)}
 Each visitor message also comes with <search_results> found on the site for it: articles, projects, services and technologies. Answer from them and the facts above only. If they do not cover a question about Ivan's work, say so plainly and point to the contacts. Never make anything up.
 ${f.offTopic ? `For a question that has nothing to do with Ivan, his work or the site:\n<off_topic>\n${f.offTopic}\n</off_topic>` : "For a question that has nothing to do with Ivan, his work or the site, say briefly that you only cover Ivan's work."}
 Name only the projects that appear in the search results. Never promise a PageSpeed score for the visitor's site: it depends on the platform and the tools the site needs. When a visitor describes a slow site or asks about a migration, suggest sending Ivan the site's URL so he can say what slows it down.
-To reach Ivan, give the contact that fits (email, Telegram, Upwork…) as a Markdown link, with the platform's name or the address as the words.
-Your text goes straight to the visitor as the reply: write in the language of their question, briefly and plainly, without marketing language, with no preamble or notes to yourself.
+How to talk: like a friendly person in a chat, not a help desk. Write in the language of the visitor's question. Answer the question first, in plain words; a simple question gets one to three sentences, and a list only when there really are several items. Don't introduce yourself or the site unless asked, don't repeat the question, don't add closing offers or summaries, no marketing language.
+Contacts: only when the visitor asks how to reach Ivan or wants to discuss or order something, and then the one or two that fit (as Markdown links, with the platform's name or the address as the words), not the whole list. Link a page of the site only when it adds something to the answer.
+Your text goes straight to the visitor as the reply: no preamble or notes to yourself.
 Link the pages you used as Markdown links with the page title as the words, using the url given: [Title](url). A project's own website may be linked the same way. Never write a bare URL, and never use a URL as the link words.
-In Bulgarian, write his name in Cyrillic: Иван.`;
+In Russian, Bulgarian and other Cyrillic languages, write his name in Cyrillic: Иван.`;
 
 export type ChatMessage = { role: "user" | "assistant"; content: string };
 
