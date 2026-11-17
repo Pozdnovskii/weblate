@@ -1,0 +1,40 @@
+---
+import Section from "@components/UI/Section.astro";
+import { type Locale, useTranslations } from "@i18n/ui";
+import { getContacts, getReviews } from "@lib/queries";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const reviews = await getReviews(locale);
+const upwork = (await getContacts()).find((link) => link.platform === "upwork")?.url;
+---
+
+<Section id="reviews" title={t("reviews.title")} class="wrapper">
+  <ul>
+    {
+      reviews.map((text) => (
+        <li>
+          <blockquote>
+            {text.split("\n").map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </blockquote>
+        </li>
+      ))
+    }
+    <li data-element="upwork">
+      <p>{t("reviews.note")}</p>
+      {
+        upwork && (
+          <a href={upwork} target="_blank" rel="noopener" data-umami-event="reviews-upwork">
+            {t("reviews.verify")} →
+          </a>
+        )
+      }
+    </li>
+  </ul>
+</Section>

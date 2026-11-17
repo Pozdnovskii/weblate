@@ -1,0 +1,33 @@
+@layer components {
+  #reviews {
+    @apply grid-wrapper;
+
+    & > ul {
+      @apply col-span-full columns-1 gap-x-6 md:columns-2 xl:columns-3;
+
+      & > li {
+        @apply mb-6 break-inside-avoid rounded-sm border border-dashed border-neutral-500 p-5;
+      }
+
+      & blockquote {
+        @apply flex flex-col gap-y-2 text-neutral-200;
+      }
+
+      & p {
+        @apply indent-text-indent leading-7;
+      }
+
+      & > [data-element="upwork"] {
+        @apply flex flex-col items-start gap-y-5 border-neutral-300;
+
+        & > p {
+          @apply statement;
+        }
+
+        & > a {
+          @apply heading-mono self-end rounded-sm border border-neutral-400 px-6 py-3 text-white transition-colors hover:bg-neutral-400;
+        }
+      }
+    }
+  }
+}
