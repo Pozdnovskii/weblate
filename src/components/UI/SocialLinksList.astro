@@ -9,9 +9,9 @@ import TgLogo from "@social-logos/tg_logo.svg";
 import EmailLogo from "@social-logos/email_logo.svg";
 import GitHubLogo from "@social-logos/github_logo.svg";
 
-const { variant } = Astro.props;
+const { variant, umamiEvent } = Astro.props;
 const dataUmamiEvent =
-  variant === "vertical" ? "header-address-click" : "contacts-address-click";
+  umamiEvent ?? (variant === "vertical" ? "header-address-click" : "contacts-address-click");
 
 const PLATFORMS: Record<ContactLink["platform"], { label: string; Icon: typeof ContraLogo }> = {
   contra: { label: "Contra account", Icon: ContraLogo },

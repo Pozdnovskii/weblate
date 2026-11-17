@@ -6,17 +6,34 @@
  * Links: the site's own become paths (so they also work on localhost and
  * workers.dev); a project's website, from the allow-list built from Sanity,
  * opens in a new tab; any other URL stays plain text.
+ *
+ * A block that is just the [[contacts]] marker becomes the site's contact icons.
  */
 
 const SITE_HOSTS = new Set(["weblateweb.dev", "www.weblateweb.dev"]);
 // A link's words may hold one level of brackets: "[[WIP] Title](url)".
 const INLINE = /\*\*(.+?)\*\*|\[((?:[^[\]]|\[[^\]]*\])+)\]\(([^)\s]+)\)|(https?:\/\/[^\s)]+[^\s).,;:!?])/g;
 const LIST_ITEM = /^\s*(?:[-*]|\d+\.)\s+/;
+export const CONTACTS_MARKER = "[[contacts]]";
 
-export function renderReply(markdown: string, externalHosts: ReadonlySet<string>): DocumentFragment {
+export function renderReply(
+  markdown: string,
+  externalHosts: ReadonlySet<string>,
+  contacts: () => Node,
+): DocumentFragment {
   const fragment = document.createDocumentFragment();
 
-  for (const block of markdown.trim().split(/\n{2,}/)) {
+  // The marker always stands as a block of its own, wherever the model put it;
+  // while it streams in, its first characters are held back rather than shown.
+  let text = markdown.replaceAll(CONTACTS_MARKER, `\n\n${CONTACTS_MARKER}\n\n`);
+  const tail = /(?:^|\n)[ \t]*(\[\[[a-z]*\]?)$/.exec(text);
+  if (tail && CONTACTS_MARKER.startsWith(tail[1])) text = text.slice(0, tail.index);
+
+  for (const block of text.trim().split(/\n{2,}/)) {
+    if (block.trim() === CONTACTS_MARKER) {
+      fragment.appendChild(contacts());
+      continue;
+    }
     const lines = block.split("\n").filter((line) => line.trim());
     if (lines.length === 0) continue;
 

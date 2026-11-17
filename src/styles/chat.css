@@ -163,6 +163,15 @@
     strong {
       @apply font-normal text-blue-100;
     }
+
+    /* The contact icons: the site's own list, not a reply's bullet list. */
+    .chat-contacts ul {
+      @apply list-none flex-row gap-y-0 ps-0;
+    }
+
+    .chat-contacts a {
+      @apply no-underline;
+    }
   }
 
   /* The input as in the footer form: a bare line that whitens on focus. */

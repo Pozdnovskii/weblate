@@ -5,6 +5,7 @@
  * locales and tabs, until a day without a message ends it.
  */
 import { type Locale, useTranslations } from "@i18n/ui";
+import SocialLinksList from "@components/UI/SocialLinksList.astro";
 import { getContacts, getProjectHosts } from "@lib/queries";
 
 interface Props {
@@ -79,6 +80,12 @@ const strings = {
       <button type="submit">{t("chat.send")} <span aria-hidden="true">→</span></button>
     </form>
   </section>
+
+  <!-- The contact icons, as everywhere on the site: a reply shows them where the
+       model writes the [[contacts]] marker. -->
+  <template data-chat-contacts>
+    <address class="chat-contacts"><SocialLinksList umamiEvent="chat-contact-click" /></address>
+  </template>
 </div>
 
 <script>
@@ -121,6 +128,9 @@ const strings = {
     const send = form.querySelector<HTMLButtonElement>("[type=submit]")!;
     const strings: Strings = JSON.parse(root.dataset.strings!);
     const hosts = new Set<string>(JSON.parse(root.dataset.hosts!));
+    const contactsTemplate = root.querySelector<HTMLTemplateElement>("[data-chat-contacts]")!;
+    const render = (markdown: string) =>
+      renderReply(markdown, hosts, () => contactsTemplate.content.cloneNode(true));
     const locale = root.dataset.locale;
 
     const greeting = log.firstElementChild!;
@@ -253,7 +263,7 @@ const strings = {
           if (done) break;
           text += decoder.decode(value, { stream: true });
           reply.classList.remove("chat-msg-pending");
-          reply.replaceChildren(renderReply(text, hosts));
+          reply.replaceChildren(render(text));
           log.scrollTop = log.scrollHeight;
         }
         if (!text) throw new Error("empty reply");
@@ -278,7 +288,7 @@ const strings = {
       const element = document.createElement("div");
       element.className = `chat-msg chat-msg-${role}`;
       element.dataset.label = role === "user" ? strings.you : strings.ai;
-      if (role === "assistant") element.appendChild(renderReply(content, hosts));
+      if (role === "assistant") element.appendChild(render(content));
       else element.textContent = content;
       log.appendChild(element);
       log.scrollTop = log.scrollHeight;
