@@ -61,7 +61,7 @@ export type ThoughtPath = {
 // ── Queries ───────────────────────────────────────────────────────────────────
 
 export const THOUGHT_CARDS_QUERY = defineQuery(`
-  *[_type == "thought" && defined(slug.en.current)] | order(date desc) {
+  *[_type == "thought" && defined(slug.en.current)] | order(order asc, date desc) {
     "enSlug": slug.en.current,
     slug,
     title,
@@ -116,6 +116,10 @@ export const TOOL_GROUPS_QUERY = defineQuery(`
 
 export const PRINCIPLES_QUERY = defineQuery(`
   *[_type == "principle"] | order(order asc) { group, title, description }
+`);
+
+export const REVIEWS_QUERY = defineQuery(`
+  *[_type == "review"] | order(order asc) { text }
 `);
 
 export const CONTACTS_QUERY = defineQuery(`
@@ -373,4 +377,12 @@ export function getContacts(): Promise<ContactLink[]> {
     })),
   );
   return contacts;
+}
+
+// The reviews section and the home page's JSON-LD both show these.
+let reviews: Promise<{ text: Record<string, string | undefined> | null }[]> | undefined;
+
+export async function getReviews(lang: Locale): Promise<string[]> {
+  reviews ??= sanityClient.fetch(REVIEWS_QUERY);
+  return (await reviews).map((r) => req(pick(r.text, lang), "review.text"));
 }

@@ -15,6 +15,20 @@
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: schema.json
+export type Review = {
+  _id: string;
+  _type: "review";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  text?: {
+    en: string;
+    bg?: string;
+    es?: string;
+  };
+  order: number;
+};
+
 export type Principle = {
   _id: string;
   _type: "principle";
@@ -244,6 +258,7 @@ export type Thought = {
     es?: string;
   };
   date: string;
+  order: number;
   faq?: Array<{
     question?: {
       en: string;
@@ -459,6 +474,7 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
+  | Review
   | Principle
   | ToolGroup
   | ServiceCard
@@ -485,7 +501,7 @@ export type AllSanitySchemaTypes =
 
 // Source: ../src/lib/queries.ts
 // Variable: THOUGHT_CARDS_QUERY
-// Query: *[_type == "thought" && defined(slug.en.current)] | order(date desc) {    "enSlug": slug.en.current,    slug,    title,    description,    date,    mainImage  }
+// Query: *[_type == "thought" && defined(slug.en.current)] | order(order asc, date desc) {    "enSlug": slug.en.current,    slug,    title,    description,    date,    mainImage  }
 export type THOUGHT_CARDS_QUERY_RESULT = Array<{
   enSlug: string;
   slug: {
@@ -753,6 +769,17 @@ export type PRINCIPLES_QUERY_RESULT = Array<{
 }>;
 
 // Source: ../src/lib/queries.ts
+// Variable: REVIEWS_QUERY
+// Query: *[_type == "review"] | order(order asc) { text }
+export type REVIEWS_QUERY_RESULT = Array<{
+  text: {
+    en: string;
+    bg?: string;
+    es?: string;
+  } | null;
+}>;
+
+// Source: ../src/lib/queries.ts
 // Variable: CONTACTS_QUERY
 // Query: *[_type == "contacts" && _id == "contacts"][0].links[]{ platform, url }
 export type CONTACTS_QUERY_RESULT = Array<{
@@ -806,13 +833,14 @@ export type PROJECTS_QUERY_RESULT = Array<{
 // Query TypeMap
 declare global {
   interface SanityQueries {
-    '\n  *[_type == "thought" && defined(slug.en.current)] | order(date desc) {\n    "enSlug": slug.en.current,\n    slug,\n    title,\n    description,\n    date,\n    mainImage\n  }\n': THOUGHT_CARDS_QUERY_RESULT;
+    '\n  *[_type == "thought" && defined(slug.en.current)] | order(order asc, date desc) {\n    "enSlug": slug.en.current,\n    slug,\n    title,\n    description,\n    date,\n    mainImage\n  }\n': THOUGHT_CARDS_QUERY_RESULT;
     '\n  *[_type == "thought" && defined(slug.en.current)]{\n    "enSlug": slug.en.current,\n    slug\n  }\n': THOUGHT_PATHS_QUERY_RESULT;
     '\n  *[_type == "thought" && slug.en.current == $enSlug][0]{\n    "enSlug": slug.en.current,\n    slug,\n    title,\n    description,\n    metaTitle,\n    metaDescription,\n    date,\n    "updatedAt": _updatedAt,\n    mainImage,\n    "body": body{\n      "en": en[]{ ..., _type == "image" => { ..., "asset": asset->{ url, "width": metadata.dimensions.width, "height": metadata.dimensions.height } } },\n      "bg": bg[]{ ..., _type == "image" => { ..., "asset": asset->{ url, "width": metadata.dimensions.width, "height": metadata.dimensions.height } } },\n      "es": es[]{ ..., _type == "image" => { ..., "asset": asset->{ url, "width": metadata.dimensions.width, "height": metadata.dimensions.height } } }\n    },\n    faq\n  }\n': THOUGHT_QUERY_RESULT;
     '\n  *[_type == "siteSettings" && _id == "siteSettings"][0]{\n    "heroBg": { "url": heroBg.asset->url }\n  }\n': SITE_SETTINGS_QUERY_RESULT;
     '\n  *[_type == "serviceCard"] | order(order asc) { title, text, icon }\n': SERVICE_CARDS_QUERY_RESULT;
     '\n  *[_type == "toolGroup"] | order(order asc) { caption, logos }\n': TOOL_GROUPS_QUERY_RESULT;
     '\n  *[_type == "principle"] | order(order asc) { group, title, description }\n': PRINCIPLES_QUERY_RESULT;
+    '\n  *[_type == "review"] | order(order asc) { text }\n': REVIEWS_QUERY_RESULT;
     '\n  *[_type == "contacts" && _id == "contacts"][0].links[]{ platform, url }\n': CONTACTS_QUERY_RESULT;
     '\n  *[_type == "project" && defined(link)].link\n': PROJECT_LINKS_QUERY_RESULT;
     '\n  *[_type == "project"] | order(order asc, _createdAt asc) {\n    _id,\n    title,\n    link,\n    description,\n    "services": services[]->title,\n    "tools": tools[]->name,\n    "desktopImage": desktopImage{\n      ...,\n      "width":  asset->metadata.dimensions.width,\n      "height": asset->metadata.dimensions.height\n    },\n    "mobileImage": mobileImage{\n      ...,\n      "width":  asset->metadata.dimensions.width,\n      "height": asset->metadata.dimensions.height\n    }\n  }\n': PROJECTS_QUERY_RESULT;

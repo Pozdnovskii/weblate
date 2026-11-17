@@ -93,7 +93,7 @@
       @apply flex flex-col gap-y-6 delay-350 md:justify-between;
 
       & > p {
-        @apply text-xl leading-tight;
+        @apply indent-text-indent text-xl leading-tight;
       }
 
       & > div {

@@ -78,6 +78,16 @@ export const thought = defineType({
     }),
 
     defineField({
+      name: "order",
+      title: "Order",
+      type: "number",
+      group: "meta",
+      description: "Lower numbers appear first",
+      initialValue: 100,
+      validation: (r) => r.required(),
+    }),
+
+    defineField({
       name: "faq",
       title: "FAQ",
       type: "array",
@@ -171,6 +181,14 @@ export const thought = defineType({
   ],
 
   orderings: [
+    {
+      title: "Order",
+      name: "order",
+      by: [
+        { field: "order", direction: "asc" },
+        { field: "date", direction: "desc" },
+      ],
+    },
     {
       title: "Newest first",
       name: "dateDesc",

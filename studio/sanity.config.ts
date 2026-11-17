@@ -9,6 +9,7 @@ import { WrenchIcon } from "@sanity/icons/Wrench";
 import { BlockContentIcon } from "@sanity/icons/BlockContent";
 import { CheckmarkCircleIcon } from "@sanity/icons/CheckmarkCircle";
 import { EnvelopeIcon } from "@sanity/icons/Envelope";
+import { CommentIcon } from "@sanity/icons/Comment";
 
 import { thought } from "@studio/schemas/thought";
 import { project } from "@studio/schemas/project";
@@ -19,6 +20,7 @@ import { serviceCard } from "@studio/schemas/serviceCard";
 import { toolGroup } from "@studio/schemas/toolGroup";
 import { principle } from "@studio/schemas/principle";
 import { contacts } from "@studio/schemas/contacts";
+import { review } from "@studio/schemas/review";
 import { DEFAULT_LOCALE } from "@studio/lib/constants";
 import { DeployButton } from "@studio/plugins/DeployButton";
 
@@ -49,7 +51,22 @@ export default defineConfig({
             S.listItem()
               .title("Thoughts")
               .icon(ComposeIcon)
-              .child(S.documentTypeList("thought").title("Thoughts")),
+              .child(
+                S.documentTypeList("thought")
+                  .title("Thoughts")
+                  .defaultOrdering([
+                    { field: "order", direction: "asc" },
+                    { field: "date", direction: "desc" },
+                  ]),
+              ),
+            S.listItem()
+              .title("Reviews")
+              .icon(CommentIcon)
+              .child(
+                S.documentTypeList("review")
+                  .title("Reviews")
+                  .defaultOrdering([{ field: "order", direction: "asc" }]),
+              ),
             S.listItem()
               .title("Tools")
               .icon(WrenchIcon)
@@ -121,7 +138,7 @@ export default defineConfig({
   },
 
   schema: {
-    types: [thought, project, siteSettings, contacts, tool, service, serviceCard, toolGroup, principle],
+    types: [thought, project, siteSettings, contacts, tool, service, serviceCard, toolGroup, principle, review],
     // Singletons are not created from the "new document" menu.
     templates: (templates) => templates.filter((t) => !SINGLETONS.has(t.schemaType)),
   },

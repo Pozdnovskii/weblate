@@ -12,6 +12,7 @@
 @import "@styles/HomePage/tools.css";
 @import "@styles/HomePage/how-to.css";
 @import "@styles/HomePage/projects.css";
+@import "@styles/HomePage/reviews.css";
 @import "@styles/HomePage/services.css";
 @import "@styles/HomePage/thoughts.css";
 @import "@styles/footer.css";
@@ -109,6 +110,11 @@
 
 @utility heading-mono {
   @apply font-secondary text-sm uppercase;
+}
+
+@utility statement {
+  --spacing-text-indent: min(2rem, 48px);
+  @apply indent-text-indent text-lg leading-7 text-white;
 }
 
 @utility grid-wrapper {
