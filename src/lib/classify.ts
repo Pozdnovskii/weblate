@@ -11,12 +11,18 @@
 import { createAnthropic } from "@ai-sdk/anthropic";
 import { classifyConversations } from "@sanity/context/insights";
 
-import { CHAT_MODEL } from "./chat.ts";
 import { contextClient } from "./insights.ts";
+
+/**
+ * Not the chat's Haiku: with no rubric of its own beyond 1–10, Haiku marks down
+ * any reply short of complete. Conversations are few, so the larger model costs
+ * little.
+ */
+export const CLASSIFY_MODEL = "claude-sonnet-5-5";
 
 export function classifyChats(keys: { sanityToken: string; anthropicKey: string }) {
   return classifyConversations({
     client: contextClient(keys.sanityToken),
-    model: createAnthropic({ apiKey: keys.anthropicKey })(CHAT_MODEL),
+    model: createAnthropic({ apiKey: keys.anthropicKey })(CLASSIFY_MODEL),
   });
 }

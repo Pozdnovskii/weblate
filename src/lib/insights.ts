@@ -13,6 +13,7 @@
 import { createClient } from "@sanity/client";
 
 import { CHAT_MODEL, type ChatMessage } from "./chat.ts";
+import { CONTACTS_MARKER } from "./chatRender.ts";
 
 const ORGANIZATION_ID = "oH5Bqfh8T";
 const APP = "weblate";
@@ -41,10 +42,17 @@ export const contextClient = (token: string) =>
     useProjectHostname: false,
   });
 
+/**
+ * The visitor sees the contact icons where a reply has the marker; the transcript
+ * says so in words, or the classifier reads a bare marker as no answer.
+ */
+export const CONTACTS_IN_WORDS = "(Ivan's contact links, shown as icons: Contra, Upwork, GitHub, LinkedIn, Telegram, Email)";
+export const markerInWords = (text: string) => text.replaceAll(CONTACTS_MARKER, CONTACTS_IN_WORDS);
+
 export async function saveConversation(token: string, turn: Turn): Promise<void> {
   const messages = [
-    ...turn.history.map(({ role, content }) => ({ role, content })),
-    { role: "assistant" as const, content: turn.reply || null, error: turn.error ?? null },
+    ...turn.history.map(({ role, content }) => ({ role, content: markerInWords(content) })),
+    { role: "assistant" as const, content: turn.reply ? markerInWords(turn.reply) : null, error: turn.error ?? null },
   ];
 
   await contextClient(token).context.request("PUT /organizations/{organizationId}/conversations/{threadId}", {
