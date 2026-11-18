@@ -43,9 +43,10 @@
   & > figure {
     @apply mt-4 mb-10;
 
-    /* A tall screenshot stays within the screen: narrower on desktop, full width on phones. */
+    /* Full column width, except a tall screenshot: it stays within the screen
+       (narrower on desktop, full width on phones). --ratio is set per image. */
     & > img {
-      @apply mx-auto max-h-[80svh] w-auto rounded-lg;
+      @apply mx-auto h-auto w-[min(100%,80svh*var(--ratio))] rounded-lg;
     }
 
     & > figcaption {

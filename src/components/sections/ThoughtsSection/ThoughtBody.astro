@@ -54,7 +54,7 @@ for (const raw of body as Block[]) {
       const width = Math.min(900, block.asset.width);
       const height = Math.round((width * block.asset.height) / block.asset.width);
       return (
-        <figure>
+        <figure style={`--ratio: ${width / height}`}>
           <Image
             src={block.asset.url}
             alt={block.alt ?? ""}
