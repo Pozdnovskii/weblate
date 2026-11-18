@@ -13,7 +13,7 @@
 import { createClient } from "@sanity/client";
 
 import { CHAT_MODEL, type ChatMessage } from "./chat.ts";
-import { CONTACTS_MARKER } from "./chatRender.ts";
+import { CONTACTS_MARKER, UNSURE_MARKER } from "./chatRender.ts";
 
 const ORGANIZATION_ID = "oH5Bqfh8T";
 const APP = "weblate";
@@ -47,7 +47,18 @@ export const contextClient = (token: string) =>
  * says so in words, or the classifier reads a bare marker as no answer.
  */
 export const CONTACTS_IN_WORDS = "(Ivan's contact links, shown as icons: Contra, Upwork, GitHub, LinkedIn, Telegram, Email)";
-export const markerInWords = (text: string) => text.replaceAll(CONTACTS_MARKER, CONTACTS_IN_WORDS);
+export const markerInWords = (text: string) =>
+  text.replaceAll(UNSURE_MARKER, "").trimEnd().replaceAll(CONTACTS_MARKER, CONTACTS_IN_WORDS);
+
+/**
+ * The model marks a reply it has no exact answer for. Kept apart from the score:
+ * an honest "I don't know" can score as well as a weak answer, and these are the
+ * questions worth answering on the site first. Filter by `unsure` in Insights.
+ */
+const isUnsure = (turn: Turn) =>
+  [...turn.history.filter((m) => m.role === "assistant").map((m) => m.content), turn.reply].some((text) =>
+    text.includes(UNSURE_MARKER),
+  );
 
 export async function saveConversation(token: string, turn: Turn): Promise<void> {
   const messages = [
@@ -66,7 +77,7 @@ export async function saveConversation(token: string, turn: Turn): Promise<void>
         outputTokens: turn.usage.output,
         totalTokens: turn.usage.input + turn.usage.output,
       },
-      metadata: { app: APP },
+      metadata: { app: APP, unsure: isUnsure(turn) ? "yes" : "no" },
     },
   });
 }

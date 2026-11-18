@@ -8,6 +8,8 @@
  * opens in a new tab; any other URL stays plain text.
  *
  * A block that is just the [[contacts]] marker becomes the site's contact icons.
+ * The [[unsure]] marker (the model has no exact answer) is for Insights only and
+ * is dropped.
  */
 
 const SITE_HOSTS = new Set(["weblateweb.dev", "www.weblateweb.dev"]);
@@ -15,6 +17,7 @@ const SITE_HOSTS = new Set(["weblateweb.dev", "www.weblateweb.dev"]);
 const INLINE = /\*\*(.+?)\*\*|\[((?:[^[\]]|\[[^\]]*\])+)\]\(([^)\s]+)\)|(https?:\/\/[^\s)]+[^\s).,;:!?])/g;
 const LIST_ITEM = /^\s*(?:[-*]|\d+\.)\s+/;
 export const CONTACTS_MARKER = "[[contacts]]";
+export const UNSURE_MARKER = "[[unsure]]";
 
 export function renderReply(
   markdown: string,
@@ -25,9 +28,9 @@ export function renderReply(
 
   // The marker always stands as a block of its own, wherever the model put it;
   // while it streams in, its first characters are held back rather than shown.
-  let text = markdown.replaceAll(CONTACTS_MARKER, `\n\n${CONTACTS_MARKER}\n\n`);
+  let text = markdown.replaceAll(UNSURE_MARKER, "").replaceAll(CONTACTS_MARKER, `\n\n${CONTACTS_MARKER}\n\n`);
   const tail = /(?:^|\n)[ \t]*(\[\[[a-z]*\]?)$/.exec(text);
-  if (tail && CONTACTS_MARKER.startsWith(tail[1])) text = text.slice(0, tail.index);
+  if (tail && [CONTACTS_MARKER, UNSURE_MARKER].some((m) => m.startsWith(tail[1]))) text = text.slice(0, tail.index);
 
   for (const block of text.trim().split(/\n{2,}/)) {
     if (block.trim() === CONTACTS_MARKER) {
