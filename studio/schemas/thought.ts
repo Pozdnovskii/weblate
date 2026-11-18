@@ -167,6 +167,15 @@ export const thought = defineType({
               },
             }),
             defineArrayMember({
+              type: "object",
+              name: "contacts",
+              title: "Contact icons",
+              description: "The site's contact icons, as in the Contacts section.",
+              // An object needs a field; this one only labels the block in Studio.
+              fields: [defineField({ name: "label", type: "string", hidden: true })],
+              preview: { prepare: () => ({ title: "Contact icons" }) },
+            }),
+            defineArrayMember({
               type: "image",
               options: { hotspot: true },
               fields: [

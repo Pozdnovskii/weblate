@@ -22,7 +22,9 @@ type PortableTextImage = {
   caption?: string;
 };
 
-export type ThoughtBodyBlock = TextBlock | PortableTextImage;
+type PortableTextContacts = { _key: string; _type: "contacts" };
+
+export type ThoughtBodyBlock = TextBlock | PortableTextImage | PortableTextContacts;
 
 const LOCALES: Locale[] = ["en", "bg", "es"];
 

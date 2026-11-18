@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import SocialLinksList from "@components/UI/SocialLinksList.astro";
 import { inlineHTML, type TextBlock } from "@lib/portableText";
 
 type ImageBlock = {
@@ -10,12 +11,15 @@ type ImageBlock = {
   caption?: string;
 };
 
-type Block = TextBlock | ImageBlock;
+type ContactsBlock = { _key: string; _type: "contacts" };
+
+type Block = TextBlock | ImageBlock | ContactsBlock;
 
 type Chunk =
   | { kind: "block"; block: TextBlock }
   | { kind: "list"; listItem: "bullet" | "number"; items: TextBlock[] }
-  | { kind: "image"; block: ImageBlock };
+  | { kind: "image"; block: ImageBlock }
+  | { kind: "contacts" };
 
 interface Props {
   body: Block[];
@@ -27,6 +31,8 @@ const chunks: Chunk[] = [];
 for (const raw of body as Block[]) {
   if (raw._type === "image") {
     chunks.push({ kind: "image", block: raw });
+  } else if (raw._type === "contacts") {
+    chunks.push({ kind: "contacts" });
   } else if (raw._type === "block" && raw.listItem) {
     const last = chunks.at(-1);
     if (last?.kind === "list" && last.listItem === raw.listItem) {
@@ -58,6 +64,14 @@ for (const raw of body as Block[]) {
           />
           {block.caption && <figcaption>{block.caption}</figcaption>}
         </figure>
+      );
+    }
+
+    if (chunk.kind === "contacts") {
+      return (
+        <address class="thought-contacts">
+          <SocialLinksList umamiEvent="thought-contact-click" />
+        </address>
       );
     }
 

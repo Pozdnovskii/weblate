@@ -43,8 +43,9 @@
   & > figure {
     @apply mt-4 mb-10;
 
+    /* A tall screenshot stays within the screen: narrower on desktop, full width on phones. */
     & > img {
-      @apply rounded-lg;
+      @apply mx-auto max-h-[80svh] w-auto rounded-lg;
     }
 
     & > figcaption {
@@ -58,6 +59,14 @@
 
   & a {
     @apply text-blue-400 underline underline-offset-2 transition-colors hover:text-blue-300;
+  }
+
+  & > .thought-contacts {
+    @apply mt-4 mb-10 not-italic;
+
+    & a {
+      @apply text-white no-underline;
+    }
   }
 
   & code {

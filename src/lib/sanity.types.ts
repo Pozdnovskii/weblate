@@ -295,6 +295,11 @@ export type Thought = {
           _key: string;
         }
       | {
+          label?: string;
+          _type: "contacts";
+          _key: string;
+        }
+      | {
           asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
@@ -326,6 +331,11 @@ export type Thought = {
           _key: string;
         }
       | {
+          label?: string;
+          _type: "contacts";
+          _key: string;
+        }
+      | {
           asset?: SanityImageAssetReference;
           media?: unknown;
           hotspot?: SanityImageHotspot;
@@ -354,6 +364,11 @@ export type Thought = {
           }>;
           level?: number;
           _type: "block";
+          _key: string;
+        }
+      | {
+          label?: string;
+          _type: "contacts";
           _key: string;
         }
       | {
@@ -612,6 +627,11 @@ export type THOUGHT_QUERY_RESULT = {
           _key: string;
         }
       | {
+          label?: string;
+          _type: "contacts";
+          _key: string;
+        }
+      | {
           asset: {
             url: string;
             width: number | null;
@@ -647,6 +667,11 @@ export type THOUGHT_QUERY_RESULT = {
           _key: string;
         }
       | {
+          label?: string;
+          _type: "contacts";
+          _key: string;
+        }
+      | {
           asset: {
             url: string;
             width: number | null;
@@ -679,6 +704,11 @@ export type THOUGHT_QUERY_RESULT = {
           }>;
           level?: number;
           _type: "block";
+          _key: string;
+        }
+      | {
+          label?: string;
+          _type: "contacts";
           _key: string;
         }
       | {
