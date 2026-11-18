@@ -41,16 +41,16 @@
   }
 
   & > figure {
-    @apply mt-4 mb-10;
+    @apply mt-8 mb-10;
 
     /* Full column width, except a tall screenshot: it stays within the screen
        (narrower on desktop, full width on phones). --ratio is set per image. */
     & > img {
-      @apply mx-auto h-auto w-[min(100%,80svh*var(--ratio))] rounded-lg;
+      @apply mx-auto h-auto w-[min(100%,90svh*var(--ratio))] rounded-lg;
     }
 
     & > figcaption {
-      @apply mt-2 text-sm text-neutral-400;
+      @apply mt-4 text-sm text-neutral-400;
     }
   }
 
