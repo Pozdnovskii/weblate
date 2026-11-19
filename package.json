@@ -13,6 +13,7 @@
     "astro": "astro",
     "sanity-typegen": "pnpm -C studio typegen",
     "ask": "node --env-file=.env scripts/ask.ts",
+    "eval": "node --env-file=.env scripts/eval.ts",
     "cf-typegen": "wrangler types",
     "check": "astro check",
     "classify": "node --env-file=.env scripts/classify.ts"
