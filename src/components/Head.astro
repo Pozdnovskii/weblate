@@ -3,7 +3,7 @@ import "@styles/global.css";
 import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 import { type Locale, useTranslations } from "@i18n/ui";
-import { getContacts, getReviews } from "@lib/queries";
+import { getContacts } from "@lib/queries";
 
 // build.format: "file" puts ".html" into pathname — strip it so canonical/hreflang match served URLs
 const cleanPath = Astro.url.pathname.replace(/index\.html$/, "").replace(/\.html$/, "");
@@ -71,23 +71,9 @@ const personSchema = {
   ],
 };
 
-const reviews = isHome && !schema ? await getReviews(locale) : [];
-const rating = { "@type": "Rating", ratingValue: 5, bestRating: 5 };
-const serviceSchema = reviews.length > 0 && {
-  "@type": "Service",
-  name: t("meta.title"),
-  provider: { "@id": personSchema["@id"] },
-  aggregateRating: { ...rating, "@type": "AggregateRating", reviewCount: reviews.length },
-  review: reviews.map((text) => ({
-    "@type": "Review",
-    author: { "@type": "Person", name: "Upwork client" },
-    reviewBody: text,
-    reviewRating: rating,
-  })),
-};
 const homeSchema = {
   "@context": "https://schema.org",
-  "@graph": serviceSchema ? [personSchema, serviceSchema] : [personSchema],
+  "@graph": [personSchema],
 };
 const finalSchema = schema ?? (isHome ? homeSchema : null);                                                                                                          
 ---
