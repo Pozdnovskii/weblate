@@ -138,6 +138,7 @@ export const PROJECTS_QUERY = defineQuery(`
     _id,
     title,
     link,
+    "caseStudySlug": caseStudy->slug,
     description,
     "services": services[]->title,
     "tools": tools[]->name,
@@ -248,6 +249,8 @@ export type Project = {
   _id: string;
   title: string;
   link: string | null;
+  /** The case study article's slug in this locale, if the project has one. */
+  caseStudySlug: string | null;
   description: string;
   services: string[];
   tools: string[];
@@ -291,6 +294,7 @@ export async function getProjects(lang: Locale): Promise<Project[]> {
     _id: r._id,
     title: r.title,
     link: r.link,
+    caseStudySlug: pickDeep(r.caseStudySlug, lang, (s) => s?.current),
     description: req(pick(r.description, lang), "project.description"),
     services: (r.services ?? []).map((s) => req(pick(s, lang), "service.title")),
     tools: r.tools ?? [],

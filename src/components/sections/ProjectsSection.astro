@@ -4,6 +4,7 @@ import { Image } from "astro:assets";
 import { type Locale, useTranslations } from "@i18n/ui";
 import { getProjects } from "@lib/queries";
 import { urlFor } from "@lib/image";
+import { getCleanRelativeLocaleUrl } from "@i18n/utils";
 
 interface Props {
   locale: Locale;
@@ -67,19 +68,30 @@ const projects = await getProjects(locale);
                     </ul>
                   </div>
                 </div>
-                {project.link ? (
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener"
-                    data-umami-event="project-visit"
-                    data-umami-event-project={project.title}
-                  >
-                    {t("projects.visitWebsite")}
-                  </a>
-                ) : (
-                  <span>{t("projects.linkUnavailable")}</span>
-                )}
+                <div data-project-links>
+                  {project.link ? (
+                    <a
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener"
+                      data-umami-event="project-visit"
+                      data-umami-event-project={project.title}
+                    >
+                      {t("projects.visitWebsite")}
+                    </a>
+                  ) : (
+                    <span>{t("projects.linkUnavailable")}</span>
+                  )}
+                  {project.caseStudySlug && (
+                    <a
+                      href={getCleanRelativeLocaleUrl(locale, `thoughts/${project.caseStudySlug}`)}
+                      data-umami-event="project-case-study"
+                      data-umami-event-project={project.title}
+                    >
+                      {t("projects.caseStudy")}
+                    </a>
+                  )}
+                </div>
             </div>
           </article>
         </li>

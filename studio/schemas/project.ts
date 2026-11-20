@@ -33,6 +33,15 @@ export const project = defineType({
     }),
 
     defineField({
+      name: "caseStudy",
+      title: "Case study",
+      type: "reference",
+      group: "main",
+      to: [{ type: "thought" }],
+      description: "An article about this project; adds a Case study button next to the site link",
+    }),
+
+    defineField({
       name: "order",
       title: "Order",
       type: "number",

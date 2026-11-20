@@ -96,8 +96,12 @@
         @apply indent-text-indent text-xl leading-tight;
       }
 
-      & > div {
+      & > div:not([data-project-links]) {
         @apply grid grid-cols-1 gap-x-3 gap-y-6 mb-4 xs:grid-cols-2;
+      }
+
+      [data-project-links] {
+        @apply flex flex-wrap gap-3;
       }
 
       h4 {
@@ -108,8 +112,7 @@
         }
       }
 
-      a,
-      span:last-child {
+      [data-project-links] > * {
         @apply px-6 py-3 w-fit border border-neutral-400 heading-mono rounded-sm;
       }
 

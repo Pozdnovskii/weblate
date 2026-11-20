@@ -160,6 +160,13 @@ export type SanityImageHotspot = {
   width: number;
 };
 
+export type ThoughtReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "thought";
+};
+
 export type ToolReference = {
   _ref: string;
   _type: "reference";
@@ -182,6 +189,7 @@ export type Project = {
   _rev: string;
   title: string;
   link?: string;
+  caseStudy?: ThoughtReference;
   order?: number;
   tools?: Array<
     {
@@ -500,6 +508,7 @@ export type AllSanitySchemaTypes =
   | SiteSettings
   | SanityImageCrop
   | SanityImageHotspot
+  | ThoughtReference
   | ToolReference
   | ServiceReference
   | Project
@@ -824,11 +833,16 @@ export type PROJECT_LINKS_QUERY_RESULT = Array<string>;
 
 // Source: ../src/lib/queries.ts
 // Variable: PROJECTS_QUERY
-// Query: *[_type == "project"] | order(order asc, _createdAt asc) {    _id,    title,    link,    description,    "services": services[]->title,    "tools": tools[]->name,    "desktopImage": desktopImage{      ...,      "width":  asset->metadata.dimensions.width,      "height": asset->metadata.dimensions.height    },    "mobileImage": mobileImage{      ...,      "width":  asset->metadata.dimensions.width,      "height": asset->metadata.dimensions.height    }  }
+// Query: *[_type == "project"] | order(order asc, _createdAt asc) {    _id,    title,    link,    "caseStudySlug": caseStudy->slug,    description,    "services": services[]->title,    "tools": tools[]->name,    "desktopImage": desktopImage{      ...,      "width":  asset->metadata.dimensions.width,      "height": asset->metadata.dimensions.height    },    "mobileImage": mobileImage{      ...,      "width":  asset->metadata.dimensions.width,      "height": asset->metadata.dimensions.height    }  }
 export type PROJECTS_QUERY_RESULT = Array<{
   _id: string;
   title: string;
   link: string | null;
+  caseStudySlug: {
+    en: Slug;
+    bg?: Slug;
+    es?: Slug;
+  } | null;
   description: {
     en: string;
     bg?: string;
@@ -873,7 +887,7 @@ declare global {
     '\n  *[_type == "review"] | order(order asc) { text }\n': REVIEWS_QUERY_RESULT;
     '\n  *[_type == "contacts" && _id == "contacts"][0].links[]{ platform, url }\n': CONTACTS_QUERY_RESULT;
     '\n  *[_type == "project" && defined(link)].link\n': PROJECT_LINKS_QUERY_RESULT;
-    '\n  *[_type == "project"] | order(order asc, _createdAt asc) {\n    _id,\n    title,\n    link,\n    description,\n    "services": services[]->title,\n    "tools": tools[]->name,\n    "desktopImage": desktopImage{\n      ...,\n      "width":  asset->metadata.dimensions.width,\n      "height": asset->metadata.dimensions.height\n    },\n    "mobileImage": mobileImage{\n      ...,\n      "width":  asset->metadata.dimensions.width,\n      "height": asset->metadata.dimensions.height\n    }\n  }\n': PROJECTS_QUERY_RESULT;
+    '\n  *[_type == "project"] | order(order asc, _createdAt asc) {\n    _id,\n    title,\n    link,\n    "caseStudySlug": caseStudy->slug,\n    description,\n    "services": services[]->title,\n    "tools": tools[]->name,\n    "desktopImage": desktopImage{\n      ...,\n      "width":  asset->metadata.dimensions.width,\n      "height": asset->metadata.dimensions.height\n    },\n    "mobileImage": mobileImage{\n      ...,\n      "width":  asset->metadata.dimensions.width,\n      "height": asset->metadata.dimensions.height\n    }\n  }\n': PROJECTS_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too
