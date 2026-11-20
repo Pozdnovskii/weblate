@@ -66,7 +66,8 @@
     grid-template-rows: repeat(1, minmax(0, 0fr));
     @apply relative grid overflow-hidden transition-all duration-500 ease-in-out;
 
-    li {
+    li,
+    #menu-chat {
       @apply opacity-0 transition duration-1000;
     }
 
@@ -99,6 +100,32 @@
 
         span {
           @apply font-secondary me-2;
+        }
+      }
+
+      /* On hover the button is selected, like a line in a terminal. */
+      #menu-chat {
+        mask: none;
+        /* The menu's fade-in keeps its second; the hover colours are quick. */
+        transition:
+          opacity 1s,
+          color 150ms,
+          background-color 150ms;
+        @apply -mx-[2px] my-6 flex cursor-pointer items-center gap-2 self-start rounded-[3px] bg-transparent px-[2px] text-white;
+
+        & > span {
+          @apply font-secondary;
+        }
+
+        &:hover,
+        &:focus-visible {
+          @apply text-grey bg-white;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+          & > span > span {
+            animation: chat-blink 1.1s steps(1) infinite;
+          }
         }
       }
 
@@ -197,7 +224,8 @@
       grid-template-rows: repeat(1, minmax(0, 1fr));
     }
 
-    #header-nav li {
+    #header-nav li,
+    #header-nav #menu-chat {
       @apply opacity-100;
     }
   }

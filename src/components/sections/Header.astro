@@ -23,7 +23,6 @@ const isHome = Astro.url.pathname === homeUrl || Astro.url.pathname === homeUrl 
 const navItems = [
   { label: t("nav.home"), href: homeUrl },
   { label: t("nav.services"), href: homeUrl === "/" ? "/#services" : `${homeUrl}#services` },
-  { label: t("nav.tools"), href: homeUrl === "/" ? "/#tools" : `${homeUrl}#tools` },
   { label: t("nav.projects"), href: homeUrl === "/" ? "/#projects" : `${homeUrl}#projects` },
   { label: t("nav.reviews"), href: homeUrl === "/" ? "/#reviews" : `${homeUrl}#reviews` },
   { label: t("nav.thoughts"), href: getCleanRelativeLocaleUrl(locale, "thoughts") },
@@ -77,6 +76,15 @@ const navItems = [
               ))
             }
           </ul>
+
+          <!-- The chat's own toggle sits in a corner where some visitors never
+               look; this one opens the same panel. -->
+          <button type="button" id="menu-chat" data-umami-event="header-chat-open">
+            <span aria-hidden="true">[</span>
+            <span aria-hidden="true">&gt;<span>_</span></span>
+            {t("chat.title")}
+            <span aria-hidden="true">]</span>
+          </button>
 
           <LanguageSwitcher locale={locale} />
         </div>

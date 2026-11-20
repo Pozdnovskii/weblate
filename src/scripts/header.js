@@ -42,6 +42,15 @@ export function initHeader() {
     };
   });
 
+  const chatButton = document.getElementById("menu-chat");
+  if (chatButton) {
+    chatButton.onclick = () => {
+      if (headerState.isOpen) headerState.toggleMenu();
+      const chatToggle = document.getElementById("chat-toggle");
+      if (chatToggle?.getAttribute("aria-expanded") === "false") chatToggle.click();
+    };
+  }
+
   if (!documentListenersAdded) {
     documentListenersAdded = true;
 
