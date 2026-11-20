@@ -110,7 +110,7 @@ const alternateUrls = Object.fromEntries(
 ---
 
 <Layout
-  title={`${post.metaTitle ?? post.title} | Ivan Pozdnovskii`}
+  title={post.metaTitle ?? post.title}
   description={post.metaDescription ?? post.description}
   schema={articleSchema}
   ogImage={ogUrl ?? undefined}
